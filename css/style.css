@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Satisfy);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,400italic);
 @import url(http://fonts.googleapis.com/css?family=Oswald:300,400,700);
- 
+
 body {
     overflow-x: hidden;
     font-family: 'Open Sans', sans-serif;
@@ -186,7 +186,7 @@ li {
     .navbar-default.navbar-shrink .navbar-brand {
         font-size: 1.5em;
     }
-    
+
 }
 
 
@@ -242,7 +242,7 @@ li {
         width: 1.5em;
         height: 1.5em;
     }
-    
+
     .menu-button::before {
         position: absolute;
         top: 0.5em;
@@ -252,7 +252,7 @@ li {
         background: linear-gradient(#373a47 20%, transparent 20%, transparent 40%, #373a47 40%, #373a47 60%, transparent 60%, transparent 80%, #373a47 80%);
         content: '';
     }
-    
+
     .menu-wrap a {
         padding: 5px !important;
     }
@@ -263,7 +263,7 @@ li {
         width: 2em;
         height: 2em;
     }
-    
+
     .menu-button::before {
         position: absolute;
         top: 0.5em;
@@ -330,24 +330,24 @@ li {
 	background: #111;
 	padding: 2.5em 1.5em 0;
 	font-size: 1.15em;
-    
+
 	-webkit-transform: translate3d(-320px,0,0);
 	-moz-transform: translate3d(-320px,0,0);
 	-o-transform: translate3d(-320px,0,0);
 	transform: translate3d(-320px,0,0);
-    
+
 	-webkit-transition: -webkit-transform 0.4s;
 	-moz-transition: -webkit-transform 0.4s;
 	-o-transition: -webkit-transform 0.4s;
 	transition: transform 0.4s;
-    
+
 	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	-moz-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	-o-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 }
 
-.menu, 
+.menu,
 .icon-list {
 	height: 100%;
 }
@@ -362,7 +362,7 @@ li {
 .icon-list a {
 	display: block;
 	padding: 0.8em;
-    
+
 	-webkit-transform: translate3d(0,500px,0);
 	-moz-transform: translate3d(0,500px,0);
 	-o-transform: translate3d(0,500px,0);
@@ -375,7 +375,7 @@ li {
 	-moz-transition: -webkit-transform 0s 0.4s;
 	-o-transition: -webkit-transform 0s 0.4s;
 	transition: transform 0s 0.4s;
-    
+
 	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	-moz-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	-o-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
@@ -429,12 +429,12 @@ li {
 	-moz-transform: translate3d(0,0,0);
 	-o-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
-    
+
 	-webkit-transition: -webkit-transform 0.8s;
 	-moz-transition: -webkit-transform 0.8s;
 	-o-transition: -webkit-transform 0.8s;
 	transition: transform 0.8s;
-    
+
 	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	-moz-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	-o-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
@@ -447,12 +447,12 @@ li {
 	-moz-transform: translate3d(0,0,0);
 	-o-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
-    
+
 	-webkit-transition: -webkit-transform 0.8s;
 	-moz-transition: -webkit-transform 0.8s;
 	-o-transition: -webkit-transform 0.8s;
 	transition: transform 0.8s;
-    
+
 	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	-moz-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
 	-o-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
@@ -470,7 +470,7 @@ li {
 
 
 
-/*================================================== 
+/*==================================================
      Slideshow
  ================================================== */
 
@@ -542,7 +542,7 @@ li {
 	padding: 15px;
 }
 
-#main-slide .carousel-control .fa-angle-left, 
+#main-slide .carousel-control .fa-angle-left,
 #main-slide .carousel-control .fa-angle-right{
 	position: absolute;
 	top: 40%;
@@ -599,6 +599,7 @@ li {
 .slider.btn{
 	padding: 10px 40px;
 	font-size: 20px;
+  width: 222px;
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
@@ -656,7 +657,7 @@ li {
 
 
 @media (min-width : 992px) {
-    
+
     #main-slide .slider-content h1{
 		font-size: 68px;
 	}
@@ -664,7 +665,7 @@ li {
 
 
 @media (min-width : 768px) and (max-width: 991px) {
-    
+
     #main-slide .slider-content h1{
 		font-size: 35px;
         margin-bottom: 10px;
@@ -681,16 +682,16 @@ li {
 		margin-top: 5px;
 		font-size: 16px;
 	}
-    
+
     #main-slide .item {
         height: 550px;
     }
-    
+
 }
 
 
 @media (max-width : 767px) {
-    
+
     #main-slide .slider-content h1{
 		font-size: 28px;
 		line-height: normal;
@@ -708,28 +709,28 @@ li {
 	#main-slide .carousel-indicators{
 		display: none;
 	}
-    
+
     #main-slide .item .slider-content{
 		display: none;
 	}
-    
+
     #main-slide .item {
         height: 400px;
     }
-    
+
 }
 
 
 @media (max-width : 479px) {
-    
+
     #main-slide .item .slider-content{
 		display: none;
 	}
-    
+
     #main-slide .item {
         height: 180px;
     }
-    
+
 }
 
 
@@ -770,7 +771,7 @@ li {
     font-family: 'Oswald', sans-serif;
 }
 
-.feature p, 
+.feature p,
 .feature-2 p,
 .feature-3 p {
     color: #444;
@@ -803,8 +804,8 @@ li {
 }
 .no-touch .feature:hover i,
 	.no-touch .feature:active i,
-	.no-touch .feature:focus i {		
-		
+	.no-touch .feature:focus i {
+
 		-webkit-transition: box-shadow .4s ease-in-out;
 		-moz-transition: box-shadow .4s ease-in-out;
 		-o-transition: box-shadow .4s ease-in-out;
@@ -829,7 +830,7 @@ li {
     height: 70px;
    padding:20px;
    position: relative;
-    
+
 }
 
 .feature-2 .media-body {
@@ -902,18 +903,18 @@ li {
     -o-transition: all 0.5s;
     transition: all 0.5s;
 }
-@media only screen 
+@media only screen
 and (max-width : 550px) {
-    
+
      #portfolio-list li {
       width: 100%;
   }
 }
 
-@media only screen 
+@media only screen
 and (max-width : 767px)
 and (min-width : 551px){
-    
+
      #portfolio-list li {
       width: 49.9%;
   }
@@ -968,11 +969,11 @@ and (min-width : 551px){
    -o-transform: scale(1.5);
    -ms-transform: scale(1.5);
    transform: scale(1.5);
-   
+
 }
 
 .portfolio-caption {
-    
+
    width: 100%;
    height: 100%;
    position: absolute;
@@ -1046,7 +1047,7 @@ and (min-width : 551px){
     background: url(../images/parallax/bg-01.jpg);
     background-attachment: fixed;
     background-size: cover;
-    
+
 }
 
 .welcome-section {
@@ -1368,7 +1369,6 @@ and (min-width : 551px){
 }
 
 .contact .btn-primary {
-    padding: 20px;
     font-size: 16px;
 }
 
@@ -1394,11 +1394,11 @@ and (min-width : 551px){
 }
 
 .contact .form-group input.form-control {
-    height: auto;
+
 }
 
 .contact .form-group textarea.form-control {
-    height: 236px;
+    height: 175px;
 }
 
 .contact::-webkit-input-placeholder {
@@ -1466,7 +1466,7 @@ and (min-width : 551px){
 /*-------------------------------------------------------*/
 
 footer.style-1 {
-    margin-top: 100px;
+    margin-top: 82px;
     padding: 25px 0;
     background: rgba(0, 0, 0, 0.8);
 }
@@ -1489,7 +1489,7 @@ footer.style-1 .footer-social li a {
     -moz-border-radius: 2px;
     -o-border-radius: 2px;
     border-radius: 2px;
-    
+
 }
 
 footer.style-1 .footer-social li i {
@@ -1599,13 +1599,13 @@ footer.style-1 .footer-link li {
 
 .call-to-action h1 strong {
     font-weight: 600;
-    
+
 }
 
-.call-to-action .btn-primary {
+/*.call-to-action .btn-primary {
     padding: 20px;
     font-size: 16px;
-}
+}*/
 
 .call-to-action .btn-primary:hover {
     background: transparent;
@@ -1728,7 +1728,7 @@ footer.style-1 .footer-link li {
   position:relative;
 }
 
- .progress-bar-span { 
+ .progress-bar-span {
  opacity:1;
  position:absolute;
  top:-5px;
@@ -1741,7 +1741,7 @@ footer.style-1 .footer-link li {
   -moz-transition: all .5s ease-in-out;
   -o-transition: all .5s ease-in-out;
   -ms-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out; 
+  transition: all .5s ease-in-out;
  }
 
 .skill:hover .progress-bar-span {
@@ -2000,5 +2000,3 @@ iframe {
         -webkit-transform: scale(1.0);
       }
 }
-
-
