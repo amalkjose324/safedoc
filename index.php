@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SafeDoc : Secure Document Storage</title>
+  <title>SafeDocx : Secure Document Storage</title>
   <?php include_once 'login.php'; ?>
   <?php include_once 'db_connect.php'; ?>
   <!-- Bootstrap Core CSS -->
@@ -72,7 +72,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand page-scroll" href="./"><span style="color:white;">Safe</span>Doc</a>
+        <a class="navbar-brand page-scroll" href="./"><span style="color:white;">Safe</span>Docx</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -128,7 +128,7 @@
           <div class="slider-content">
             <div class="col-md-12 text-center">
               <h1 class="animated3">
-                <span>Safe<strong>Doc</strong></span>
+                <span>Safe<strong>Docx</strong></span>
               </h1>
               <p class="animated2">Place to keep your certificates safely and <br>easily sharable as per your needs..!</p>
               <a class="animated3 slider btn btn-primary btn-min-block log-btn-main" href="#">Login / Signup</a><a class="animated3 slider btn btn-default btn-min-block btn-downloads-main">Downloads</a>
@@ -155,7 +155,7 @@
             <i class="fa fa-cloud"></i>
             <div class="feature-content">
               <h4>Safe Storage</h4>
-              <p>SafeDoc provides a safe storage of documents without providing any unautherised access.</p>
+              <p>SafeDocx provides a safe storage of documents without providing any unautherised access.</p>
             </div>
           </div>
         </div><!-- /.col-md-3 -->
@@ -164,7 +164,7 @@
             <i class="fa fa-check"></i>
             <div class="feature-content">
               <h4>Easy Varification</h4>
-              <p>Document varification is through online system using SafeDoc Varification Option(SVO). </p>
+              <p>Document varification is through online system using SafeDocx Varification Option(SVO). </p>
             </div>
           </div>
         </div><!-- /.col-md-3 -->
@@ -193,7 +193,7 @@
             <i class="fa fa-lock"></i>
             <div class="feature-content">
               <h4>High Security</h4>
-              <p>Provides high security from unautherised access through SafeDoc Security Option(SSO).</p>
+              <p>Provides high security from unautherised access through SafeDocx Security Option(SSO).</p>
             </div>
           </div>
         </div><!-- /.col-md-3 -->
@@ -202,7 +202,7 @@
             <i class="fa fa-shield"></i>
             <div class="feature-content">
               <h4>Platform Independent</h4>
-              <p>SafeDoc will available for all platforms Windows,Android and iOS. And also in any web browser.</p>
+              <p>SafeDocx will available for all platforms Windows,Android and iOS. And also in any web browser.</p>
             </div>
           </div>
         </div><!-- /.col-md-3 -->
@@ -211,7 +211,7 @@
             <i class="fa fa-truck"></i>
             <div class="feature-content">
               <h4>Free Service</h4>
-              <p>SafeDoc is ubsolutely free upto the storage of 1GB. Thereafter you can use this service with a cheap rate.</p>
+              <p>SafeDocx is ubsolutely free upto the storage of 1GB. Thereafter you can use this service with a cheap rate.</p>
             </div>
           </div>
         </div><!-- /.col-md-3 -->
@@ -236,7 +236,7 @@
       <div class="row">
         <div class="col-md-12">
           <h1 class="animated3" style="font-size:48px;">
-            <span>Safe<strong>Doc</strong> Downloads</span>
+            <span>Safe<strong>Docx</strong> Downloads</span>
           </h1>
           <h1>Keep and access your documents in handfree mode</br>Share your documents to any one and anywhere as your wish</br>Access your documents from any browser and from any platform</h1>
           <button type="submit" class="btn btn-primary download_btn"><i class="fa fa-android fa-3x"></i><b class="download_text" ><h4>Android</h4></b></button>
@@ -693,7 +693,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-xs-12">
-            <span class="copyright">Copyright &copy; <a href="./">SafeDoc</a> 2017</span>
+            <span class="copyright">Copyright &copy; <a href="./">SafeDocx</a> 2017</span>
           </div>
           <div class="col-md-4 col-xs-12">
             <div class="footer-social text-center">
