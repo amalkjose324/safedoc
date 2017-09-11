@@ -54,7 +54,41 @@ if(isset($_POST['fun']) && $_POST['fun']=="signup-first-submit"){
     echo json_encode($arr);
     exit();
 }
-
+/**
+ * Function to send sms
+ * @var json
+ */
+public function sms($to,$message)
+{
+  $reg_phone='7012848331';
+  $reg_password='safedoc2017';
+  $link="http://smsapi.engineeringtgr.com/send/?Mobile=$reg_phone&Password=$reg_password&Message=$message&To=$to";
+}
+/**
+ * Function to send mail
+ * @var json
+ */
+public function sms($to,$message)
+{
+  define("MAIL_FROM","omsajce@gmail.com");
+  define("MAIL_USERNAME","omsajce@gmail.com");
+  define("MAIL_PASSWORD","omsajce2016");
+  require_once "class.phpmailer.php";
+  //Set who the message is to be sent from
+  $mail->setFrom($from, $from);
+  //Set who the message is to be sent to
+  $mail->addAddress("$email");
+  $mail->Subject = "OMS Reset Password";
+  $mail->Body = "Hai User,<br>Your One Time Password is <b> $password </b>.<br> Please note that, you should change your password immediately after login with this OTP.";
+  if ($mail->Send()) {
+    $_SESSION['msg']="Your One Time Password(OTP) has been sent to your email address..!";
+    header('location:../');
+  }
+  else {
+    $_SESSION['msg']="Email with OTP can't be send right now..!";
+    header('location:../');
+  }
+}
 /**
  * Login-submit
  * @var json
