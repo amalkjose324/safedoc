@@ -8,7 +8,9 @@ jQuery(document).ready(function($){
 	$tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
 	$forgot_password_link = $form_login.find('.reset-message a'),
 	$back_to_login_link = $form_forgot_password.find('.reset-message a'),
-	$main_nav = $('.login-btn');
+	$main_nav = $('.login-btn'),
+	$forms=$('.cform'),
+	$errors=$('.cd-error-message');
 
 	//open modal
 	$main_nav.on('click', function(event){
@@ -23,6 +25,8 @@ jQuery(document).ready(function($){
 			$form_modal.addClass('is-visible');
 			//show the selected form
 			( $(event.target).is('.cd-signup') ) ? signup_selected() : login_selected();
+			$forms.trigger("reset");
+			$errors.removeClass('is-visible');
 		}
 
 	});
@@ -44,6 +48,8 @@ jQuery(document).ready(function($){
 	$form_modal_tab.on('click', function(event) {
 		event.preventDefault();
 		( $(event.target).is( $tab_login ) ) ? login_selected() : signup_selected();
+		$forms.trigger("reset");
+		$errors.removeClass('is-visible');
 	});
 
 	//hide or show password
@@ -61,12 +67,16 @@ jQuery(document).ready(function($){
 	$forgot_password_link.on('click', function(event){
 		event.preventDefault();
 		forgot_password_selected();
+		$forms.trigger("reset");
+		$errors.removeClass('is-visible');
 	});
 
 	//back to login from the forgot-password form
 	$back_to_login_link.on('click', function(event){
 		event.preventDefault();
 		login_selected();
+		$forms.trigger("reset");
+		$errors.removeClass('is-visible');
 	});
 
 	function login_selected(){
@@ -97,7 +107,7 @@ jQuery(document).ready(function($){
 	$('.log-btn-main').click(function(){
 		$("#log-btn").click();
 	})
-	
+
 
 });
 

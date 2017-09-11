@@ -10,11 +10,13 @@
 
   <title>SafeDoc : Secure Document Storage</title>
   <?php include_once 'login.php'; ?>
+  <?php include_once 'db_connect.php'; ?>
   <!-- Bootstrap Core CSS -->
   <link href="asset/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome CSS -->
   <link href="css/font-awesome.min.css" rel="stylesheet">
-
+  <!-- Custom messagebx and notification CSS -->
+ <link rel="stylesheet" href="css/lobibox.min.css"/>
 
   <!-- Animate CSS -->
   <link href="css/animate.css" rel="stylesheet" >
@@ -70,7 +72,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand page-scroll" href="./">SafeDoc</a>
+        <a class="navbar-brand page-scroll" href="./"><span style="color:white;">Safe</span>Doc</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -737,6 +739,7 @@
 
   <!-- Plugin JavaScript -->
   <script src="js/jquery.easing.1.3.js"></script>
+  <script type="text/javascript" src="js/ajaxscripts.js"></script>
   <script src="js/classie.js"></script>
   <script src="js/count-to.js"></script>
   <script src="js/custom.js"></script>
@@ -745,6 +748,7 @@
   <script src="js/owl.carousel.min.js"></script>
   <script src="js/jquery.fitvids.js"></script>
   <script src="js/styleswitcher.js"></script>
+  <script src="js/lobibox.min.js"></script>
 
   <!-- Contact Form JavaScript -->
   <script src="js/jqBootstrapValidation.js"></script>

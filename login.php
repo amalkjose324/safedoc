@@ -4,82 +4,71 @@
 <div class="cd-user-modal" style="z-index: 300;"> <!-- this is the entire modal form, including the background -->
   <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
     <ul class="cd-switcher" type="none">
-      <li><a href="#0">Sign in</a></li>
-      <li><a href="#0">New account</a></li>
+      <li><a class="link_btn">Sign in</a></li>
+      <li><a class="link_btn">New account</a></li>
     </ul>
 
     <div id="cd-login"> <!-- log in form -->
-      <form class="cd-form">
+      <form class="cd-form cform" id="login_form" onsubmit="return false;">
         <p class="fieldset">
-          <label class="image-replace cd-email" for="signin-email">E-mail / Username</label>
-          <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="Username/E-mail">
-          <span class="cd-error-message" >Error message here!</span>
+          <label class="image-replace cd-email" for="login-email_phone">Phone / Email</label>
+          <input class="full-width has-padding has-border" id="login-email_phone" maxlength="60" type="text" placeholder="E-mail / Phone">
+          <span class="cd-error-message" id="login-email_phone-error" >Invalid Email or Phone number!</span>
         </p>
 
         <p class="fieldset">
-          <label class="image-replace cd-password" for="signin-password">Password</label>
-          <input class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Password">
-          <a href="#0" class="hide-password">Show</a>
-          <span class="cd-error-message">Error message here!</span>
+          <label class="image-replace cd-password" for="login-password">Password</label>
+          <input class="full-width has-padding has-border" id="login-password" maxlength="35" type="password"  placeholder="Password">
+          <a class="hide-password link_btn">Show</a>
+          <span class="cd-error-message" id="login-password-error">Invalid Password</span>
         </p>
 
         <p class="fieldset">
           <input class="full-width" type="submit" value="Login">
         </p>
-        <p class="reset-message"><a href="#0">Forgot your password?</a></p>
+        <p class="reset-message"><a class="link_btn">Forgot your password?</a></p>
       </form>
 
-      <!-- <a href="#0" class="cd-close-form">Close</a> -->
+      <!-- <a class="link_btn" class="cd-close-form">Close</a> -->
     </div> <!-- cd-login -->
 
     <div id="cd-signup"> <!-- sign up form -->
-      <form class="cd-form" id="signup_form" onsubmit="return false;">
+      <form class="cd-form cform" id="signup_form" onsubmit="return false;">
         <p class="fieldset">
-          <label class="image-replace cd-username" for="signup-username">Username</label>
-          <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
-          <span class="cd-error-message" id="signup-username-error" >Username already taken</span>
+          <label class="image-replace cd-username" for="signup-phone">Phone</label>
+            <a class="country-code">Country code not required </a>
+          <input class="full-width has-padding has-border" id="signup-phone" maxlength="30" type="text" placeholder="Mobile Number">
+          <span class="cd-error-message" id="signup-phone-error" >Phone already taken</span>
         </p>
 
         <p class="fieldset">
           <label class="image-replace cd-email" for="signup-email">E-mail</label>
-          <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+          <input class="full-width has-padding has-border" id="signup-email" maxlength="50" type="email" placeholder="E-mail">
           <span class="cd-error-message" id="signup-email-error">Email already registerd</span>
         </p>
 
         <p class="fieldset">
           <label class="image-replace cd-password" for="signup-password">Password</label>
-          <input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Password">
-          <a href="#0" class="hide-password">Show</a>
+          <input class="full-width has-padding has-border" id="signup-password" maxlength="40" type="password"  placeholder="Password">
+          <a class="hide-password link_btn">Show</a>
           <span class="cd-error-message" id="signup-password-error" style="z-index: 3 !important;">Password must be 6-30 charactors</span>
-        </p>
-        <p class="fieldset">
-          <div class="col-xs12">
-            <div id="tab" class="btn-group btn-group-justified " data-toggle="buttons">
-              <a href="#features" class="btn btn-default active" style="line-height: 2em;" data-toggle="tab">
-                <input type="radio" value="1" name="utype" checked="checked"/>Customer
-              </a>
-              <a href="#requests" class="btn btn-default" style="line-height: 2em;" data-toggle="tab">
-                <input type="radio" value="2" name="utype"/>Plat Owner
-              </a>
-            </div>
-          </div>
         </p>
         <p class="fieldset">
           <input class="full-width has-padding" type="submit" value="Create account">
         </p>
       </form>
 
-      <!-- <a href="#0" class="cd-close-form">Close</a> -->
+      <!-- <a class="link_btn" class="cd-close-form">Close</a> -->
     </div> <!-- cd-signup -->
 
     <div id="cd-reset-password"> <!-- reset password form -->
-      <p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+      <p class="cd-form-message ">Lost your password? Use your Registered Email or Mobile number to reset password</p>
 
-      <form class="cd-form">
+      <form class="cd-form cform" id="resetpw_form" onsubmit="return false;">
         <p class="fieldset">
-          <label class="image-replace cd-email" for="reset-email">E-mail</label>
-          <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
-          <span class="cd-error-message">Error message here!</span>
+          <label class="image-replace cd-email" for="resetpw-email_phone">Email / Phone</label>
+          <input class="full-width has-padding has-border" id="resetpw-email_phone" maxlength="60" type="text" placeholder="Phone / E-mail">
+          <span class="cd-error-message" id="resetpw-email_phone-error" >Invalid Email or Phone number!</span>
         </p>
 
         <p class="fieldset">
@@ -87,8 +76,8 @@
         </p>
       </form>
 
-      <p class="reset-message back-to-log"><a href="#0">Back to log-in</a></p>
+      <p class="reset-message back-to-log"><a class="link_btn">Back to Login</a></p>
     </div> <!-- cd-reset-password -->
-    <a href="#0" class="cd-close-form">Close</a>
+    <a class="cd-close-form link_btn">Close</a>
   </div> <!-- cd-user-modal-container -->
 </div> <!-- cd-user-modal -->

@@ -101,7 +101,7 @@ Main components
     border-radius: 50em;
   }
   .login-nav a.cd-signup {
-    background: #2f889a;
+    background: #5BB12F;
     border: none;
   }
 }
@@ -183,7 +183,7 @@ xsigin/signup popup
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background: #2f889a;
+  background: #5BB12F;
   color: #ffffff;
 }
 .cd-user-modal-container .cd-switcher a.selected {
@@ -282,7 +282,7 @@ xsigin/signup popup
 .cd-form input[type=submit] {
   padding: 16px 0;
   cursor: pointer;
-  background: #2f889a;
+  background: #5BB12F;
   color: #FFF;
   font-weight: bold;
   border: none;
