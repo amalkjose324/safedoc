@@ -58,7 +58,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="signup-first-submit"){
 * Function to send sms
 * @var json
 */
-public function sendsms($to,$message)
+function sendsms($to,$message)
 {
   $reg_phone='7012848331';
   $reg_password='safedoc2017';
@@ -71,7 +71,7 @@ public function sendsms($to,$message)
 * Function to send mail
 * @var json
 */
-public function sendmail($from,$to,$subject,$message)
+function sendmail($from,$to,$subject,$message)
 {
   define("MAIL_FROM",$from);
   define("MAIL_USERNAME",$from);
@@ -118,14 +118,14 @@ if(isset($_POST['fun']) && $_POST['fun']=="resetpw-submit"){
   $arr = array();
   $q = mysqli_query($con, "SELECT * FROM safedoc_login WHERE (login_phone='$email_phone' OR login_email='$email_phone')");
   if(mysqli_num_rows($q)>0){
-    while ($row=mysqli_fetch_array($q)) {
-      $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      $password = substr( str_shuffle( $chars ), 0, 8 );
-      $query=mysqli_query($con,"INSERT INTO safedoc_pwreset (pwreset_login_id,pwreset_password) VALUES($row['login_id'],'$password')") or die(mysqli_error($con));
-      sendmail("otp@safedocx.ml",$row['login_email'],"Reset SafeDocx Password","Your new password is $password . It is valid only for 1hrs and for one-time use.");
-      sendsms($row['login_phone'],"Your new password is $password . It is valid only for 1hrs and for one-time use.");
+    // while ($row=mysqli_fetch_array($q)) {
+    //   $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    //   $password = substr( str_shuffle( $chars ), 0, 8 );
+    //   $query=mysqli_query($con,"INSERT INTO safedoc_pwreset (pwreset_login_id,pwreset_password) VALUES($row['login_id'],'$password')") or die(mysqli_error($con));
+    //   sendmail("otp@safedocx.ml",$row['login_email'],"Reset SafeDocx Password","Your new password is $password . It is valid only for 1hrs and for one-time use.");
+    //   sendsms($row['login_phone'],"Your new password is $password . It is valid only for 1hrs and for one-time use.");
       array_push($arr, array("val" => true));
-    }
+  //  }
   }
   else {
     array_push($arr, array("val" => false));
