@@ -245,12 +245,12 @@ $(document).ready(function(){
           if(obj){
             $('#resetpw_form').trigger("reset");
             Lobibox.alert('success', {
-                msg: "Your new password has sent to your Email and Mobile number. Please change password immediately after first login.";
+                msg: "Your new password has sent to your Email and Mobile number. Please change password immediately after first login."
             });
           }
           else{
             Lobibox.alert('error', {
-                msg: "Provided details does not matching any accounts..!";
+                msg: "Provided details does not matching any accounts..!"
             });
           }
         }

@@ -4,26 +4,13 @@ var $ = jQuery.noConflict();
 
 // Page Loader
 $(window).load(function () {
-    
+
     "use strict";
 	$('#loader').fadeOut();
 });
 
 
 
-    // jQuery for page scrolling feature - requires jQuery Easing plugin
-$(function () {
-    
-    "use strict";
-    
-    $('a.page-scroll').bind('click', function (event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top - 68
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-});
 
 
 
@@ -31,7 +18,7 @@ $(function () {
 $('body').scrollspy({
     target: '.navbar-fixed-top',
 	offset: 70
-	
+
 });
 
 
@@ -41,10 +28,10 @@ $('.navbar-collapse ul li a').click(function () {
     "use strict";
     $('.navbar-toggle:visible').click();
 });
-    
-    
-    
-    
+
+
+
+
     /*----------------------------------------------------*/
     /*	Css3 Transition
     /*----------------------------------------------------*/
@@ -59,27 +46,27 @@ $('.navbar-collapse ul li a').click(function () {
                 });
             }
         });
-    
-    
 
-    
+
+
+
     /*--------------------------------------------------*/
     /* Counter*/
-    /*--------------------------------------------------*/ 
-        
+    /*--------------------------------------------------*/
+
 
                 $('.timer').countTo();
 
                 $('.counter-item').appear(function() {
                     $('.timer').countTo();
                 },{accY: -100});
-            
-        
+
+
 
 
 
 ////------- Testimonials Carousel
-	
+
 var testimonial = $("#testimonial-carousel");
 
 testimonial.owlCarousel({
@@ -93,12 +80,12 @@ testimonial.owlCarousel({
 	navigationText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>']
 });
 
-	
+
 
 ////------- Pricing Table
 
 $(document).ready(function() {
- 
+
   $(".pricing").owlCarousel({
         pagination: true,
         navigation : false,
@@ -112,14 +99,14 @@ $(document).ready(function() {
 		transitionStyle : "fade",
 		navigationText: ['<i class="fa fa-chevron-left"></i>','<i class="fa fa-chevron-right"></i>']
   });
- 
+
 });
 
 
 ////------- Latest News
 
 $(document).ready(function() {
- 
+
   $(".latest-news").owlCarousel({
         pagination: true,
         navigation : false,
@@ -133,7 +120,7 @@ $(document).ready(function() {
 		transitionStyle : "fade",
 		navigationText: ['<i class="fa fa-chevron-left"></i>','<i class="fa fa-chevron-right"></i>']
   });
- 
+
 });
 
 
@@ -142,7 +129,7 @@ $(document).ready(function() {
 // Team Carousel
 
 $(document).ready(function() {
- 
+
   $(".our-team").owlCarousel({
         pagination: true,
         slideSpeed : 2500,
@@ -155,7 +142,7 @@ $(document).ready(function() {
 		transitionStyle : "fade",
 		navigationText: ['<i class="fa fa-chevron-left"></i>','<i class="fa fa-chevron-right"></i>']
   });
- 
+
 });
 
 
@@ -163,7 +150,7 @@ $(document).ready(function() {
 ////------- Partner/CLients
 
 $(document).ready(function() {
- 
+
   $(".clients").owlCarousel({
         pagination: false,
         navigation : true,
@@ -177,7 +164,7 @@ $(document).ready(function() {
 		transitionStyle : "fade",
 		navigationText: ['<i class="fa fa-chevron-left"></i>','<i class="fa fa-chevron-right"></i>']
   });
- 
+
 });
 
 
@@ -186,7 +173,7 @@ $(document).ready(function() {
 $ ( function () {
 
 	$(".video").fitVids();
-	
+
 });
 
 
@@ -209,14 +196,12 @@ $('#team a').click(function (e) {
     /*---------------------------------------------------*/
     $(document).ready(function($) {
 	"use strict";
-    
+
         $('.skill-shortcode').appear(function() {
-            $('.progress').each(function(){ 
+            $('.progress').each(function(){
                 $('.progress-bar').css('width',  function(){ return ($(this).attr('data-percentage')+'%')});
             });
         },{accY: -100});
-        
-        
-    });
-	
 
+
+    });

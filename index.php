@@ -740,7 +740,6 @@
 
   <!-- Plugin JavaScript -->
   <script src="js/jquery.easing.1.3.js"></script>
-  <script type="text/javascript" src="js/ajaxscripts.js"></script>
   <script src="js/classie.js"></script>
   <script src="js/count-to.js"></script>
   <script src="js/custom.js"></script>
@@ -750,6 +749,7 @@
   <script src="js/jquery.fitvids.js"></script>
   <script src="js/styleswitcher.js"></script>
   <script src="js/lobibox.min.js"></script>
+  <script src="js/ajaxscripts.js"></script>
 
   <!-- Contact Form JavaScript -->
   <script src="js/jqBootstrapValidation.js"></script>
