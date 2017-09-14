@@ -225,7 +225,7 @@ $(document).ready(function(){
   * Reset Password validation
   * @return error message
   */
-  $("#resetpw_form").on("submit", function(){
+  $("#resetpw_form").on("submit",function(){
     var val_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
     var val_phone= /^[0-9]{9,12}$/;
     $email_phone = $('#resetpw-email_phone').val();

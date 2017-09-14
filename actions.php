@@ -61,24 +61,29 @@ if(isset($_POST['fun']) && $_POST['fun']=="signup-first-submit"){
 function sendsms($to,$message)
 {
   $reg_phone='7012848331';
-  $reg_password='safedoc2017';
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, "http://smsapi.engineeringtgr.com/send/?Mobile=$reg_phone&Password=$reg_password&Message=$message&To=$to");
-  curl_exec($ch);
-  curl_close($ch);
+  $reg_password='safedocx2017';
+  $message= preg_replace('/\s+/', '%20', $message);
+  $link="http://smsapi.engineeringtgr.com/send/?Mobile=$reg_phone&Password=$reg_password&Message=$message&To=$to";
+  $response = file_get_contents($link);
 }
 /**
 * Function to send mail
 * @var json
 */
-function sendmail($from,$to,$subject,$message)
+function sendmail($username,$from,$to,$subject,$message)
 {
+
   define("MAIL_FROM",$from);
-  define("MAIL_USERNAME",$from);
+  define("MAIL_USERNAME",$username);
   define("MAIL_PASSWORD","safedocx2017");
   require_once "mail_sms/class.phpmailer.php";
+  $mail->IsSMTP();                // Sets up a SMTP connection
+  $mail->SMTPAuth = true;         // Connection with the SMTP does require authorization
+  $mail->SMTPSecure = "ssl";      // Connect using a TLS connection
+  $mail->Host = "smtp.gmail.com";  //Gmail SMTP server address
+  $mail->Port = 465;  //Gmail SMTP port
   //Set who the message is to be sent from
-  $mail->setFrom($from, $from);
+  $mail->setFrom($from, "SafeDocx - Password");
   //Set who the message is to be sent to
   $mail->addAddress($to);
   $mail->Subject = $subject;
@@ -118,14 +123,23 @@ if(isset($_POST['fun']) && $_POST['fun']=="resetpw-submit"){
   $arr = array();
   $q = mysqli_query($con, "SELECT * FROM safedoc_login WHERE (login_phone='$email_phone' OR login_email='$email_phone')");
   if(mysqli_num_rows($q)>0){
-    // while ($row=mysqli_fetch_array($q)) {
-    //   $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    //   $password = substr( str_shuffle( $chars ), 0, 8 );
-    //   $query=mysqli_query($con,"INSERT INTO safedoc_pwreset (pwreset_login_id,pwreset_password) VALUES($row['login_id'],'$password')") or die(mysqli_error($con));
-    //   sendmail("otp@safedocx.ml",$row['login_email'],"Reset SafeDocx Password","Your new password is $password . It is valid only for 1hrs and for one-time use.");
-    //   sendsms($row['login_phone'],"Your new password is $password . It is valid only for 1hrs and for one-time use.");
+    while ($row=mysqli_fetch_array($q)) {
+      $id=$row['login_id'];
+      $name="User";
+      $query = mysqli_query($con, "SELECT * FROM safedoc_users WHERE user_id=$id");
+      while ($row2=mysqli_fetch_array($query)) {
+        $name=$row2['user_name'];
+      }
+      $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      $password = substr( str_shuffle( $chars ), 0, 8 );
+      $sms_msg   = "Hello $name, You can now login with the password : $password  .This password is valid only for 30 minutes and for one-time use. -SafeDocx";
+      $email_msg = "Hello $name, <br>&nbsp;&nbsp;&nbsp;&nbsp;You can now login with the password : <b>$password</b>. This password is valid only for 30 minutes and for one-time use.You should change your password immediately after this login.";
+      mysqli_query($con,"DELETE FROM `safedoc_pwreset` WHERE `pwreset_login_id`=$id");
+      mysqli_query($con,"INSERT INTO `safedoc_pwreset` (`pwreset_login_id`,`pwreset_password`) VALUES($id,'$password')");
+      sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$row['login_email'],"SafeDocx Password",$email_msg);
+      sendsms($row['login_phone'],$sms_msg);
       array_push($arr, array("val" => true));
-  //  }
+    }
   }
   else {
     array_push($arr, array("val" => false));
