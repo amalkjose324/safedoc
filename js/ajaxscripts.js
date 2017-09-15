@@ -114,22 +114,22 @@ $(document).ready(function(){
           if(obj){
             $('#signup_form').trigger("reset");
             Lobibox.alert('success', {
-                msg: "Your account has been created. Now you can login here..!"
+              msg: "Your account has been created. Now you can login here..!"
             });
             var $form_modal = $('.cd-user-modal'),
-          	$form_login = $form_modal.find('#cd-login'),
-          	$form_signup = $form_modal.find('#cd-signup'),
-          	$form_modal_tab = $('.cd-switcher'),
-          	$tab_login = $form_modal_tab.children('li').eq(0).children('a'),
-          	$tab_signup = $form_modal_tab.children('li').eq(1).children('a');
+            $form_login = $form_modal.find('#cd-login'),
+            $form_signup = $form_modal.find('#cd-signup'),
+            $form_modal_tab = $('.cd-switcher'),
+            $tab_login = $form_modal_tab.children('li').eq(0).children('a'),
+            $tab_signup = $form_modal_tab.children('li').eq(1).children('a');
             $form_login.addClass('is-selected');
-        		$form_signup.removeClass('is-selected');
-        		$tab_login.addClass('selected');
-        		$tab_signup.removeClass('selected');
+            $form_signup.removeClass('is-selected');
+            $tab_login.addClass('selected');
+            $tab_signup.removeClass('selected');
           }
           else{
             Lobibox.alert('error', {
-                msg: "We can't create your account right now..!"
+              msg: "We can't create your account right now..!"
             });
           }
         }
@@ -148,7 +148,7 @@ $(document).ready(function(){
       $("#login-email_phone-error").addClass('is-visible');
       $("#login-email_phone-error").html('Invalid Email or Phone number');
     }else {
-        $("#login-email_phone-error").removeClass('is-visible');
+      $("#login-email_phone-error").removeClass('is-visible');
     }
   });
   /**
@@ -197,7 +197,7 @@ $(document).ready(function(){
           }
           else{
             Lobibox.alert('error', {
-                msg: "Provided login credentials are invalid..!"
+              msg: "Provided login credentials are invalid..!"
             });
           }
         }
@@ -217,7 +217,7 @@ $(document).ready(function(){
       $("#resetpw-email_phone-error").addClass('is-visible');
       $("#resetpw-email_phone-error").html('Invalid Email or Phone number');
     }else {
-        $("#resetpw-email_phone-error").removeClass('is-visible');
+      $("#resetpw-email_phone-error").removeClass('is-visible');
     }
   });
 
@@ -234,7 +234,7 @@ $(document).ready(function(){
       return false;
     }
     else{
-      $fun="resetpw-submit";
+      $fun="check_mail_phone";
       $.ajax({
         type:'post',
         url:'./actions.php',
@@ -245,12 +245,23 @@ $(document).ready(function(){
           if(obj){
             $('#resetpw_form').trigger("reset");
             Lobibox.alert('success', {
-                msg: "Your new password has sent to your Email and Mobile number. Please change password immediately after first login."
+              msg: "Your new password has sent to your Email and Mobile number. Please change password immediately after first login."
+            });
+            $('.cd-user-modal').removeClass('is-visible');
+            $fun="resetpw-submit";
+            $.ajax({
+              type:'post',
+              url:'./actions.php',
+              data:{email_phone:$email_phone,fun:$fun},
+              success:function(response)
+              {
+                var obj = JSON.parse(response)[0]['val'];
+              }
             });
           }
           else{
             Lobibox.alert('error', {
-                msg: "Provided details does not matching any accounts..!"
+              msg: "Provided details does not matching any accounts..!"
             });
           }
         }

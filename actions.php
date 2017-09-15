@@ -5,9 +5,9 @@
 */
 if(isset($_POST['fun']) && $_POST['fun']=="signup-phone-validate"){
   $phone= $_POST['phone'];
-  $q = mysqli_query($con, "SELECT * FROM safedoc_login where login_phone='$phone'");
   $arr = array();
-  if(mysqli_num_rows($q)>0){
+  $query=select("safedoc_login","login_phone='$phone'");
+  if($query['count']>0){
     array_push($arr, array("val" => true));
   }
   else {
@@ -23,9 +23,9 @@ if(isset($_POST['fun']) && $_POST['fun']=="signup-phone-validate"){
 */
 if(isset($_POST['fun']) && $_POST['fun']=="signup-email-validate"){
   $uemail= $_POST['email'];
-  $q = mysqli_query($con, "SELECT * FROM safedoc_login where login_email='$uemail'");
   $arr = array();
-  if(mysqli_num_rows($q)>0){
+  $query=select("safedoc_login","login_email='$uemail'");
+  if($query['count']>0){
     array_push($arr, array("val" => true));
   }
   else {
@@ -44,8 +44,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="signup-first-submit"){
   $phone=$_POST['phone'];
   $password=SHA1($_POST['password']);
   $arr = array();
-  $q = mysqli_query($con, "INSERT INTO safedoc_login(login_phone,login_pword,login_email) VALUES('$phone','$password','$email')");
-  if($q){
+  if(insert("safedoc_login","login_phone,login_pword,login_email","'$phone','$password','$email'")){
     array_push($arr, array("val" => true));
   }
   else{
@@ -103,8 +102,26 @@ if(isset($_POST['fun']) && $_POST['fun']=="login-submit"){
   $email_phone= $_POST['email_phone'];
   $password=SHA1($_POST['password']);
   $arr = array();
-  $q = mysqli_query($con, "SELECT * FROM safedoc_login WHERE (login_phone='$email_phone' OR login_email='$email_phone') AND login_pword='$password'");
-  if(mysqli_num_rows($q)>0){
+  $query=select("safedoc_login","(login_phone='$email_phone' OR login_email='$email_phone') AND login_pword='$password'");
+  if($query['count']>0){
+    array_push($arr, array("val" => true));
+  }
+  else {
+    array_push($arr, array("val" => false));
+  }
+  echo json_encode($arr);
+  exit();
+}
+
+/**
+* Check mail or phone validate (exist)
+* @var json
+*/
+if(isset($_POST['fun']) && $_POST['fun']=="check_mail_phone"){
+  $email_phone= $_POST['email_phone'];
+  $arr = array();
+  $query=select("safedoc_login","(login_phone='$email_phone' OR login_email='$email_phone')");
+  if($query['count']>0){
     array_push($arr, array("val" => true));
   }
   else {
@@ -121,21 +138,22 @@ if(isset($_POST['fun']) && $_POST['fun']=="login-submit"){
 if(isset($_POST['fun']) && $_POST['fun']=="resetpw-submit"){
   $email_phone= $_POST['email_phone'];
   $arr = array();
-  $q = mysqli_query($con, "SELECT * FROM safedoc_login WHERE (login_phone='$email_phone' OR login_email='$email_phone')");
-  if(mysqli_num_rows($q)>0){
-    while ($row=mysqli_fetch_array($q)) {
+  $query=select("safedoc_login","(login_phone='$email_phone' OR login_email='$email_phone')");
+  if($query['count']>0){
+    while ($row=mysqli_fetch_array($query['rows'])) {
       $id=$row['login_id'];
       $name="User";
-      $query = mysqli_query($con, "SELECT * FROM safedoc_users WHERE user_id=$id");
-      while ($row2=mysqli_fetch_array($query)) {
+      $query2 = select("safedoc_users","user_id=$id");
+      while ($row2=mysqli_fetch_array($query2['rows'])) {
         $name=$row2['user_name'];
       }
       $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       $password = substr( str_shuffle( $chars ), 0, 8 );
+      $password2=SHA1($password);
       $sms_msg   = "Hello $name, You can now login with the password : $password  .This password is valid only for 30 minutes and for one-time use. -SafeDocx";
       $email_msg = "Hello $name, <br>&nbsp;&nbsp;&nbsp;&nbsp;You can now login with the password : <b>$password</b>. This password is valid only for 30 minutes and for one-time use.You should change your password immediately after this login.";
-      mysqli_query($con,"DELETE FROM `safedoc_pwreset` WHERE `pwreset_login_id`=$id");
-      mysqli_query($con,"INSERT INTO `safedoc_pwreset` (`pwreset_login_id`,`pwreset_password`) VALUES($id,'$password')");
+      remove("safedoc_pwreset","`pwreset_login_id`=$id");
+      insert("safedoc_pwreset","`pwreset_login_id`,`pwreset_password`","$id,'$password2'");
       sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$row['login_email'],"SafeDocx Password",$email_msg);
       sendsms($row['login_phone'],$sms_msg);
       array_push($arr, array("val" => true));
