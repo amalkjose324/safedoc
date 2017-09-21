@@ -253,8 +253,12 @@ xsigin/signup popup
   padding: 0;
   border-radius: 0.25em;
 }
+
 .cd-form input.full-width {
   width: 100%;
+}
+.cd-form input.half-width {
+  width: 49.5%;
 }
 .cd-form input.has-padding {
   padding: 12px 20px 12px 50px;
@@ -425,10 +429,10 @@ xsigin/signup popup
   }
 }
 
-#cd-login, #cd-signup, #cd-reset-password {
+#cd-login, #cd-signup, #cd-reset-password,#cd-varify {
   display: none;
 }
 
-#cd-login.is-selected, #cd-signup.is-selected, #cd-reset-password.is-selected {
+#cd-login.is-selected, #cd-signup.is-selected, #cd-reset-password.is-selected, #cd-varify.is-selected {
   display: block;
 }

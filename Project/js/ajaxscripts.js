@@ -166,6 +166,34 @@ $(document).ready(function(){
     }
   });
   /**
+  * email id varification
+  * @return error message
+  */
+  $("#varify_email").focusout(function(){
+    $email = $('#varify_email').val();
+    var validator= /^[0-9]{6,6}$/;
+    if(!validator.test($email)){
+      $("#varify-email-error").addClass('is-visible');
+    }
+    else {
+      $("#varify-email-error").removeClass('is-visible');
+    }
+  });
+  /**
+  * phone number varification
+  * @return error message
+  */
+  $("#varify_phone").focusout(function(){
+    $phone = $('#varify_phone').val();
+    var validator= /^[0-9]{6,6}$/;
+    if(!validator.test($phone)){
+      $("#varify-phone-error").addClass('is-visible');
+    }
+    else {
+      $("#varify-phone-error").removeClass('is-visible');
+    }
+  });
+  /**
   * Login validation
   * @return error message
   */
@@ -192,8 +220,43 @@ $(document).ready(function(){
         success:function(response)
         {
           var obj = JSON.parse(response)[0]['val'];
-          if(obj){
+          if(obj==1){
+            Lobibox.alert('success', {
+              msg: "Success"
+            });
+          }
+          else if(obj==2){
             $('#login_form').trigger("reset");
+            var $form_modal = $('.cd-user-modal'),
+            $form_login = $form_modal.find('#cd-login'),
+            $form_varify = $form_modal.find('#cd-varify'),
+            $form_modal_tab = $('.cd-switcher'),
+            $tab_login = $form_modal_tab.children('li').eq(0).children('a'),
+            $tab_signup = $form_modal_tab.children('li').eq(1).children('a');
+            $form_login.removeClass('is-selected');
+            $form_varify.addClass('is-selected');
+            $tab_signup.removeClass('selected');
+            $tab_login.addClass('selected');
+            var timer2 = "3:00";
+            var interval = setInterval(function() {
+              var timer = timer2.split(':');
+              var minutes = parseInt(timer[0], 10);
+              var seconds = parseInt(timer[1], 10);
+              --seconds;
+              minutes = (seconds < 0) ? --minutes : minutes;
+              if (minutes < 0){
+                clearInterval(interval);
+                $form_login.addClass('is-selected');
+                $form_varify.removeClass('is-selected');
+                $tab_signup.removeClass('selected');
+                $tab_login.addClass('selected');
+              }
+              seconds = (seconds < 0) ? 59 : seconds;
+              seconds = (seconds < 10) ? '0' + seconds : seconds;
+              minutes = (minutes < 10) ?  '0' + minutes : minutes;
+              $('#countdown').html(minutes + ':' + seconds);
+              timer2 = minutes + ':' + seconds;
+            }, 1000);
           }
           else{
             Lobibox.alert('error', {

@@ -7,6 +7,11 @@
 .download_text{
   margin-top: 40px;
 }
+.countdown{
+  font-size: 28px;
+  font-size: 3rem;
+  text-align: center;
+}
 h4{
   text-transform: none !important;
 }
