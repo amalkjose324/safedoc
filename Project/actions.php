@@ -112,6 +112,18 @@ if(isset($_POST['fun']) && $_POST['fun']=="login-submit"){
          array_push($arr, array("val" => 1));
       }
       else{
+        $chars = "012345678901234567890123456789";
+        $otp_mail = substr(str_shuffle( $chars ), 0, 6 );
+        $otp_phone = substr(str_shuffle( $chars ), 0, 6 );
+        $otp_m=SHA1($otp_mail);
+        $otp_p=SHA1($otp_phone);
+        $sms_msg   = "Varify your Mobile Number using otp: $otp_phone -SafeDocx";
+        $email_msg = "Varify your Email-ID using otp: $otp_mail -SafeDocx";
+        mysqli_query($con, "DELETE FROM `safedoc_otp` WHERE `otp_login_id`=$id");
+        mysqli_query($con, "INSERT INTO `safedoc_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($id,0,'$otp_p')");
+        mysqli_query($con, "INSERT INTO `safedoc_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($id,1,'$otp_m')");
+        sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$row['login_email'],"SafeDocx Password",$email_msg);
+        sendsms($row['login_phone'],$sms_msg);
         array_push($arr, array("val" => 2));
       }
     }

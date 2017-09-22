@@ -34,7 +34,7 @@
 
     <div id="cd-varify"> <!-- log in form -->
       <p class="cd-form-message">We send varification code to your email and phone number. Please varify both email and phone.</p>
-      <div class="countdown" id="countdown"></div>
+      <div class="countdown" id="countdown">03:00</div>
       <form class="cd-form cform" id="varify_form" onsubmit="return false;">
         <p class="fieldset">
           <label class="image-replace cd-email" for="login-email_phone">OTP</label>

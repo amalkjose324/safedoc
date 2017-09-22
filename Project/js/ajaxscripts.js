@@ -226,7 +226,11 @@ $(document).ready(function(){
             });
           }
           else if(obj==2){
+            $('#countdown').html("03:00");
             $('#login_form').trigger("reset");
+            for (var i = 0; i < 9999999; i++){
+                window.clearInterval(i);
+            }
             var $form_modal = $('.cd-user-modal'),
             $form_login = $form_modal.find('#cd-login'),
             $form_varify = $form_modal.find('#cd-varify'),
