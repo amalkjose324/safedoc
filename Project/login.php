@@ -46,6 +46,7 @@
           <input class="full-width has-padding has-border" id="varify_phone" maxlength="6" type="text"  placeholder="Enter OTP received to your Phone">
           <span class="cd-error-message" id="varify-phone-error">OPT Must contains 6 Numerical Digits</span>
         </p>
+        <input type="hidden" id="hidden_email_phone">
         <p class="fieldset">
           <input class="full-width" type="submit" value="Varify">
         </p>

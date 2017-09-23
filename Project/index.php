@@ -1,3 +1,4 @@
+<?php include_once 'db_connect.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,6 @@
 
   <title>SafeDocx : Secure Document Storage</title>
   <?php include_once 'login.php'; ?>
-  <?php include_once 'db_connect.php'; ?>
   <!-- Bootstrap Core CSS -->
   <link href="asset/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome CSS -->

@@ -136,6 +136,61 @@ $(document).ready(function(){
       });
     }
   });
+
+  /**
+  * Signup-password checking for alredy taken or not
+  * @return error message
+  */
+  $("#signup-password").focusout(function(){
+    $password = $('#signup-password').val();
+    var validator= /^[^&]{6,30}$/;
+    if(!validator.test($password)){
+      $("#signup-password-error").addClass('is-visible');
+    }
+    else {
+      $("#signup-password-error").removeClass('is-visible');
+    }
+  });
+  /**
+  * Varification form validation
+  * @return error message
+  */
+  $("#varify_form").on("submit", function(){
+    $email = $('#varify_email').val();
+    $phone = $('#varify_phone').val();
+    $email_phone= $('#hidden_email_phone').val();
+    var validator= /^[0-9]{6,6}$/;
+    if(!validator.test($email)){
+      $("#varify-email-error").addClass('is-visible');
+    }
+    else if(!validator.test($phone)){
+      $("#varify-phone-error").addClass('is-visible');
+    }
+    else{
+      $fun="varify-email-phone";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{otp_email:$email,otp_phone:$phone,email_phone:$email_phone,fun:$fun},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $('#varify_form').trigger("reset");
+            Lobibox.alert('success', {
+              msg: "You are varified"
+            });
+            $('.cd-user-modal').removeClass('is-visible');
+          }
+          else{
+            Lobibox.alert('error', {
+              msg: "Invalid OTP"
+            });
+          }
+        }
+      });
+    }
+  });
   /**
   * login-email_phone checking
   * @return error message
@@ -226,6 +281,7 @@ $(document).ready(function(){
             });
           }
           else if(obj==2){
+            $('#hidden_email_phone').val($email_phone);
             $('#countdown').html("03:00");
             $('#login_form').trigger("reset");
             for (var i = 0; i < 9999999; i++){
@@ -242,6 +298,12 @@ $(document).ready(function(){
             $tab_signup.removeClass('selected');
             $tab_login.addClass('selected');
             var timer2 = "3:00";
+            $fun="varify-email-phone-sendotp";
+            $.ajax({
+              type:'post',
+              url:'./actions.php',
+              data:{email_phone:$email_phone,fun:$fun}
+            });
             var interval = setInterval(function() {
               var timer = timer2.split(':');
               var minutes = parseInt(timer[0], 10);

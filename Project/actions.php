@@ -109,27 +109,64 @@ if(isset($_POST['fun']) && $_POST['fun']=="login-submit"){
       $id=$row['login_id'];
       $query2 = mysqli_query($con, "SELECT * FROM `safedoc_varify` WHERE varify_login_id=$id AND varify_phone=1 AND varify_email=1");
       if(mysqli_num_rows($query2)>0){
-         array_push($arr, array("val" => 1));
+        array_push($arr, array("val" => 1));
       }
       else{
-        $chars = "012345678901234567890123456789";
-        $otp_mail = substr(str_shuffle( $chars ), 0, 6 );
-        $otp_phone = substr(str_shuffle( $chars ), 0, 6 );
-        $otp_m=SHA1($otp_mail);
-        $otp_p=SHA1($otp_phone);
-        $sms_msg   = "Varify your Mobile Number using otp: $otp_phone -SafeDocx";
-        $email_msg = "Varify your Email-ID using otp: $otp_mail -SafeDocx";
-        mysqli_query($con, "DELETE FROM `safedoc_otp` WHERE `otp_login_id`=$id");
-        mysqli_query($con, "INSERT INTO `safedoc_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($id,0,'$otp_p')");
-        mysqli_query($con, "INSERT INTO `safedoc_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($id,1,'$otp_m')");
-        sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$row['login_email'],"SafeDocx Password",$email_msg);
-        sendsms($row['login_phone'],$sms_msg);
         array_push($arr, array("val" => 2));
       }
     }
   }
   else {
     array_push($arr, array("val" => 0));
+  }
+  echo json_encode($arr);
+  exit();
+}
+/**
+* Varification process
+* @var json
+*/
+if(isset($_POST['fun']) && $_POST['fun']=="varify-email-phone-sendotp"){
+  $email_phone= $_POST['email_phone'];
+  $query = mysqli_query($con, "SELECT * FROM safedoc_login WHERE (login_phone='$email_phone' OR login_email='$email_phone')");
+  while ($row=mysqli_fetch_array($query)) {
+    $id=$row['login_id'];
+    $chars = "012345678901234567890123456789";
+    $otp_mail = substr(str_shuffle( $chars ), 0, 6 );
+    $otp_phone = substr(str_shuffle( $chars ), 0, 6 );
+    $otp_m=SHA1($otp_mail);
+    $otp_p=SHA1($otp_phone);
+    $sms_msg   = "Varify your Mobile Number using otp: $otp_phone -SafeDocx";
+    $email_msg = "Varify your Email-ID using otp: $otp_mail -SafeDocx";
+    mysqli_query($con, "DELETE FROM `safedoc_otp` WHERE `otp_login_id`=$id");
+    mysqli_query($con, "INSERT INTO `safedoc_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($id,0,'$otp_p')");
+    mysqli_query($con, "INSERT INTO `safedoc_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($id,1,'$otp_m')");
+    sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$row['login_email'],"SafeDocx Password",$email_msg);
+    sendsms($row['login_phone'],$sms_msg);
+  }
+}
+/**
+* Varify now
+* @var json
+*/
+if(isset($_POST['fun']) && $_POST['fun']=="varify-email-phone"){
+  $otp_email=SHA1($_POST['otp_email']);
+  $otp_phone=SHA1($_POST['otp_phone']);
+  $email_phone=$_POST['email_phone'];
+  $arr = array();
+  $query = mysqli_query($con, "SELECT * FROM safedoc_login WHERE (login_phone='$email_phone' OR login_email='$email_phone')");
+  while ($row=mysqli_fetch_array($query)) {
+    $id=$row['login_id'];
+    $query2 = mysqli_query($con, "SELECT * FROM safedoc_otp WHERE otp_login_id=$id AND ((otp_type=0 AND otp_password='$otp_phone') OR (otp_type=1 AND otp_password='$otp_email'))");
+    if(mysqli_num_rows($query2)==2){
+      mysqli_query($con, "DELETE FROM `safedoc_otp` WHERE `otp_login_id`=$id");
+      mysqli_query($con, "DELETE FROM `safedoc_varify` WHERE `varify_login_id`=$id");
+      mysqli_query($con, "INSERT INTO `safedoc_varify` (varify_login_id,varify_phone,varify_email) VALUES($id,1,1)");
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
   }
   echo json_encode($arr);
   exit();
