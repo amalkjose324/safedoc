@@ -103,10 +103,11 @@ if(isset($_POST['fun']) && $_POST['fun']=="login-submit"){
   $email_phone= $_POST['email_phone'];
   $password=SHA1($_POST['password']);
   $arr = array();
-  $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE (login_phone='$email_phone' OR login_email='$email_phone') AND login_pword='$password'");
+  $query = mysqli_query($con, "SELECT * FROM `safedocx_login`,`safedocx_user_type` WHERE (login_phone='$email_phone' OR login_email='$email_phone') AND login_pword='$password' AND login_status=1 AND utype_id=login_user_type");
   if(mysqli_num_rows($query)>0){
     while ($row=mysqli_fetch_array($query)) {
       $id=$row['login_id'];
+      $_SESSION['user_page'] = $row['utype_page'];
       $query2 = mysqli_query($con, "SELECT * FROM `safedocx_varify` WHERE varify_login_id=$id AND varify_phone=1 AND varify_email=1");
       if(mysqli_num_rows($query2)>0){
         array_push($arr, array("val" => 1));
@@ -190,6 +191,14 @@ if(isset($_POST['fun']) && $_POST['fun']=="check_mail_phone"){
   exit();
 }
 
+/**
+* Logout
+* @var json
+*/
+if(isset($_POST['fun']) && $_POST['fun']=="logout"){
+  session_destroy();
+  exit();
+}
 /**
 * ResetPw-submit
 * @var json

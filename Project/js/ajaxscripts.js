@@ -276,16 +276,14 @@ $(document).ready(function(){
         {
           var obj = JSON.parse(response)[0]['val'];
           if(obj==1){
-            Lobibox.alert('success', {
-              msg: "Success"
-            });
+            window.location.replace('dashboard') ;
           }
           else if(obj==2){
             $('#hidden_email_phone').val($email_phone);
             $('#countdown').html("03:00");
             $('#login_form').trigger("reset");
             for (var i = 0; i < 9999999; i++){
-                window.clearInterval(i);
+              window.clearInterval(i);
             }
             var $form_modal = $('.cd-user-modal'),
             $form_login = $form_modal.find('#cd-login'),
@@ -398,4 +396,20 @@ $(document).ready(function(){
     }
   });
 
+  /**
+  * Logout function
+  * @return error message
+  */
+  $("#logout").click(function(){
+      $fun="logout";
+      $.ajax({
+        type:'post',
+        url:'../actions.php',
+        data:{fun:$fun},
+        success:function(response)
+        {
+          window.location.replace('../') ;
+        }
+      });
+  });
 });
