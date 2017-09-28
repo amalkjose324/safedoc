@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-overlay-menu.css">
     <link rel="stylesheet" type="text/css" href="css/core/colors/palette-gradient.css">
+    <link rel="stylesheet" href="../css/lobibox.min.css"/>
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -45,7 +46,7 @@
   <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
 
     <!-- navbar-fixed-top-->
-  
+
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
@@ -409,6 +410,7 @@
     <script src="vendors/js/ui/screenfull.min.js" type="text/javascript"></script>
     <script src="vendors/js/extensions/pace.min.js" type="text/javascript"></script>
     <script src="../js/ajaxscripts.js"></script>
+    <script src="../js/lobibox.min.js"></script>
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->
     <script src="vendors/js/charts/chart.min.js" type="text/javascript"></script>
