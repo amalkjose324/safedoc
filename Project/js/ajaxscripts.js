@@ -395,21 +395,4 @@ $(document).ready(function(){
       });
     }
   });
-
-  /**
-  * Logout function
-  * @return error message
-  */
-  $("#logout").click(function(){
-      $fun="logout";
-      $.ajax({
-        type:'post',
-        url:'../actions.php',
-        data:{fun:$fun},
-        success:function(response)
-        {
-          window.location.replace('../') ;
-        }
-      });
-  });
 });

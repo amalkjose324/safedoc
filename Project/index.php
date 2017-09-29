@@ -1,6 +1,6 @@
 <?php
 include_once 'db_connect.php';
-include_once 'logval.php';
+include_once 'check_login.php';
 ?>
 
 <!DOCTYPE html>

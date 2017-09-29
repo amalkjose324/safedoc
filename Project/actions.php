@@ -46,6 +46,11 @@ if(isset($_POST['fun']) && $_POST['fun']=="signup-first-submit"){
   $arr = array();
   $query = mysqli_query($con, "INSERT INTO safedocx_login (login_phone,login_pword,login_email) VALUES('$phone','$password','$email')");
   if($query){
+    $query2=mysqli_query($con,"SELECT * FROM safedocx_login WHERE login_email='$email'");
+    while ($row=mysqli_fetch_array($query2)) {
+      $uid=$row['login_id'];
+      mysqli_query($con, "INSERT INTO `safedocx_profile_pic`(`profile_pic_user_id`) VALUES($uid)");
+    }
     array_push($arr, array("val" => true));
   }
   else{
@@ -106,7 +111,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="login-submit"){
   $query = mysqli_query($con, "SELECT * FROM `safedocx_login`,`safedocx_user_type` WHERE (login_phone='$email_phone' OR login_email='$email_phone') AND login_pword='$password' AND login_status=1 AND utype_id=login_user_type");
   if(mysqli_num_rows($query)>0){
     while ($row=mysqli_fetch_array($query)) {
-      $id=$row['login_id'];
+      $id=$_SESSION['user_id']=$row['login_id'];
       $_SESSION['user_page'] = $row['utype_page'];
       $query2 = mysqli_query($con, "SELECT * FROM `safedocx_varify` WHERE varify_login_id=$id AND varify_phone=1 AND varify_email=1");
       if(mysqli_num_rows($query2)>0){
@@ -191,14 +196,6 @@ if(isset($_POST['fun']) && $_POST['fun']=="check_mail_phone"){
   exit();
 }
 
-/**
-* Logout
-* @var json
-*/
-if(isset($_POST['fun']) && $_POST['fun']=="logout"){
-  session_destroy();
-  exit();
-}
 /**
 * ResetPw-submit
 * @var json

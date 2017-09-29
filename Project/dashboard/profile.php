@@ -30,7 +30,7 @@
   <link rel="stylesheet" type="text/css" href="css/bootstrap-extended.css">
   <link rel="stylesheet" type="text/css" href="css/app.css">
   <link rel="stylesheet" type="text/css" href="css/colors.css">
-  <link rel="stylesheet" type="text/css" href="css/custom.css">
+  <link rel="stylesheet" type="text/css" href="css/popup.css">
   <!-- END ROBUST CSS-->
   <!-- BEGIN Page Level CSS-->
   <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-menu.css">
@@ -41,9 +41,7 @@
   <!-- END Custom CSS-->
 </head>
 <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
-
   <?php include_once 'sidemenu.php'; ?>
-
   <div class="app-content content container-fluid">
     <div class="content-wrapper">
       <div class="content-header row">
@@ -55,7 +53,7 @@
         <div class="cd-popup-container">
           <center><div id="upload-demo" style="width:350px"></div></center>
           <button class="btn btn-success upload-select" style="margin-top: -40px;width:150px;">Change Picture</button>
-            <button class="btn btn-success upload-result" style="margin-top: -40px;width:150px;">Set Picture</button>
+          <button class="btn btn-success upload-result" style="margin-top: -40px;width:150px;">Set Picture</button>
 
 
           <a href="#0" class="cd-popup-close img-replace">Close</a>
@@ -71,7 +69,6 @@
                 <div class="card-header">
                   <h4 class="card-title" id="basic-layout-square-controls">Donation</h4>
                   <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-
                 </div>
                 <div class="card-body collapse in">
                   <div class="card-block">
@@ -80,21 +77,21 @@
                         <input type="file" id="upload" accept="image/*" hidden="hidden">
                         <div class="form-group">
                           <label for="donationinput1">Profile Picture</label>
-                        <center>  <div id="upload-demo-i" style="border-radius: 360px;width:202px;height:202px;box-shadow: 1px 1px 10px 3px #888888;"></div></center>
+                          <center>  <div id="upload-demo-i" style="border-radius: 360px;width:202px;height:202px;box-shadow: 1px 1px 10px 3px #888888;"></div></center>
                         </div>
                         <div class="form-group">
                           <label for="donationinput1">Phone Number</label>
-                          <input type="text" id="donationinput1" class="form-control square" placeholder="name" name="fullname">
+                          <input type="text" id="donationinput1" class="in_icon form-control square" placeholder="name" name="fullname">
                         </div>
 
                         <div class="form-group">
                           <label for="donationinput2">Email ID</label>
-                          <input type="email" id="donationinput2" class="form-control square" placeholder="email" name="email">
+                          <input type="email" id="donationinput2" class="in_icon form-control square" placeholder="email" name="email">
                         </div>
 
                         <div class="form-group">
                           <label for="donationinput3">Password</label>
-                          <input type="tel" id="donationinput3" class="form-control square" name="contact">
+                          <input type="tel" id="donationinput3" class="in_icon form-control square" name="contact">
                         </div>
 
                       </div>
@@ -199,7 +196,7 @@
   <!-- BEGIN ROBUST JS-->
   <script src="js/core/app-menu.js" type="text/javascript"></script>
   <script src="js/core/app.js" type="text/javascript"></script>
-  <script src="js/custom.js" type="text/javascript"></script>
+  <script src="js/popup.js" type="text/javascript"></script>
   <!-- END ROBUST JS-->
   <!-- BEGIN PAGE LEVEL JS-->
   <!-- END PAGE LEVEL JS-->
@@ -231,18 +228,17 @@
     catch(e){
       $('.cd-popup').removeClass('is-visible');
     }
-
   });
-
   $('.upload-result').on('click', function (ev) {
     $uploadCrop.croppie('result', {
       type: 'canvas',
       size: 'viewport'
     }).then(function (resp) {
+      alert(resp);
       $.ajax({
-        url: "./ajaxpro.php",
+        url: "./actions.php",
         type: "POST",
-        data: {"image":resp},
+        data: {"image":resp,fun:"change_profile_pic"},
         success: function (data) {
           html = '<img src="' + resp + '" />';
           $("#upload-demo-i").html(html);
