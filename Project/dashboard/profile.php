@@ -1,3 +1,7 @@
+<?php
+include_once '../db_connect.php';
+include_once 'check_logout.php';
+?>
 <!DOCTYPE html>
 <html lang="en" data-textdirection="ltr" class="loading">
 <head>
@@ -25,151 +29,167 @@
   <link rel="stylesheet" type="text/css" href="fonts/icomoon.css">
   <link rel="stylesheet" type="text/css" href="fonts/flag-icon-css/css/flag-icon.min.css">
   <link rel="stylesheet" type="text/css" href="vendors/css/extensions/pace.css">
+  <link rel="stylesheet" href="../css/lobibox.min.css"/>
   <!-- END VENDOR CSS-->
   <!-- BEGIN ROBUST CSS-->
   <link rel="stylesheet" type="text/css" href="css/bootstrap-extended.css">
   <link rel="stylesheet" type="text/css" href="css/app.css">
   <link rel="stylesheet" type="text/css" href="css/colors.css">
-  <link rel="stylesheet" type="text/css" href="css/popup.css">
+
   <!-- END ROBUST CSS-->
   <!-- BEGIN Page Level CSS-->
   <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-menu.css">
+  <link rel="stylesheet" type="text/css" href="css/custom.css">
   <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-overlay-menu.css">
+  <link href="../css/login_css.css" rel="stylesheet">
   <!-- END Page Level CSS-->
   <!-- BEGIN Custom CSS-->
-  <link rel="stylesheet" type="text/css" href="css/style.css">
   <!-- END Custom CSS-->
 </head>
 <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
   <?php include_once 'sidemenu.php'; ?>
   <div class="app-content content container-fluid">
     <div class="content-wrapper">
-      <div class="content-header row">
-        <div class="content-header-left col-md-6 col-xs-12 mb-1">
-          <h2 class="content-header-title">Manage Profile</h2>
+      <form class="form" id="profile_form" onsubmit="return false;" method="post">
+        <div class="content-header row">
+          <button type="submit" class="btn btn-primary profile_save">
+            <i class="icon-check"></i> Save
+          </button>
+          <button type="button" id="cpass-btn" class="btn btn-warning mr-1 profile_save">
+            <i class="icon-edit"></i> Change Password.
+          </button>
+          <div class="content-header-left col-md-6 col-xs-12 mb-1">
+            <h2 class="content-header-title">Manage Profile</h2>
+          </div>
         </div>
-      </div>
-      <div class="cd-popup" role="alert">
-        <div class="cd-popup-container">
-          <center><div id="upload-demo" style="width:350px"></div></center>
-          <button class="btn btn-success upload-select" style="margin-top: -40px;width:150px;">Change Picture</button>
-          <button class="btn btn-success upload-result" style="margin-top: -40px;width:150px;">Set Picture</button>
+        <div class="cd-popup" id="profile-pic" role="alert">
+          <div class="cd-popup-container">
+            <center><div id="upload-demo" style="width:350px"></div></center>
+            <button class="btn btn-success upload-select" style="margin-top: -40px;width:150px;">Change Picture</button>
+            <button class="btn btn-success upload-result" style="margin-top: -40px;width:150px;">Set Picture</button>
+            <a href="#0" class="cd-popup-close img-replace">Close</a>
+          </div> <!-- cd-popup-container -->
+        </div> <!-- cd-popup -->
 
-
-          <a href="#0" class="cd-popup-close img-replace">Close</a>
-        </div> <!-- cd-popup-container -->
-      </div> <!-- cd-popup -->
-      <a href="#0" class="cd-popup-trigger" hidden="hidden">View Pop-up</a>
-      <div class="content-body"><!-- Basic form layout section start -->
-        <section id="basic-form-layouts">
-
-          <div class="row match-height">
-            <div class="col-md-6" style="z-index: 0;">
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title" id="basic-layout-square-controls">Donation</h4>
-                  <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                </div>
-                <div class="card-body collapse in">
-                  <div class="card-block">
-                    <form class="form">
+        <a href="#0" class="cd-popup-trigger" hidden="hidden">View Pop-up</a>
+        <div class="content-body"><!-- Basic form layout section start -->
+          <section id="basic-form-layouts">
+            <div class="row match-height">
+              <div class="col-md-6" style="z-index: 0;">
+                <div class="card">
+                  <div class="card-header">
+                    <h4 class="card-title" id="basic-layout-square-controls">Account Details</h4>
+                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                  </div>
+                  <div class="card-body collapse in">
+                    <div class="card-block">
                       <div class="form-body">
                         <input type="file" id="upload" accept="image/*" hidden="hidden">
                         <div class="form-group">
                           <label for="donationinput1">Profile Picture</label>
-                          <center>  <div id="upload-demo-i" style="border-radius: 360px;width:202px;height:202px;box-shadow: 1px 1px 10px 3px #888888;"></div></center>
+                          <?php
+                          $query=mysqli_query($con,"SELECT * FROM safedocx_login WHERE `login_id`=$user_id ");
+                          $login=mysqli_fetch_array($query);
+                          $query=mysqli_query($con,"SELECT * FROM safedocx_users WHERE `user_id`=$user_id ");
+                          $users=mysqli_fetch_array($query);
+                          $query=mysqli_query($con,"SELECT * FROM safedocx_profile_pic WHERE profile_pic_user_id=$user_id");
+                          $profile=mysqli_fetch_array($query);
+                          $default_state=0;
+                          if(isset($users['user_district_id'])){
+                            $default_district =$users['user_district_id'];
+                            $q=mysqli_query($con,"SELECT * FROM safedocx_districts WHERE district_id=$default_district");
+                            while($r=mysqli_fetch_array($q)){
+                              $default_state =$r['district_state_id'];
+                            }
+                          }
+                          ?>
+                          <center style="margin:18px !important;">  <div id="upload-demo-i" style="border-radius: 360px;width:202px;height:202px;box-shadow: 1px 1px 10px 3px #888888;"><img src="<?php echo('images/profile_pics/'.$profile[2]);?>" alt="No Image"></div></center>
                         </div>
                         <div class="form-group">
-                          <label for="donationinput1">Phone Number</label>
-                          <input type="text" id="donationinput1" class="in_icon form-control square" placeholder="name" name="fullname">
+                          <label for="profile-phone">Phone Number</label>
+                          <input type="text" id="profile-phone" class="in_icon form-control square" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
+                          <span class="cd-error-message" id="profile-phone-error" >Invalid Phone number!</span>
                         </div>
 
                         <div class="form-group">
-                          <label for="donationinput2">Email ID</label>
-                          <input type="email" id="donationinput2" class="in_icon form-control square" placeholder="email" name="email">
+                          <label for="profile-email">Email ID</label>
+                          <input type="text" id="profile-email" class="in_icon form-control square" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
+                          <span class="cd-error-message" id="profile-email-error" >Invalid Email id!</span>
                         </div>
-
-                        <div class="form-group">
-                          <label for="donationinput3">Password</label>
-                          <input type="tel" id="donationinput3" class="in_icon form-control square" name="contact">
-                        </div>
-
                       </div>
-
-                      <div class="form-actions right">
-                        <button type="button" class="btn btn-warning mr-1">
-                          <i class="icon-cross2"></i> Cancel
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                          <i class="icon-check2"></i> Save
-                        </button>
-                      </div>
-                    </form>
-
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col-md-6" style="z-index: 0;" >
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title" id="basic-layout-square-controls">Donation</h4>
-                  <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+              <div class="col-md-6" style="z-index: 0;" >
+                <div class="card">
+                  <div class="card-header">
+                    <h4 class="card-title" id="basic-layout-square-controls">Personal Details</h4>
+                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                  </div>
+                  <div class="card-body collapse in">
+                    <div class="card-block">
 
-                </div>
-                <div class="card-body collapse in">
-                  <div class="card-block">
-
-                    <form class="form">
                       <div class="form-body">
 
-                        <div class="form-group">
-                          <label for="donationinput1">Full Name</label>
-                          <input type="text" id="donationinput1" class="form-control square" placeholder="name" name="fullname">
+                        <div class="form-group ">
+                          <label for="profile-name">Full Name</label>
+                          <input type="text" id="profile-name" class="form-control square" placeholder="Full Name" name="profile-name" value="<?php echo $users['user_name']?>">
+                          <span class="cd-error-message" id="profile-name-error" >Name must have 3-30 Charectors</span>
                         </div>
 
                         <div class="form-group">
-                          <label for="donationinput2">Aadhaar Number</label>
-                          <input type="email" id="donationinput2" class="form-control square" placeholder="email" name="email">
+                          <label for="profile-aadhaar">Aadhaar Number</label>
+                          <input type="text" id="profile-aadhaar" class="form-control square" placeholder="Aadhaar Number" name="profile-aadhaar" value="<?php echo $users['user_aadhaar_no']?>">
+                          <span class="cd-error-message" id="profile-aadhaar-error" >Invalid Aadhaar Number</span>
                         </div>
 
                         <div class="form-group">
-                          <label for="donationinput3">Date of Birth</label>
-                          <input type="tel" id="donationinput3" class="form-control square" name="contact">
+                          <label for="profile-dob">Date of Birth</label>
+                          <input type="date" id="profile-dob" class="form-control square dob" placeholder="Date of Birth" name="profile-dob" value="<?php echo $users['user_dob']?>">
+                          <span class="cd-error-message" id="profile-dob-error" >Invalid Date</span>
                         </div>
 
                         <div class="form-group">
-                          <label for="donationinput4">State</label>
-                          <input type="text" id="donationinput4" class="form-control square" placeholder="type of donation" name="donationtype">
+                          <label for="profile-state">State</label>
+                          <select id="profile-state" class="form-control square" placeholder="State" name="profile-state">
+                            <option selected="true" disabled="disabled">Choose State</option>
+                            <?php
+                            $query=mysqli_query($con,"SELECT * FROM safedocx_states");
+                            while ($row=mysqli_fetch_array($query)) {
+                              ?><option value="<?php echo $row['state_id'];?>" <?php echo ($row['state_id'] == $default_state) ? " selected" : ""; ?>><?php echo $row['state_name'];?></option><?php
+                            }
+                            ?>
+                          </select>
+                          <span class="cd-error-message" id="profile-state-error" >Select a state</span>
                         </div>
 
                         <div class="form-group">
-                          <label for="donationinput4">District</label>
-                          <input type="text" id="donationinput4" class="form-control square" placeholder="type of donation" name="donationtype">
+                          <label for="profile-district">District</label>
+                          <select id="profile-district" class="form-control square" placeholder="District" name="profile-district">
+                            <option selected="true" disabled="disabled">Choose District</option>
+                            <?php
+                            $query=mysqli_query($con,"SELECT * FROM safedocx_districts WHERE district_state_id=$default_state");
+                            while ($row=mysqli_fetch_array($query)) {
+                              ?><option value="<?php echo $row['district_id'];?>" <?php echo ($row['district_id'] == $default_district) ? " selected" : ""; ?>><?php echo $row['district_name'];?></option><?php
+                            }
+                            ?>
+                          </select>
+                          <span class="cd-error-message" id="profile-district-error" >Select a district</span>
                         </div>
 
                       </div>
-
-                      <div class="form-actions right">
-                        <button type="button" class="btn btn-warning mr-1">
-                          <i class="icon-cross2"></i> Cancel
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                          <i class="icon-check2"></i> Save
-                        </button>
-                      </div>
-                    </form>
-
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-        <!-- // Basic form layout section end -->
+          </section>
+          <!-- // Basic form layout section end -->
+        </div>
       </div>
-    </div>
+    </form>
   </div>
   <!-- ////////////////////////////////////////////////////////////////////////////-->
 
@@ -189,73 +209,13 @@
   <script src="vendors/js/ui/screenfull.min.js" type="text/javascript"></script>
   <script src="vendors/js/extensions/pace.min.js" type="text/javascript"></script>
   <script src="js/croppie.js"></script>
-
-  <!-- BEGIN VENDOR JS-->
-  <!-- BEGIN PAGE VENDOR JS-->
-  <!-- END PAGE VENDOR JS-->
-  <!-- BEGIN ROBUST JS-->
   <script src="js/core/app-menu.js" type="text/javascript"></script>
   <script src="js/core/app.js" type="text/javascript"></script>
   <script src="js/popup.js" type="text/javascript"></script>
-  <!-- END ROBUST JS-->
-  <!-- BEGIN PAGE LEVEL JS-->
-  <!-- END PAGE LEVEL JS-->
-  <script type="text/javascript">
-  $uploadCrop = $('#upload-demo').croppie({
-    enableExif: true,
-    viewport: {
-      width: 202,
-      height: 202,
-      type: 'circle'
-    },
-    boundary: {
-      width: 300,
-      height: 300
-    }
-  });
+  <script src="../js/lobibox.min.js"></script>
+  <script src="js/ajaxscripts.js"></script>
+  <script src="js/profile_pic.js"></script>
 
-  $('#upload').on('change', function () {
-    try{
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $uploadCrop.croppie('bind', {
-          url: e.target.result
-        }).then(function(){
-        });
-      }
-      reader.readAsDataURL(this.files[0]);
-    }
-    catch(e){
-      $('.cd-popup').removeClass('is-visible');
-    }
-  });
-  $('.upload-result').on('click', function (ev) {
-    $uploadCrop.croppie('result', {
-      type: 'canvas',
-      size: 'viewport'
-    }).then(function (resp) {
-      alert(resp);
-      $.ajax({
-        url: "./actions.php",
-        type: "POST",
-        data: {"image":resp,fun:"change_profile_pic"},
-        success: function (data) {
-          html = '<img src="' + resp + '" />';
-          $("#upload-demo-i").html(html);
-          $('.cd-popup').removeClass('is-visible');
-        }
-      });
-    });
-  });
-  $('#upload-demo-i').on('click', function (ev) {
-    $('#upload').click();
-    $('.cd-popup-trigger').click();
-  });
-  $('.upload-select').on('click', function (ev) {
-    $('#upload').click();
-    $('.cd-popup-trigger').click();
-  });
 
-  </script>
 </body>
 </html>

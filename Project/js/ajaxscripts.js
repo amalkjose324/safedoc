@@ -71,7 +71,7 @@ $(document).ready(function(){
   */
   $("#signup-password").focusout(function(){
     $password = $('#signup-password').val();
-    var validator= /^[^&]{6,30}$/;
+    var validator= /^[^&\s]{6,30}$/;
     if(!validator.test($password)){
       $("#signup-password-error").addClass('is-visible');
     }
@@ -86,7 +86,7 @@ $(document).ready(function(){
   $("#signup_form").on("submit", function(){
     var val_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
     var val_phone= /^[0-9]{9,12}$/;
-    var val_pword= /^[^&]{6,30}$/;
+    var val_pword= /^[^&\s]{6,30}$/;
     $password = $('#signup-password').val();
     $email = $('#signup-email').val();
     $phone = $('#signup-phone').val();
@@ -143,7 +143,7 @@ $(document).ready(function(){
   */
   $("#signup-password").focusout(function(){
     $password = $('#signup-password').val();
-    var validator= /^[^&]{6,30}$/;
+    var validator= /^[^&\s]{6,30}$/;
     if(!validator.test($password)){
       $("#signup-password-error").addClass('is-visible');
     }
@@ -212,7 +212,7 @@ $(document).ready(function(){
   */
   $("#login-password").focusout(function(){
     $password = $('#login-password').val();
-    var validator= /^[^&]{6,30}$/;
+    var validator= /^[^&\s]{6,30}$/;
     if(!validator.test($password)){
       $("#login-password-error").addClass('is-visible');
     }
@@ -255,7 +255,7 @@ $(document).ready(function(){
   $("#login_form").on("submit", function(){
     var val_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
     var val_phone= /^[0-9]{9,12}$/;
-    var val_pword= /^[^&]{6,30}$/;
+    var val_pword= /^[^&\s]{6,30}$/;
     $password = $('#login-password').val();
     $email_phone = $('#login-email_phone').val();
     if((!val_email.test($email_phone))&&(!val_phone.test($email_phone))){

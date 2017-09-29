@@ -113,6 +113,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="login-submit"){
     while ($row=mysqli_fetch_array($query)) {
       $id=$_SESSION['user_id']=$row['login_id'];
       $_SESSION['user_page'] = $row['utype_page'];
+      $_SESSION['user_type'] = $row['utype_name'];
       $query2 = mysqli_query($con, "SELECT * FROM `safedocx_varify` WHERE varify_login_id=$id AND varify_phone=1 AND varify_email=1");
       if(mysqli_num_rows($query2)>0){
         array_push($arr, array("val" => 1));

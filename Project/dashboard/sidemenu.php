@@ -1,3 +1,4 @@
+  <link rel="stylesheet" type="text/css" href="css/popup.css">
 <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-semi-dark navbar-shadow">
   <div class="navbar-wrapper">
     <div class="navbar-header">
@@ -11,13 +12,9 @@
       <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
         <ul class="nav navbar-nav">
           <li class="nav-item hidden-sm-down"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5">         </i></a></li>
-          <li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-link-expand"><i class="ficon icon-expand2"></i></a></li>
-          <li class="nav-item hidden-sm-down"><a href="https://pixinvent.com/bootstrap-admin-template/robust/" target="_blank" class="btn btn-success upgrade-to-pro">Upgrade to PRO $24</a></li>
-        </ul>
+          </ul>
         <ul class="nav navbar-nav float-xs-right">
-          <li class="dropdown dropdown-language nav-item"><a id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle nav-link"><i class="flag-icon flag-icon-gb"></i><span class="selected-language">English</span></a>
-            <div aria-labelledby="dropdown-flag" class="dropdown-menu"><a href="#" class="dropdown-item"><i class="flag-icon flag-icon-gb"></i> English</a><a href="#" class="dropdown-item"><i class="flag-icon flag-icon-fr"></i> French</a><a href="#" class="dropdown-item"><i class="flag-icon flag-icon-cn"></i> Chinese</a><a href="#" class="dropdown-item"><i class="flag-icon flag-icon-de"></i> German</a></div>
-          </li>
+
           <li class="dropdown dropdown-notification nav-item"><a href="#" data-toggle="dropdown" class="nav-link nav-link-label"><i class="ficon icon-bell4"></i><span class="tag tag-pill tag-default tag-danger tag-default tag-up">5</span></a>
             <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
               <li class="dropdown-menu-header">
@@ -107,7 +104,7 @@
                                                 </ul>
                                               </li>
                                               <li class="dropdown dropdown-user nav-item"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link"><span class="avatar avatar-online"><img src="images/portrait/small/avatar-s-1.png" alt="avatar"><i></i></span><span class="user-name">John Doe</span></a>
-                                                <div class="dropdown-menu dropdown-menu-right"><a href="./profile.php" class="dropdown-item"><i class="icon-head"></i> Edit Profile</a><a href="#" class="dropdown-item"><i class="icon-mail6"></i> My Inbox</a><a href="#" class="dropdown-item"><i class="icon-clipboard2"></i> Task</a><a href="#" class="dropdown-item"><i class="icon-calendar5"></i> Calender</a>
+                                                <div class="dropdown-menu dropdown-menu-right"><a href="./profile.php" class="dropdown-item"><i class="icon-head"></i> Edit Profile</a><a href="#" class="dropdown-item"><i class="icon-mail6"></i> My Inbox</a><a href="#" class="dropdown-item"><i class="icon-clipboard2"></i> Task</a><a href="#" id="cpass-icon" class="dropdown-item"><i class="icon-edit"></i>Change Password</a>
                                                   <div class="dropdown-divider"></div><a href="logout.php" id="logout" class="dropdown-item"><i class="icon-power3"></i> Logout</a>
                                                 </div>
                                               </li>
@@ -411,3 +408,26 @@
                                       <!-- main menu footer-->
                                     </div>
                                     <!-- / main menu-->
+                                    <div class="cd-popup" id="password-change" role="alert">
+                                      <div class="cd-popup-container pass-pop">
+                                        <h3>Change Password</h3>
+                                        <hr>
+                                        <form method="post" id="pass_change_form" onsubmit="return false">
+                                        <div class="form-group ">
+                                          <input type="text" id="pass-old" class="form-control" placeholder="Old Password" name="profile-name">
+                                          <span class="cd-error-message" id="pass-old-error" >Invalid Password</span>
+                                        </div>
+                                        <div class="form-group ">
+                                          <input type="text" id="pass-new" class="form-control" placeholder="New Password" name="profile-name">
+                                          <span class="cd-error-message" id="pass-new-error" >Invalid Password</span>
+                                        </div>
+                                        <div class="form-group">
+                                          <input type="text" id="pass-conf" class="form-control" placeholder="Confirm Password" name="profile-aadhaar">
+                                          <span class="cd-error-message" id="pass-conf-error" >Password not matching</span>
+                                        </div><hr>
+                                        <input type="submit" class="btn btn-success" style="width:100%;" value="Change Password">
+                                        <a href="#0" class="cd-popup-close img-replace">Close</a>
+                                      </div> <!-- cd-popup-container -->
+                                    </form>
+                                    </div> <!-- cd-popup -->
+                                    
