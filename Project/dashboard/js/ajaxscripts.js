@@ -362,4 +362,53 @@ $(document).ready(function(){
   $("#cpass-btn").click(function(){
     $("#cpass-icon").click();
   });
+  /**
+  * Phone otp checking
+  * @return error message
+  */
+  $("#var-phone").focusout(function(){
+    $otp = $('#var-phone').val();
+    var validator= /^[0-9]{6}$/;
+    if(!validator.test($otp)){
+      $("#var-phone-error").addClass('is-visible');
+    }
+    else {
+      $("#var-phone-error").removeClass('is-visible');
+    }
+  });
+  /**
+  * Phone varification  form validation
+  * @return error message
+  */
+  $("#var-phone_form").on("submit", function(){
+    $otp = $('#var-phone').val();
+    var validator= /^[0-9]{6}$/;
+    if(!validator.test($otp)){
+      $("#var-phone").focusout();
+    }
+    else{
+      $fun="varify-phone-submit";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{otp:$otp,fun:$fun},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $('#var-phone_form').trigger("reset");
+            $('#varify-phone').removeClass('is-visible');
+            Lobibox.alert('success', {
+              msg: "Your phone number has been varified...!"
+            });
+          }
+          else{
+            Lobibox.alert('error', {
+              msg: "OTP does not matching...!"
+            });
+          }
+        }
+      });
+    }
+  });
 });

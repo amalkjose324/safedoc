@@ -38,4 +38,23 @@ $(document).ready(function(){
 			$('#password-change').removeClass('is-visible');
 		}
 	});
+	//open popup-phone varification
+	$('#varify-phone-btn').on('click', function(event){
+		event.preventDefault();
+		$('#varify-phone').addClass('is-visible');
+	});
+
+	//close popup-phone varification
+	$('#varify-phone').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('#varify-phone') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button-phone varification
+	$(document).keyup(function(event){
+		if(event.which=='27'){
+			$('#varify-phone').removeClass('is-visible');
+		}
+	});
 });

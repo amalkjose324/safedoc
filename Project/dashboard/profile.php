@@ -2,52 +2,9 @@
 include_once '../db_connect.php';
 include_once 'check_logout.php';
 ?>
-<!DOCTYPE html>
-<html lang="en" data-textdirection="ltr" class="loading">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-  <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-  <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-  <meta name="author" content="PIXINVENT">
-  <title>Basic Forms - Robust Free Bootstrap Admin Template</title>
-  <link rel="apple-touch-icon" sizes="60x60" href="images/ico/apple-icon-60.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="images/ico/apple-icon-76.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="images/ico/apple-icon-120.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="images/ico/apple-icon-152.png">
-  <link rel="shortcut icon" type="image/x-icon" href="images/ico/favicon.ico">
-  <link rel="shortcut icon" type="image/png" href="images/ico/favicon-32.png">
-  <link rel="stylesheet" href="css/croppie.css">
-
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-touch-fullscreen" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <!-- BEGIN VENDOR CSS-->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-  <!-- font icons-->
-  <link rel="stylesheet" type="text/css" href="fonts/icomoon.css">
-  <link rel="stylesheet" type="text/css" href="fonts/flag-icon-css/css/flag-icon.min.css">
-  <link rel="stylesheet" type="text/css" href="vendors/css/extensions/pace.css">
-  <link rel="stylesheet" href="../css/lobibox.min.css"/>
-  <!-- END VENDOR CSS-->
-  <!-- BEGIN ROBUST CSS-->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-extended.css">
-  <link rel="stylesheet" type="text/css" href="css/app.css">
-  <link rel="stylesheet" type="text/css" href="css/colors.css">
-
-  <!-- END ROBUST CSS-->
-  <!-- BEGIN Page Level CSS-->
-  <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-menu.css">
-  <link rel="stylesheet" type="text/css" href="css/custom.css">
-  <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-overlay-menu.css">
-  <link href="../css/login_css.css" rel="stylesheet">
-  <!-- END Page Level CSS-->
-  <!-- BEGIN Custom CSS-->
-  <!-- END Custom CSS-->
-</head>
+<?php include_once 'sidemenu.php'; ?>
 <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
-  <?php include_once 'sidemenu.php'; ?>
+
   <div class="app-content content container-fluid">
     <div class="content-wrapper">
       <form class="form" id="profile_form" onsubmit="return false;" method="post">
@@ -102,18 +59,26 @@ include_once 'check_logout.php';
                               $default_state =$r['district_state_id'];
                             }
                           }
+                          $phone=$login['login_phone'];
                           ?>
                           <center style="margin:18px !important;">  <div id="upload-demo-i" style="border-radius: 360px;width:202px;height:202px;box-shadow: 1px 1px 10px 3px #888888;"><img src="<?php echo('images/profile_pics/'.$profile[2]);?>" alt="No Image"></div></center>
                         </div>
                         <div class="form-group">
-                          <label for="profile-phone">Phone Number</label>
-                          <input type="text" id="profile-phone" class="in_icon form-control square" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
+                          <label for="profile-phone">Phone Number</label></br>
+                          <button type="button" id="varify-phone-btn" class="btn btn-primary bg-red">
+                            <i class="icon-check"></i> Varify
+                          </button>
+                          <input type="text" id="profile-phone" class="varify in_icon form-control square q3" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
                           <span class="cd-error-message" id="profile-phone-error" >Invalid Phone number!</span>
+
                         </div>
 
                         <div class="form-group">
-                          <label for="profile-email">Email ID</label>
-                          <input type="text" id="profile-email" class="in_icon form-control square" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
+                          <label for="profile-email">Email ID</label></br>
+                          <button type="button" id="varify-email-btn"  class="btn btn-primary bg-red">
+                            <i class="icon-check"></i> Varify
+                          </button>
+                          <input type="text" id="profile-email" class="varify in_icon form-control square q3" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
                           <span class="cd-error-message" id="profile-email-error" >Invalid Email id!</span>
                         </div>
                       </div>
@@ -186,11 +151,25 @@ include_once 'check_logout.php';
               </div>
             </div>
           </section>
-          <!-- // Basic form layout section end -->
         </div>
       </div>
     </form>
   </div>
+  <div class="cd-popup" id="varify-phone" role="alert">
+    <div class="cd-popup-container">
+      <p>We just sent you an SMS with a 6 digit OTP to <?php echo $phone;?>. Enter it to verify your phone.</p>
+      <form method="post" id="var-phone_form" onsubmit="return false">
+        <div class="form-group ">
+          <input type="text" id="var-phone" class="form-control" placeholder="Enter OTP" name="var-phone">
+          <span class="cd-error-message" id="var-phone-error" >Invalid OTP</span>
+        </div>
+        <input type="submit" class="btn btn-success" style="width:49%;" value="Varify">
+        <button type="button" id="var-phone-resend" class="btn btn-success bg-orange" style="width:49%;">Resend</button>
+        <a href="#0" class="cd-popup-close img-replace">Close</a>
+    </form>
+      <a href="#0" class="cd-popup-close img-replace">Close</a>
+    </div> <!-- cd-popup-container -->
+  </div> <!-- cd-popup -->
   <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 

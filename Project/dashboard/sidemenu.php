@@ -1,10 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-textdirection="ltr" class="loading">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description" content="Secure, Varified and Faster Solution for Document Storage and Share">
+  <meta name="keywords" content="SafeDoc, SafeDocx, Share documents, documents, Share doc, Docx">
+  <meta name="author" content="SafeDocx">
+  <title>SafeDocx : Secure Document Storage &amp; Share</title>
+  <link rel="apple-touch-icon" sizes="57x57" href="../asset/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="../asset/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="../asset/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../asset/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="../asset/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="../asset/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="../asset/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="../asset/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../asset/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="../asset/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../asset/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="../asset/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../asset/icons/favicon-16x16.png">
+  <link rel="manifest" href="../asset/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="../asset/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="css/croppie.css">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <!-- BEGIN VENDOR CSS-->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <!-- font icons-->
+  <link rel="stylesheet" type="text/css" href="fonts/icomoon.css">
+  <link rel="stylesheet" type="text/css" href="fonts/flag-icon-css/css/flag-icon.min.css">
+  <link rel="stylesheet" type="text/css" href="vendors/css/extensions/pace.css">
+  <link rel="stylesheet" href="../css/lobibox.min.css"/>
+  <!-- END VENDOR CSS-->
+  <!-- BEGIN ROBUST CSS-->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-extended.css">
+  <link rel="stylesheet" type="text/css" href="css/app.css">
+  <link rel="stylesheet" type="text/css" href="css/colors.css">
+
+  <!-- END ROBUST CSS-->
+  <!-- BEGIN Page Level CSS-->
+  <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-menu.css">
+  <link rel="stylesheet" type="text/css" href="css/custom.css">
+  <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-overlay-menu.css">
+  <link href="../css/login_css.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/popup.css">
+  <!-- END Page Level CSS-->
+  <!-- BEGIN Custom CSS-->
+  <!-- END Custom CSS-->
+</head>
+<?php
+$userid=$_SESSION['user_id'];
+$u_name="New User";
+$u_image="default.png";
+$query=mysqli_query($con,"SELECT * FROM safedocx_users WHERE user_id=$userid");
+while ($row=mysqli_fetch_array($query)) {
+  $u_name=$row['user_name'];
+}
+$query=mysqli_query($con,"SELECT * FROM safedocx_profile_pic WHERE profile_pic_user_id=$userid");
+while ($row=mysqli_fetch_array($query)) {
+  $u_image=$row['profile_pic_image'];
+}
+?>
 <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-semi-dark navbar-shadow">
   <div class="navbar-wrapper">
     <div class="navbar-header">
       <ul class="nav navbar-nav">
         <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1"></i></a></li>
-        <li class="nav-item"><a href="index.html" class="navbar-brand nav-link"><img alt="branding logo" src="images/logo/robust-logo-light.png" data-expand="images/logo/robust-logo-light.png" data-collapse="images/logo/robust-logo-small.png" class="brand-logo"></a></li>
+        <li class="nav-item"><a href="./" class="navbar-brand nav-link"><img alt="branding logo" src="images/logo/robust-logo-light.png" data-expand="images/logo/robust-logo-light.png" data-collapse="images/logo/robust-logo-small.png" class="brand-logo"></a></li>
         <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="icon-ellipsis pe-2x icon-icon-rotate-right-right"></i></a></li>
       </ul>
     </div>
@@ -12,7 +80,7 @@
       <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
         <ul class="nav navbar-nav">
           <li class="nav-item hidden-sm-down"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5">         </i></a></li>
-          </ul>
+        </ul>
         <ul class="nav navbar-nav float-xs-right">
 
           <li class="dropdown dropdown-notification nav-item"><a href="#" data-toggle="dropdown" class="nav-link nav-link-label"><i class="ficon icon-bell4"></i><span class="tag tag-pill tag-default tag-danger tag-default tag-up">5</span></a>
@@ -69,7 +137,7 @@
                                   </li>
                                   <li class="list-group scrollable-container"><a href="javascript:void(0)" class="list-group-item">
                                     <div class="media">
-                                      <div class="media-left"><span class="avatar avatar-sm avatar-online rounded-circle"><img src="images/portrait/small/avatar-s-1.png" alt="avatar"><i></i></span></div>
+                                      <div class="media-left"><span class="avatar avatar-sm avatar-online rounded-circle"><img src="<?php echo('images/profile_pics/'.$u_image);?>" alt="avatar"><i></i></span></div>
                                       <div class="media-body">
                                         <h6 class="media-heading">Margaret Govan</h6>
                                         <p class="notification-text font-small-3 text-muted">I like your portfolio, let's start the project.</p><small>
@@ -103,7 +171,7 @@
                                                   <li class="dropdown-menu-footer"><a href="javascript:void(0)" class="dropdown-item text-muted text-xs-center">Read all messages</a></li>
                                                 </ul>
                                               </li>
-                                              <li class="dropdown dropdown-user nav-item"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link"><span class="avatar avatar-online"><img src="images/portrait/small/avatar-s-1.png" alt="avatar"><i></i></span><span class="user-name">John Doe</span></a>
+                                              <li class="dropdown dropdown-user nav-item"><a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link"><span class="avatar avatar-online"><img src="<?php echo('images/profile_pics/'.$u_image);?>" alt="avatar"><i></i></span><span class="user-name"><?php echo $u_name; ?></span></a>
                                                 <div class="dropdown-menu dropdown-menu-right"><a href="./profile.php" class="dropdown-item"><i class="icon-head"></i> Edit Profile</a><a href="#" class="dropdown-item"><i class="icon-mail6"></i> My Inbox</a><a href="#" class="dropdown-item"><i class="icon-clipboard2"></i> Task</a><a href="#" id="cpass-icon" class="dropdown-item"><i class="icon-edit"></i>Change Password</a>
                                                   <div class="dropdown-divider"></div><a href="logout.php" id="logout" class="dropdown-item"><i class="icon-power3"></i> Logout</a>
                                                 </div>
@@ -124,13 +192,8 @@
                                       <!-- main menu content-->
                                       <div class="main-menu-content">
                                         <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
-                                          <li class=" nav-item"><a href="index.html"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span><span class="tag tag tag-primary tag-pill float-xs-right mr-2">2</span></a>
-                                            <ul class="menu-content">
-                                              <li class="active"><a href="index.html" data-i18n="nav.dash.main" class="menu-item">Dashboard</a>
-                                              </li>
-                                              <li><a href="dashboard-2.html" data-i18n="nav.dash.main" class="menu-item">Dashboard 2</a>
-                                              </li>
-                                            </ul>
+                                          <li class=" nav-item"><a href="./"><i class="icon-home3"></i><span data-i18n="nav.dash.main" class="menu-title">Home</span></a>
+                                            <!-- <span class="tag tag tag-primary tag-pill float-xs-right mr-2"></span> -->
                                           </li>
                                           <li class=" nav-item"><a href="#"><i class="icon-stack-2"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Page layouts</span></a>
                                             <ul class="menu-content">
@@ -413,21 +476,20 @@
                                         <h3>Change Password</h3>
                                         <hr>
                                         <form method="post" id="pass_change_form" onsubmit="return false">
-                                        <div class="form-group ">
-                                          <input type="text" id="pass-old" class="form-control" placeholder="Old Password" name="profile-name">
-                                          <span class="cd-error-message" id="pass-old-error" >Invalid Password</span>
-                                        </div>
-                                        <div class="form-group ">
-                                          <input type="text" id="pass-new" class="form-control" placeholder="New Password" name="profile-name">
-                                          <span class="cd-error-message" id="pass-new-error" >Invalid Password</span>
-                                        </div>
-                                        <div class="form-group">
-                                          <input type="text" id="pass-conf" class="form-control" placeholder="Confirm Password" name="profile-aadhaar">
-                                          <span class="cd-error-message" id="pass-conf-error" >Password not matching</span>
-                                        </div><hr>
-                                        <input type="submit" class="btn btn-success" style="width:100%;" value="Change Password">
-                                        <a href="#0" class="cd-popup-close img-replace">Close</a>
-                                      </div> <!-- cd-popup-container -->
-                                    </form>
+                                          <div class="form-group ">
+                                            <input type="password" id="pass-old" class="form-control" placeholder="Old Password" name="profile-name">
+                                            <span class="cd-error-message" id="pass-old-error" >Invalid Password</span>
+                                          </div>
+                                          <div class="form-group ">
+                                            <input type="password" id="pass-new" class="form-control" placeholder="New Password" name="profile-name">
+                                            <span class="cd-error-message" id="pass-new-error" >Invalid Password</span>
+                                          </div>
+                                          <div class="form-group">
+                                            <input type="password" id="pass-conf" class="form-control" placeholder="Confirm Password" name="profile-aadhaar">
+                                            <span class="cd-error-message" id="pass-conf-error" >Password not matching</span>
+                                          </div><hr>
+                                          <input type="submit" class="btn btn-success" style="width:100%;" value="Change Password">
+                                          <a href="#0" class="cd-popup-close img-replace">Close</a>
+                                        </div> <!-- cd-popup-container -->
+                                      </form>
                                     </div> <!-- cd-popup -->
-                                    

@@ -44,6 +44,28 @@
 .pass-pop{
   padding: 30px;
 }
+
 .cd-popup-container{
   text-align: left !important;
+  padding: 30px;
+}
+.cd-popup-container p{
+  padding: 1em 0em !important;
+}
+.q1{
+  width: 25%;
+}
+.q2{
+  width: 50%;
+}
+.q3{
+  width: 75%;
+}
+.q4{
+  width: 100%;
+}
+.varify{
+  display: inline-block !important;
+  float: left;
+  margin-right: 10px;
 }
