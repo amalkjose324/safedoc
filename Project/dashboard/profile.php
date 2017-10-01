@@ -19,14 +19,7 @@ include_once 'check_logout.php';
             <h2 class="content-header-title">Manage Profile</h2>
           </div>
         </div>
-        <div class="cd-popup" id="profile-pic" role="alert">
-          <div class="cd-popup-container">
-            <center><div id="upload-demo" style="width:350px"></div></center>
-            <button class="btn btn-success upload-select" style="margin-top: -40px;width:150px;">Change Picture</button>
-            <button class="btn btn-success upload-result" style="margin-top: -40px;width:150px;">Set Picture</button>
-            <a href="#0" class="cd-popup-close img-replace">Close</a>
-          </div> <!-- cd-popup-container -->
-        </div> <!-- cd-popup -->
+
 
         <a href="#0" class="cd-popup-trigger" hidden="hidden">View Pop-up</a>
         <div class="content-body"><!-- Basic form layout section start -->
@@ -51,6 +44,10 @@ include_once 'check_logout.php';
                           $users=mysqli_fetch_array($query);
                           $query=mysqli_query($con,"SELECT * FROM safedocx_profile_pic WHERE profile_pic_user_id=$user_id");
                           $profile=mysqli_fetch_array($query);
+                          $profile_pic="default.png";
+                          if(isset($profile[2])){
+                            $profile_pic=$profile[2];
+                          }
                           $default_state=0;
                           if(isset($users['user_district_id'])){
                             $default_district =$users['user_district_id'];
@@ -61,26 +58,57 @@ include_once 'check_logout.php';
                           }
                           $phone=$login['login_phone'];
                           ?>
-                          <center style="margin:18px !important;">  <div id="upload-demo-i" style="border-radius: 360px;width:202px;height:202px;box-shadow: 1px 1px 10px 3px #888888;"><img src="<?php echo('images/profile_pics/'.$profile[2]);?>" alt="No Image"></div></center>
+                          <center style="margin:18px !important;">  <div id="upload-demo-i" style="border-radius: 360px;width:202px;height:202px;box-shadow: 1px 1px 10px 3px #888888;"><img src="<?php echo('images/profile_pics/'.$profile_pic);?>" alt="No Image"></div></center>
                         </div>
-                        <div class="form-group">
-                          <label for="profile-phone">Phone Number</label></br>
-                          <button type="button" id="varify-phone-btn" class="btn btn-primary bg-red">
-                            <i class="icon-check"></i> Varify
-                          </button>
-                          <input type="text" id="profile-phone" class="varify in_icon form-control square q3" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
-                          <span class="cd-error-message" id="profile-phone-error" >Invalid Phone number!</span>
+                        <?php
+                        $query=mysqli_query($con,"SELECT * FROM safedocx_varify WHERE varify_login_id=$user_id");
+                        while ($row=mysqli_fetch_array($query)) {
+                          if($row['varify_phone']==1){
+                            ?>
+                            <div class="form-group">
+                              <label for="profile-phone">Phone Number</label></br>
+                              <input type="text" id="profile-phone" class="in_icon form-control square" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
+                              <span class="cd-error-message" id="profile-phone-error" >Invalid Phone number!</span>
 
-                        </div>
+                            </div>
+                            <?php
+                          }
+                          else{
+                            ?>
+                            <div class="form-group">
+                              <label for="profile-phone">Phone Number</label></br>
+                              <button type="button" id="varify-phone-btn" class="btn btn-primary bg-red">
+                                <i class="icon-check"></i> Varify
+                              </button>
+                              <input type="text" id="profile-phone" class="varify in_icon form-control square q3" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
+                              <span class="var-error cd-error-message" id="profile-phone-error" >Invalid Phone number!</span>
 
-                        <div class="form-group">
-                          <label for="profile-email">Email ID</label></br>
-                          <button type="button" id="varify-email-btn"  class="btn btn-primary bg-red">
-                            <i class="icon-check"></i> Varify
-                          </button>
-                          <input type="text" id="profile-email" class="varify in_icon form-control square q3" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
-                          <span class="cd-error-message" id="profile-email-error" >Invalid Email id!</span>
-                        </div>
+                            </div>
+                            <?php
+                          }
+                          if($row['varify_email']==1){
+                            ?>
+                            <div class="form-group">
+                              <label for="profile-email">Email ID</label></br>
+                              <input type="text" id="profile-email" class="in_icon form-control square" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
+                              <span class="cd-error-message" id="profile-email-error" >Invalid Email id!</span>
+                            </div>
+                            <?php
+                          }
+                          else{
+                            ?>
+                            <div class="form-group">
+                              <label for="profile-email">Email ID</label></br>
+                              <button type="button" id="varify-email-btn"  class="btn btn-primary bg-red">
+                                <i class="icon-check"></i> Varify
+                              </button>
+                              <input type="text" id="profile-email" class="varify in_icon form-control square q3" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
+                              <span class="var-error cd-error-message" id="profile-email-error" >Invalid Email id!</span>
+                            </div>
+                            <?php
+                          }
+                        }
+                        ?>
                       </div>
                     </div>
                   </div>
@@ -166,7 +194,15 @@ include_once 'check_logout.php';
         <input type="submit" class="btn btn-success" style="width:49%;" value="Varify">
         <button type="button" id="var-phone-resend" class="btn btn-success bg-orange" style="width:49%;">Resend</button>
         <a href="#0" class="cd-popup-close img-replace">Close</a>
-    </form>
+      </form>
+      <a href="#0" class="cd-popup-close img-replace">Close</a>
+    </div> <!-- cd-popup-container -->
+  </div> <!-- cd-popup -->
+  <div class="cd-popup" id="profile-pic" role="alert">
+    <div class="cd-popup-container">
+      <center><div id="upload-demo" style="width:350px"></div></center>
+      <button class="btn btn-success upload-select" style="margin-top: -40px;width:49%;">Change Picture</button>
+      <button class="btn btn-success upload-result" style="margin-top: -40px;width:49%;">Set Picture</button>
       <a href="#0" class="cd-popup-close img-replace">Close</a>
     </div> <!-- cd-popup-container -->
   </div> <!-- cd-popup -->

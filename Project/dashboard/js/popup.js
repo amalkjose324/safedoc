@@ -42,7 +42,14 @@ $(document).ready(function(){
 	$('#varify-phone-btn').on('click', function(event){
 		event.preventDefault();
 		$('#varify-phone').addClass('is-visible');
+		$fun="varify-phone-otpsend";
+		$.ajax({
+			type:'post',
+			url:'./actions.php',
+			data:{fun:$fun}
+		});
 	});
+
 
 	//close popup-phone varification
 	$('#varify-phone').on('click', function(event){

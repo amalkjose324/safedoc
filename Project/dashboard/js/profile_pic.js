@@ -49,7 +49,9 @@ $(document).ready(function () {
             $('.cd-popup').removeClass('is-visible');
           }
           else {
-            alert("Invalid Image..!");
+            Lobibox.alert('error', {
+              msg: "Unsupported image file...!"
+            });
           }
         }
       });

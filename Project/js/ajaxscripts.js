@@ -155,42 +155,42 @@ $(document).ready(function(){
   * Varification form validation
   * @return error message
   */
-  $("#varify_form").on("submit", function(){
-    $email = $('#varify_email').val();
-    $phone = $('#varify_phone').val();
-    $email_phone= $('#hidden_email_phone').val();
-    var validator= /^[0-9]{6,6}$/;
-    if(!validator.test($email)){
-      $("#varify-email-error").addClass('is-visible');
-    }
-    else if(!validator.test($phone)){
-      $("#varify-phone-error").addClass('is-visible');
-    }
-    else{
-      $fun="varify-email-phone";
-      $.ajax({
-        type:'post',
-        url:'./actions.php',
-        data:{otp_email:$email,otp_phone:$phone,email_phone:$email_phone,fun:$fun},
-        success:function(response)
-        {
-          var obj = JSON.parse(response)[0]['val'];
-          if(obj){
-            $('#varify_form').trigger("reset");
-            Lobibox.alert('success', {
-              msg: "You are varified"
-            });
-            $('.cd-user-modal').removeClass('is-visible');
-          }
-          else{
-            Lobibox.alert('error', {
-              msg: "Invalid OTP"
-            });
-          }
-        }
-      });
-    }
-  });
+  // $("#varify_form").on("submit", function(){
+  //   $email = $('#varify_email').val();
+  //   $phone = $('#varify_phone').val();
+  //   $email_phone= $('#hidden_email_phone').val();
+  //   var validator= /^[0-9]{6,6}$/;
+  //   if(!validator.test($email)){
+  //     $("#varify-email-error").addClass('is-visible');
+  //   }
+  //   else if(!validator.test($phone)){
+  //     $("#varify-phone-error").addClass('is-visible');
+  //   }
+  //   else{
+  //     $fun="varify-email-phone";
+  //     $.ajax({
+  //       type:'post',
+  //       url:'./actions.php',
+  //       data:{otp_email:$email,otp_phone:$phone,email_phone:$email_phone,fun:$fun},
+  //       success:function(response)
+  //       {
+  //         var obj = JSON.parse(response)[0]['val'];
+  //         if(obj){
+  //           $('#varify_form').trigger("reset");
+  //           Lobibox.alert('success', {
+  //             msg: "You are varified"
+  //           });
+  //           $('.cd-user-modal').removeClass('is-visible');
+  //         }
+  //         else{
+  //           Lobibox.alert('error', {
+  //             msg: "Invalid OTP"
+  //           });
+  //         }
+  //       }
+  //     });
+  //   }
+  // });
   /**
   * login-email_phone checking
   * @return error message
@@ -224,30 +224,30 @@ $(document).ready(function(){
   * email id varification
   * @return error message
   */
-  $("#varify_email").focusout(function(){
-    $email = $('#varify_email').val();
-    var validator= /^[0-9]{6,6}$/;
-    if(!validator.test($email)){
-      $("#varify-email-error").addClass('is-visible');
-    }
-    else {
-      $("#varify-email-error").removeClass('is-visible');
-    }
-  });
+  // $("#varify_email").focusout(function(){
+  //   $email = $('#varify_email').val();
+  //   var validator= /^[0-9]{6,6}$/;
+  //   if(!validator.test($email)){
+  //     $("#varify-email-error").addClass('is-visible');
+  //   }
+  //   else {
+  //     $("#varify-email-error").removeClass('is-visible');
+  //   }
+  // });
   /**
   * phone number varification
   * @return error message
   */
-  $("#varify_phone").focusout(function(){
-    $phone = $('#varify_phone').val();
-    var validator= /^[0-9]{6,6}$/;
-    if(!validator.test($phone)){
-      $("#varify-phone-error").addClass('is-visible');
-    }
-    else {
-      $("#varify-phone-error").removeClass('is-visible');
-    }
-  });
+  // $("#varify_phone").focusout(function(){
+  //   $phone = $('#varify_phone').val();
+  //   var validator= /^[0-9]{6,6}$/;
+  //   if(!validator.test($phone)){
+  //     $("#varify-phone-error").addClass('is-visible');
+  //   }
+  //   else {
+  //     $("#varify-phone-error").removeClass('is-visible');
+  //   }
+  // });
   /**
   * Login validation
   * @return error message

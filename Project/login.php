@@ -32,29 +32,6 @@
       <!-- <a class="link_btn" class="cd-close-form">Close</a> -->
     </div> <!-- cd-login -->
 
-    <div id="cd-varify"> <!-- log in form -->
-      <p class="cd-form-message">We send varification code to your email and phone number. Please varify both email and phone.</p>
-      <div class="countdown" id="countdown">03:00</div>
-      <form class="cd-form cform" id="varify_form" onsubmit="return false;">
-        <p class="fieldset">
-          <label class="image-replace cd-email" for="login-email_phone">OTP</label>
-          <input class="full-width has-padding has-border" id="varify_email" maxlength="6" type="text" placeholder="Enter OTP received to your Email">
-          <span class="cd-error-message" id="varify-email-error" >OPT Must contains 6 Numerical Digits</span>
-        </p>
-        <p class="fieldset">
-          <label class="image-replace cd-email" for="login-password">OTP</label>
-          <input class="full-width has-padding has-border" id="varify_phone" maxlength="6" type="text"  placeholder="Enter OTP received to your Phone">
-          <span class="cd-error-message" id="varify-phone-error">OPT Must contains 6 Numerical Digits</span>
-        </p>
-        <input type="hidden" id="hidden_email_phone">
-        <p class="fieldset">
-          <input class="full-width" type="submit" value="Varify">
-        </p>
-      </form>
-
-      <!-- <a class="link_btn" class="cd-close-form">Close</a> -->
-    </div> <!-- cd-login -->
-
     <div id="cd-signup"> <!-- sign up form -->
       <form class="cd-form cform" id="signup_form" onsubmit="return false;">
         <p class="fieldset">

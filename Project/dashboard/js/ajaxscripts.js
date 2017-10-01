@@ -411,4 +411,43 @@ $(document).ready(function(){
       });
     }
   });
+  $('#varify-email-btn').on('click', function(event){
+    event.preventDefault();
+    $fun="varify-email-otpsend";
+    $.ajax({
+      type:'post',
+      url:'./actions.php',
+      data:{fun:$fun},
+      success:function(response)
+      {
+        var obj = JSON.parse(response)[0]['val'];
+        if(obj){
+          Lobibox.alert('success', {
+            msg: "We just sent you an email with varification link. "
+          });
+        }
+        else{
+          Lobibox.alert('error', {
+            msg: "Can't send varification link now..!"
+          });
+        }
+      }
+    });
+  });
+  //open popup-phone rsend
+  $('#var-phone-resend').on('click', function(event){
+    event.preventDefault();
+    $('#varify-phone').addClass('is-visible');
+    $fun="varify-phone-otpsend";
+    $.ajax({
+      type:'post',
+      url:'./actions.php',
+      data:{fun:$fun},
+      success: function (response) {
+        Lobibox.alert('success', {
+          msg: "OTP has been sent..!"
+        });
+      }
+    });
+  });
 });
