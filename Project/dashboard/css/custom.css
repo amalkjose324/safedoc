@@ -70,5 +70,5 @@
   margin-right: 10px;
 }
 .var-error{
-  position: relative !important;
+  display: inherit !important;
 }

@@ -1,6 +1,9 @@
+<script src="js/core/libraries/jquery.min.js" type="text/javascript"></script>
+<script src="../js/lobibox.min.js"></script>
 <?php
 include_once '../db_connect.php';
 include_once 'check_logout.php';
+include_once 'profile_check.php';
 $page=$_SESSION['user_page'];
 if($page<>'users.php'){
   header("location: $page");
@@ -357,7 +360,7 @@ if($page<>'users.php'){
   </footer>
 
   <!-- BEGIN VENDOR JS-->
-  <script src="js/core/libraries/jquery.min.js" type="text/javascript"></script>
+
   <script src="vendors/js/ui/tether.min.js" type="text/javascript"></script>
   <script src="js/core/libraries/bootstrap.min.js" type="text/javascript"></script>
   <script src="vendors/js/ui/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
@@ -367,7 +370,6 @@ if($page<>'users.php'){
   <script src="vendors/js/ui/screenfull.min.js" type="text/javascript"></script>
   <script src="vendors/js/extensions/pace.min.js" type="text/javascript"></script>
   <script src="../js/ajaxscripts.js"></script>
-  <script src="../js/lobibox.min.js"></script>
   <!-- BEGIN VENDOR JS-->
   <!-- BEGIN PAGE VENDOR JS-->
   <script src="vendors/js/charts/chart.min.js" type="text/javascript"></script>

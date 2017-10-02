@@ -175,10 +175,20 @@ if(isset($_POST['fun']) && $_POST['fun']=="profile-submit"){
   $district=$_POST['district'];
   $arr = array();
   $rows=0;
-  $query1 = mysqli_query($con, "UPDATE safedocx_login SET login_email='$email',login_phone='$phone' WHERE login_id=$userid");
-  $rows=mysqli_affected_rows($con);
+  $query1 = mysqli_query($con, "UPDATE safedocx_login SET login_email='$email' WHERE login_id=$userid");
+  if(mysqli_affected_rows($con)>0){
+    $rows=1;
+    mysqli_query($con, "UPDATE safedocx_varify SET varify_email=0 WHERE varify_login_id=$userid");
+  }
+  $query3 = mysqli_query($con, "UPDATE safedocx_login SET login_phone='$phone' WHERE login_id=$userid");
+  if(mysqli_affected_rows($con)>0){
+    $rows=1;
+    mysqli_query($con, "UPDATE safedocx_varify SET varify_phone=0 WHERE varify_login_id=$userid");
+  }
   $query2 = mysqli_query($con, "UPDATE safedocx_users SET user_name='$name',user_dob='$dob',user_aadhaar_no='$aadhaar',user_district_id=$district WHERE user_id=$userid");
-  $rows+=mysqli_affected_rows($con);
+  if(mysqli_affected_rows($con)>0){
+    $rows=1;
+  }
   if($rows>0){
     array_push($arr, array("val" => true));
   }

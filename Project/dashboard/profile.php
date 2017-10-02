@@ -1,3 +1,5 @@
+<script src="js/core/libraries/jquery.min.js" type="text/javascript"></script>
+<script src="../js/lobibox.min.js"></script>
 <?php
 include_once '../db_connect.php';
 include_once 'check_logout.php';
@@ -210,11 +212,10 @@ include_once 'check_logout.php';
 
 
   <footer class="footer footer-static footer-light navbar-border">
-    <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">PIXINVENT </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
+    <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="./" target="_blank" class="text-bold-800 grey darken-2">SafeDocx </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
   </footer>
 
   <!-- BEGIN VENDOR JS-->
-  <script src="js/core/libraries/jquery.min.js" type="text/javascript"></script>
   <script src="vendors/js/ui/tether.min.js" type="text/javascript"></script>
   <script src="js/core/libraries/bootstrap.min.js" type="text/javascript"></script>
   <script src="vendors/js/ui/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
@@ -227,7 +228,6 @@ include_once 'check_logout.php';
   <script src="js/core/app-menu.js" type="text/javascript"></script>
   <script src="js/core/app.js" type="text/javascript"></script>
   <script src="js/popup.js" type="text/javascript"></script>
-  <script src="../js/lobibox.min.js"></script>
   <script src="js/ajaxscripts.js"></script>
   <script src="js/profile_pic.js"></script>
 
