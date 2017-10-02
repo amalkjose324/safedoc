@@ -1,8 +1,7 @@
-<script src="js/core/libraries/jquery.min.js" type="text/javascript"></script>
-<script src="../js/lobibox.min.js"></script>
 <?php
 include_once '../db_connect.php';
 include_once 'check_logout.php';
+include_once 'lobibox.php';
 ?>
 <?php include_once 'sidemenu.php'; ?>
 <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">

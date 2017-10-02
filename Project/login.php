@@ -1,5 +1,4 @@
 <link href="css/login_css.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/login_js.js"></script>
 <div class="cd-user-modal" style="z-index: 300;"> <!-- this is the entire modal form, including the background -->
   <div class="cd-user-modal-container"> <!-- this is the container wrapper -->

@@ -1164,7 +1164,7 @@ var Lobibox = Lobibox || {};
         this.$el = null;
 //------------------------------------------------------------------------------
 //-----------------PRIVATE VARIABLES--------------------------------------------
-//------------------------------------------------------------------------------        
+//------------------------------------------------------------------------------
         var me = this;
 //------------------------------------------------------------------------------
 //-----------------PRIVATE FUNCTIONS--------------------------------------------
@@ -1486,12 +1486,12 @@ var Lobibox = Lobibox || {};
             list[i].remove();
         }
     };
-    //User can set default options to this variable
+    //User can set default options to this variableSSS
     Lobibox.notify.DEFAULTS = {
-        title: true,                // Title of notification. If you do not include the title in options it will automatically takes its value 
+        title: true,                // Title of notification. If you do not include the title in options it will automatically takes its value
         //from Lobibox.notify.OPTIONS object depending of the type of the notifications or set custom string. Set this false to disable title
         size: 'normal',             // normal, mini, large
-        soundPath: 'sounds/',   // The folder path where sounds are located
+        soundPath: './lobibox/sounds/',   // The folder path where sounds are located
         soundExt: '.ogg',           // Default extension for all sounds
         showClass: 'fadeInDown',    // Show animation class.
         hideClass: 'zoomOut',       // Hide animation class.
@@ -1571,5 +1571,3 @@ var Lobibox = Lobibox || {};
         }
     };
 })();
-
-

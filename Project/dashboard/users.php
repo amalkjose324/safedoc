@@ -1,15 +1,16 @@
-<script src="js/core/libraries/jquery.min.js" type="text/javascript"></script>
-<script src="../js/lobibox.min.js"></script>
 <?php
 include_once '../db_connect.php';
 include_once 'check_logout.php';
 include_once 'profile_check.php';
+
 $page=$_SESSION['user_page'];
 if($page<>'users.php'){
   header("location: $page");
 }
 ?>
-<?php include_once 'sidemenu.php'; ?>
+<?php include_once 'sidemenu.php';
+include_once 'lobibox.php'; ?>
+
 <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
 
   <div class="app-content content container-fluid">
@@ -375,13 +376,14 @@ if($page<>'users.php'){
   <script src="vendors/js/charts/chart.min.js" type="text/javascript"></script>
   <!-- END PAGE VENDOR JS-->
   <!-- BEGIN ROBUST JS-->
-  <script src="js/core/app-menu.js" type="text/javascript"></script>
+
   <script src="js/core/app.js" type="text/javascript"></script>
   <!-- END ROBUST JS-->
   <!-- BEGIN PAGE LEVEL JS-->
   <script src="js/scripts/pages/dashboard-lite.js" type="text/javascript"></script>
   <script src="js/ajaxscripts.js"></script>
   <script src="js/popup.js"></script>
+    <script src="js/core/app-menu.js" type="text/javascript"></script>
   <script>
   $(function(){
     $(document).attr("title", "New Title");

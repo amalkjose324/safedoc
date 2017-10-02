@@ -36,7 +36,6 @@
   <link rel="stylesheet" type="text/css" href="fonts/icomoon.css">
   <link rel="stylesheet" type="text/css" href="fonts/flag-icon-css/css/flag-icon.min.css">
   <link rel="stylesheet" type="text/css" href="vendors/css/extensions/pace.css">
-  <link rel="stylesheet" href="../css/lobibox.min.css"/>
   <!-- END VENDOR CSS-->
   <!-- BEGIN ROBUST CSS-->
   <link rel="stylesheet" type="text/css" href="css/bootstrap-extended.css">

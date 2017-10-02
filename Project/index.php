@@ -1,6 +1,7 @@
 <?php
 include_once 'db_connect.php';
 include_once 'check_login.php';
+include_once 'lobibox.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +22,6 @@ include_once 'check_login.php';
   <!-- Font Awesome CSS -->
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <!-- Custom messagebx and notification CSS -->
- <link rel="stylesheet" href="css/lobibox.min.css"/>
 
   <!-- Animate CSS -->
   <link href="css/animate.css" rel="stylesheet" >
@@ -736,8 +736,6 @@ include_once 'check_login.php';
 
 
 
-  <!-- jQuery Version 2.1.1 -->
-  <script src="js/jquery-2.1.1.min.js"></script>
 
   <!-- Bootstrap Core JavaScript -->
   <script src="asset/js/bootstrap.min.js"></script>
@@ -752,7 +750,6 @@ include_once 'check_login.php';
   <script src="js/owl.carousel.min.js"></script>
   <script src="js/jquery.fitvids.js"></script>
   <script src="js/styleswitcher.js"></script>
-  <script src="js/lobibox.min.js"></script>
   <script src="js/ajaxscripts.js"></script>
 
   <!-- Contact Form JavaScript -->

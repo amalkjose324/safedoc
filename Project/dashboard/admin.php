@@ -1,9 +1,8 @@
-<script src="js/core/libraries/jquery.min.js" type="text/javascript"></script>
-<script src="../js/lobibox.min.js"></script>
 <?php
 include_once '../db_connect.php';
 include_once 'check_logout.php';
 include_once 'profile_check.php';
+include_once 'lobibox.php';
 $page=$_SESSION['user_page'];
 if($page<>'admin.php'){
   header("location: $page");
