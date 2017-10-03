@@ -1,9 +1,8 @@
 <?php
 include_once 'db_connect.php';
 include_once 'check_login.php';
-include_once 'lobibox.php';
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +15,9 @@ include_once 'lobibox.php';
   <meta name="author" content="">
 
   <title>SafeDocx : Secure Document Storage</title>
-  <?php include_once 'login.php'; ?>
+
+  <?php include_once 'lobibox.php';
+  include_once 'login.php'; ?>
   <!-- Bootstrap Core CSS -->
   <link href="asset/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome CSS -->
@@ -733,9 +734,6 @@ include_once 'lobibox.php';
       <div class="dot2"></div>
     </div>
   </div>
-
-
-
 
   <!-- Bootstrap Core JavaScript -->
   <script src="asset/js/bootstrap.min.js"></script>

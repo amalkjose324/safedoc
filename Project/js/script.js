@@ -3,7 +3,7 @@ var $ = jQuery.noConflict();
 
 
 // Page Loader
-$(window).load(function () {
+$(window).on('load', function () {
 
     "use strict";
 	$('#loader').fadeOut();
