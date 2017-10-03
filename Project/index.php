@@ -9,7 +9,7 @@ include_once 'check_login.php';
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" type="image/png"  href="./asset/icons/android-icon-192x192.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -109,7 +109,7 @@ include_once 'check_login.php';
             <a class="page-scroll" href="#contact">Contact</a>
           </li>
           <li class="login-btn">
-            <a class="page-scroll" id="log-btn">Login / Signup</a>
+            <a class="" id="log-btn">Login / Signup</a>
           </li>
         </ul>
       </div>
