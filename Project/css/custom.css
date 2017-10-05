@@ -1,6 +1,7 @@
 .download_btn{
   width: 226px;
 }
+
 .fa-3x{
   float: left !important;
 }
@@ -37,4 +38,8 @@ h4{
 }
 .link_btn{
   cursor: pointer;
+}
+.brand-logo{
+    width: 195px !important;
+    border: 2px solid red;
 }

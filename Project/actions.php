@@ -110,12 +110,19 @@ if(isset($_POST['fun']) && $_POST['fun']=="login-submit"){
   $email_phone= $_POST['email_phone'];
   $password=SHA1($_POST['password']);
   $arr = array();
-  $query = mysqli_query($con, "SELECT * FROM `safedocx_login`,`safedocx_user_type` WHERE (login_phone='$email_phone' OR login_email='$email_phone') AND login_pword='$password' AND login_status=1 AND utype_id=login_user_type");
+  $query = mysqli_query($con, "SELECT * FROM `safedocx_login` LEFT JOIN `safedocx_user_type` ON `safedocx_login`.`login_user_type`=`safedocx_user_type`.`utype_id` LEFT JOIN `safedocx_pwreset` ON `safedocx_login`.`login_id`=`safedocx_pwreset`.`pwreset_login_id` WHERE (login_phone='$email_phone' OR login_email='$email_phone') AND (login_pword='$password' OR pwreset_password='$password') AND login_status=1 AND utype_id=login_user_type");
   if(mysqli_num_rows($query)>0){
     while ($row=mysqli_fetch_array($query)) {
       $id=$_SESSION['user_id']=$row['login_id'];
       $_SESSION['user_page'] = $row['utype_page'];
       $_SESSION['user_type'] = $row['utype_name'];
+      if(isset($row['pwreset_password'])){
+        $_SESSION['login_password'] = "reset";
+        mysqli_query($con,"DELETE FROM safedocx_pwreset WHERE pwreset_login_id=$id");
+      }
+      else {
+        unset($_SESSION['login_password']);
+      }
       array_push($arr, array("val" => 1));
     }
   }
@@ -125,55 +132,6 @@ if(isset($_POST['fun']) && $_POST['fun']=="login-submit"){
   echo json_encode($arr);
   exit();
 }
-// /**
-// * Varification process
-// * @var json
-// */
-// if(isset($_POST['fun']) && $_POST['fun']=="varify-email-phone-sendotp"){
-//   $email_phone= $_POST['email_phone'];
-//   $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE (login_phone='$email_phone' OR login_email='$email_phone')");
-//   while ($row=mysqli_fetch_array($query)) {
-//     $id=$row['login_id'];
-//     $chars = "012345678901234567890123456789";
-//     $otp_mail = substr(str_shuffle( $chars ), 0, 6 );
-//     $otp_phone = substr(str_shuffle( $chars ), 0, 6 );
-//     $otp_m=SHA1($otp_mail);
-//     $otp_p=SHA1($otp_phone);
-//     $sms_msg   = "Varify your Mobile Number using otp: $otp_phone -SafeDocx";
-//     $email_msg = "Varify your Email-ID using otp: $otp_mail -SafeDocx";
-//     mysqli_query($con, "DELETE FROM `safedocx_otp` WHERE `otp_login_id`=$id");
-//     mysqli_query($con, "INSERT INTO `safedocx_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($id,0,'$otp_p')");
-//     mysqli_query($con, "INSERT INTO `safedocx_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($id,1,'$otp_m')");
-//     sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$row['login_email'],"SafeDocx Password",$email_msg);
-//     sendsms($row['login_phone'],$sms_msg);
-//   }
-// }
-// /**
-// * Varify now
-// * @var json
-// */
-// if(isset($_POST['fun']) && $_POST['fun']=="varify-email-phone"){
-//   $otp_email=SHA1($_POST['otp_email']);
-//   $otp_phone=SHA1($_POST['otp_phone']);
-//   $email_phone=$_POST['email_phone'];
-//   $arr = array();
-//   $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE (login_phone='$email_phone' OR login_email='$email_phone')");
-//   while ($row=mysqli_fetch_array($query)) {
-//     $id=$row['login_id'];
-//     $query2 = mysqli_query($con, "SELECT * FROM safedocx_otp WHERE otp_login_id=$id AND ((otp_type=0 AND otp_password='$otp_phone') OR (otp_type=1 AND otp_password='$otp_email'))");
-//     if(mysqli_num_rows($query2)==2){
-//       mysqli_query($con, "DELETE FROM `safedocx_otp` WHERE `otp_login_id`=$id");
-//       mysqli_query($con, "DELETE FROM `safedocx_varify` WHERE `varify_login_id`=$id");
-//       mysqli_query($con, "INSERT INTO `safedocx_varify` (varify_login_id,varify_phone,varify_email) VALUES($id,1,1)");
-//       array_push($arr, array("val" => true));
-//     }
-//     else {
-//       array_push($arr, array("val" => false));
-//     }
-//   }
-//   echo json_encode($arr);
-//   exit();
-// }
 
 /**
 * Check mail or phone validate (exist)
@@ -202,7 +160,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="resetpw-submit"){
   $arr = array();
   $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE (login_phone='$email_phone' OR login_email='$email_phone')");
   if(mysqli_num_rows($query)>0){
-    while ($row=mysqli_fetch_array($query['rows'])) {
+    while ($row=mysqli_fetch_array($query)) {
       $id=$row['login_id'];
       $name="User";
       $query2 = mysqli_query($con, "SELECT * FROM safedocx_users WHERE user_id=$id");
@@ -216,9 +174,14 @@ if(isset($_POST['fun']) && $_POST['fun']=="resetpw-submit"){
       $email_msg = "Hello $name, <br>&nbsp;&nbsp;&nbsp;&nbsp;You can now login with the password : <b>$password</b>. This password is valid only for 30 minutes and for one-time use.You should change your password immediately after this login.";
       mysqli_query($con, "DELETE FROM `safedocx_pwreset` WHERE `pwreset_login_id`=$id");
       mysqli_query($con, "INSERT INTO `safedocx_pwreset`(`pwreset_login_id`,`pwreset_password`) VALUES($id,'$password2')");
-      sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$row['login_email'],"SafeDocx Password",$email_msg);
-      sendsms($row['login_phone'],$sms_msg);
-      array_push($arr, array("val" => true));
+      $m=sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$row['login_email'],"SafeDocx Password",$email_msg);
+      if($m){
+        sendsms($row['login_phone'],$sms_msg);
+        array_push($arr, array("val" => true));
+      }
+      else {
+        array_push($arr, array("val" => false));
+      }
     }
   }
   else {

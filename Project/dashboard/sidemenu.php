@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" data-textdirection="ltr" class="loading">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="../asset/icons/android-icon-192x192.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-  <meta name="description" content="Secure, Varified and Faster Solution for Document Storage and Share">
-  <meta name="keywords" content="SafeDoc, SafeDocx, Share documents, documents, Share doc, Docx">
-  <meta name="author" content="SafeDocx">
-  <title>SafeDocx : Secure Document Storage &amp; Share</title>
 
   <link rel="stylesheet" href="css/croppie.css">
 
@@ -456,7 +445,7 @@ while ($row=mysqli_fetch_array($query)) {
                                     </div>
                                     <!-- / main menu-->
                                     <div class="cd-popup" id="password-change" role="alert">
-                                      <div class="cd-popup-container pass-pop">
+                                      <div class="cd-popup-container pasvs-pop">
                                         <h3>Change Password</h3>
                                         <hr>
                                         <form method="post" id="pass_change_form" onsubmit="return false">

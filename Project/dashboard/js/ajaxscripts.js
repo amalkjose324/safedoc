@@ -234,13 +234,17 @@ $(document).ready(function(){
         {
           var obj = JSON.parse(response)[0]['val'];
           if(obj){
-            Lobibox.alert('success', {
-              msg: "Your details has been updated...!"
+            Lobibox.notify('success', {
+                delay:5000,
+              title: 'Details Updated',
+              msg: 'Your details has been updated successfully..!'
             });
           }
           else{
-            Lobibox.alert('error', {
-              msg: "No details has been updated...!"
+            Lobibox.notify('error', {
+                delay:5000,
+              title: 'No Details Updated',
+              msg: 'No any details has been updated right now..!'
             });
           }
         }
@@ -342,13 +346,17 @@ $(document).ready(function(){
           if(obj){
             $('#pass_change_form').trigger("reset");
             $('#password-change').removeClass('is-visible');
-            Lobibox.alert('success', {
-              msg: "Your password has been changed...!"
+            Lobibox.notify('success', {
+              delay:5000,
+              title: 'Password Changed',
+              msg: 'Your password hasbeen updated. You can login with new password..!'
             });
           }
           else{
-            Lobibox.alert('error', {
-              msg: "Password updation failed...!"
+            Lobibox.notify('error', {
+                delay:5000,
+              title: 'Password Changing Failed',
+              msg: 'Sorry, we can\' update your password right now. Please try again later..!'
             });
           }
         }
@@ -398,13 +406,17 @@ $(document).ready(function(){
           if(obj){
             $('#var-phone_form').trigger("reset");
             $('#varify-phone').removeClass('is-visible');
-            Lobibox.alert('success', {
-              msg: "Your phone number has been varified...!"
+            Lobibox.notify('success', {
+              delay:5000,
+              title: 'Phone Varified',
+              msg: "Your phone number has been varified successfully...!"
             });
           }
           else{
-            Lobibox.alert('error', {
-              msg: "OTP does not matching...!"
+            Lobibox.notify('error', {
+              delay:5000,
+              title: 'Invalid OTP',
+              msg: "Your OTP does not matching. Please check the OTP..!"
             });
           }
         }
@@ -414,6 +426,11 @@ $(document).ready(function(){
   $('#varify-email-btn').on('click', function(event){
     event.preventDefault();
     $fun="varify-email-otpsend";
+    Lobibox.notify('info', {
+      delay:5000,
+      title: 'E-mail varification',
+      msg: "We are trying to send varification link for Varify your email."
+    });
     $.ajax({
       type:'post',
       url:'./actions.php',
@@ -422,13 +439,17 @@ $(document).ready(function(){
       {
         var obj = JSON.parse(response)[0]['val'];
         if(obj){
-          Lobibox.alert('success', {
-            msg: "We just sent you an email with varification link. "
+          Lobibox.notify('success', {
+            delay:5000,
+            title: 'Varification link Sent to Email',
+            msg: "We just sent you an email with varification link. Varify your email id using this varification link."
           });
         }
         else{
-          Lobibox.alert('error', {
-            msg: "Can't send varification link now..!"
+          Lobibox.notify('error', {
+            delay:5000,
+            title: 'Network error',
+            msg: "Due to network issues, we can't send varification link to your email id. Please try again later."
           });
         }
       }
@@ -439,13 +460,20 @@ $(document).ready(function(){
     event.preventDefault();
     $('#varify-phone').addClass('is-visible');
     $fun="varify-phone-otpsend";
+    Lobibox.notify('info', {
+      delay:5000,
+      title: 'OTP Senting to Phone',
+      msg: "We are trying to send OTP to your phone. Please wait."
+    });
     $.ajax({
       type:'post',
       url:'./actions.php',
       data:{fun:$fun},
       success: function (response) {
-        Lobibox.alert('success', {
-          msg: "OTP has been sent..!"
+        Lobibox.notify('success', {
+          delay:5000,
+          title: 'OTP Sent to Phone',
+          msg: "We just sent you an SMS with OTP. Varify your Mobile using this OTP."
         });
       }
     });

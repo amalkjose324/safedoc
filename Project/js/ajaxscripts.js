@@ -113,8 +113,10 @@ $(document).ready(function(){
           var obj = JSON.parse(response)[0]['val'];
           if(obj){
             $('#signup_form').trigger("reset");
-            Lobibox.alert('success', {
-              msg: "Your account has been created. Now you can login here..!"
+            Lobibox.notify('success', {
+              delay:5000,
+              title: 'Registration Successful',
+              msg: 'Now you can login with given email/phone and password here..!'
             });
             var $form_modal = $('.cd-user-modal'),
             $form_login = $form_modal.find('#cd-login'),
@@ -128,8 +130,10 @@ $(document).ready(function(){
             $tab_signup.removeClass('selected');
           }
           else{
-            Lobibox.alert('error', {
-              msg: "We can't create your account right now..!"
+            Lobibox.notify('error', {
+              delay:5000,
+              title: 'Registration Failed',
+              msg: 'Sorry we can\'t create your account right now. Please try again later!'
             });
           }
         }
@@ -151,46 +155,7 @@ $(document).ready(function(){
       $("#signup-password-error").removeClass('is-visible');
     }
   });
-  /**
-  * Varification form validation
-  * @return error message
-  */
-  // $("#varify_form").on("submit", function(){
-  //   $email = $('#varify_email').val();
-  //   $phone = $('#varify_phone').val();
-  //   $email_phone= $('#hidden_email_phone').val();
-  //   var validator= /^[0-9]{6,6}$/;
-  //   if(!validator.test($email)){
-  //     $("#varify-email-error").addClass('is-visible');
-  //   }
-  //   else if(!validator.test($phone)){
-  //     $("#varify-phone-error").addClass('is-visible');
-  //   }
-  //   else{
-  //     $fun="varify-email-phone";
-  //     $.ajax({
-  //       type:'post',
-  //       url:'./actions.php',
-  //       data:{otp_email:$email,otp_phone:$phone,email_phone:$email_phone,fun:$fun},
-  //       success:function(response)
-  //       {
-  //         var obj = JSON.parse(response)[0]['val'];
-  //         if(obj){
-  //           $('#varify_form').trigger("reset");
-  //           Lobibox.alert('success', {
-  //             msg: "You are varified"
-  //           });
-  //           $('.cd-user-modal').removeClass('is-visible');
-  //         }
-  //         else{
-  //           Lobibox.alert('error', {
-  //             msg: "Invalid OTP"
-  //           });
-  //         }
-  //       }
-  //     });
-  //   }
-  // });
+
   /**
   * login-email_phone checking
   * @return error message
@@ -220,34 +185,7 @@ $(document).ready(function(){
       $("#login-password-error").removeClass('is-visible');
     }
   });
-  /**
-  * email id varification
-  * @return error message
-  */
-  // $("#varify_email").focusout(function(){
-  //   $email = $('#varify_email').val();
-  //   var validator= /^[0-9]{6,6}$/;
-  //   if(!validator.test($email)){
-  //     $("#varify-email-error").addClass('is-visible');
-  //   }
-  //   else {
-  //     $("#varify-email-error").removeClass('is-visible');
-  //   }
-  // });
-  /**
-  * phone number varification
-  * @return error message
-  */
-  // $("#varify_phone").focusout(function(){
-  //   $phone = $('#varify_phone').val();
-  //   var validator= /^[0-9]{6,6}$/;
-  //   if(!validator.test($phone)){
-  //     $("#varify-phone-error").addClass('is-visible');
-  //   }
-  //   else {
-  //     $("#varify-phone-error").removeClass('is-visible');
-  //   }
-  // });
+
   /**
   * Login validation
   * @return error message
@@ -356,6 +294,7 @@ $(document).ready(function(){
     var val_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
     var val_phone= /^[0-9]{9,12}$/;
     $email_phone = $('#resetpw-email_phone').val();
+
     if((!val_email.test($email_phone))&&(!val_phone.test($email_phone))){
       $("#resetpw-email_phone").focusout();
       return false;
@@ -371,8 +310,10 @@ $(document).ready(function(){
           var obj = JSON.parse(response)[0]['val'];
           if(obj){
             $('#resetpw_form').trigger("reset");
-            Lobibox.alert('success', {
-              msg: "Your new password has sent to your Email and Mobile number. Please change password immediately after first login."
+            Lobibox.notify('info', {
+              delay:5000,
+              title: 'Reset Password',
+              msg: 'We are trying to send your new password. Please wait..!'
             });
             $('.cd-user-modal').removeClass('is-visible');
             $fun="resetpw-submit";
@@ -382,13 +323,39 @@ $(document).ready(function(){
               data:{email_phone:$email_phone,fun:$fun},
               success:function(response)
               {
-                var obj = JSON.parse(response)[0]['val'];
+                try{
+                  var obj = JSON.parse(response)[0]['val'];
+                  if(obj){
+                    Lobibox.notify('success', {
+                      delay:5000,
+                      title: 'Reset Password Sent',
+                      msg: "Your new password has been sent to your Email and Mobile number. Please change password immediately after first login."
+                    });
+                  }
+                  else{
+                    Lobibox.notify('error', {
+                      delay:5000,
+                      title: 'Network Error',
+                      msg: "Sorry, we can\' send password right now. Please try again later.!"
+                    });
+                  }
+                }
+                catch(e){
+                  Lobibox.notify('warning', {
+                    delay:5000,
+                    title: 'Password sent to Email',
+                    msg: "Due to network issues, we can't send password to your phone number.!"
+                  });
+                }
               }
             });
           }
           else{
-            Lobibox.alert('error', {
-              msg: "Provided details does not matching any accounts..!"
+
+            Lobibox.notify('error', {
+              delay:5000,
+              title: 'Invalid Details',
+              msg: "Does not match any account with this provided details.!"
             });
           }
         }

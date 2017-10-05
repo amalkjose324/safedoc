@@ -1,14 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" data-textdirection="ltr" class="loading">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/png" href="../asset/icons/android-icon-192x192.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description" content="Secure, Varified and Faster Solution for Document Storage and Share">
+  <meta name="keywords" content="SafeDoc, SafeDocx, Share documents, documents, Share doc, Docx">
+  <meta name="author" content="SafeDocx">
+  <title>SafeDocx : Secure Document Storage &amp; Share</title>
+
 <?php
 include_once '../db_connect.php';
 include_once 'check_logout.php';
 include_once 'profile_check.php';
-
+include_once 'sidemenu.php';
 $page=$_SESSION['user_page'];
 if($page<>'users.php'){
   header("location: $page");
 }
 ?>
-<?php include_once 'sidemenu.php';
+<?php
 include_once 'lobibox.php'; ?>
 
 <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
