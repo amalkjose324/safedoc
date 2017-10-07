@@ -48,11 +48,7 @@ $(document).ready(function(){
 			url:'./actions.php',
 			data:{fun:$fun}
 		});
-    Lobibox.notify('info', {
-      delay:5000,
-      title: 'E-mail varification',
-      msg: "We are trying to send varification link for Varify your email."
-    });
+    
 	});
 
 

@@ -3,7 +3,7 @@ include_once '../db_connect.php';
 include_once 'check_logout.php';
 include_once 'lobibox.php';
 $query1=mysqli_query($con,"SELECT * FROM safedocx_varify WHERE varify_email=1 AND varify_phone=1 AND varify_login_id=$user_id");
-$query2=mysqli_query($con,"SELECT * FROM safedocx_users WHERE user_aadhaar_no='' AND user_id=$user_id");
+$query2=mysqli_query($con,"SELECT * FROM safedocx_users WHERE user_aadhaar_no>0 AND user_id=$user_id");
 if(isset($_SESSION['login_password'])){
   ?>
   <script>
