@@ -5,7 +5,22 @@
 .dob{
   height: 37.21px;
 }
-
+.doc-list{
+    margin-bottom: 10px;
+    margin-top: -20px;
+    margin-right: -14px;
+    margin-left: -14px;
+    min-height: 500px;
+}
+.action-list{
+    margin-bottom: 10px;
+    margin-top: -20px;
+    margin-right: -14px;
+    margin-left: -5px;
+}
+.card-block{
+  padding: 1.1rem !important;
+}
 .cd-error-message {
   display: inline-block;
   position: absolute;

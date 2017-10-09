@@ -15,7 +15,9 @@ html {
       transition: 300ms ease all;
       backface-visibility: hidden; }
       html body .content .content-wrapper {
-        padding: 1.8rem; }
+        padding-left: 1.8rem;
+      padding-right:  1.8rem;
+    }
         html body .content .content-wrapper .content-header-right {
           margin-top: 6px; }
     html body[data-col="1-column"]:not(.vertical-content-menu) .content,
