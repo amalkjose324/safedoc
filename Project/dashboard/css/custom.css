@@ -6,17 +6,29 @@
   height: 37.21px;
 }
 .doc-list{
-    margin-bottom: 10px;
-    margin-top: -20px;
-    margin-right: -14px;
-    margin-left: -14px;
-    min-height: 500px;
+  margin-bottom: 10px;
+  margin-top: -20px;
+  margin-right: -14px;
+  margin-left: -14px;
+  min-height: 500px;
+  padding: 10px;
+}
+.doc_item_tumbanail{
+  height: 100px;
+}
+.doc_items{
+  height: 230px;
+  border: 1px solid red;
+  margin: 10px;
+  -webkit-box-shadow: -2px 2px 24px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: -2px 2px 24px 1px rgba(0,0,0,0.75);
+  box-shadow: -2px 2px 24px 1px rgba(0,0,0,0.75);
 }
 .action-list{
-    margin-bottom: 10px;
-    margin-top: -20px;
-    margin-right: -14px;
-    margin-left: -5px;
+  margin-bottom: 10px;
+  margin-top: -20px;
+  margin-right: -14px;
+  margin-left: -5px;
 }
 .card-block{
   padding: 1.1rem !important;

@@ -100,20 +100,51 @@
               </div>
             </div>
           </div>
-
-          <div class="col-xl-10 col-md-12 col-sm-12">
+          <div class="col-xl-12 col-md-12 col-sm-12">
             <div class="card doc-list">
-
-            fdg
-            </div>
-          </div>
-          <div class="col-xl-2 col-lg-12 col-xs-12">
-            <div class="card action-list">
-              <div class="card-body">
-                <div class="card-block">
-                  ajdjhjh
-                </div>
-              </div>
+              <?php
+                $query=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_doc_type WHERE doc_type=doc_type_id AND doc_status=doc_status_id AND doc_user_id=$user_id");
+                while($row=mysqli_fetch_array($query)){
+                  ?>
+                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
+                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
+                    <?php echo $row['doc_caption'];?>
+                  </div>
+                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
+                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
+                    <?php echo $row['doc_caption'];?>
+                  </div>
+                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
+                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
+                    <?php echo $row['doc_caption'];?>
+                  </div>
+                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
+                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
+                    <?php echo $row['doc_caption'];?>
+                  </div>
+                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
+                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
+                    <?php echo $row['doc_caption'];?>
+                  </div>
+                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
+                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
+                    <?php echo $row['doc_caption'];?>
+                  </div>
+                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
+                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
+                    <?php echo $row['doc_caption'];?>
+                  </div>
+                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
+                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
+                    <?php echo $row['doc_caption'];?>
+                  </div>
+                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
+                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
+                    <?php echo $row['doc_caption'];?>
+                  </div>
+                  <?php
+                }
+              ?>
             </div>
           </div>
         </div>
