@@ -9,7 +9,7 @@
   <meta name="keywords" content="SafeDoc, SafeDocx, Share documents, documents, Share doc, Docx">
   <meta name="author" content="SafeDocx">
   <title>SafeDocx : Secure Document Storage &amp; Share</title>
-
+  <link rel="stylesheet" href="./css/doc_item_card.css" type="text/css">
   <?php
   include_once '../db_connect.php';
   include_once 'check_logout.php';
@@ -82,17 +82,17 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6 col-xs-12">
+              <div class="col-xl-3 col-lg-6 col-xs-12">
               <div class="card">
                 <div class="card-body">
                   <div class="card-block">
                     <div class="media">
-                      <div class="media-body text-xs-left">
-                        <h3 class="cyan">423</h3>
-                        <span>Support Tickets</span>
+                      <div class="col-xl-6 col-lg-6 col-xs-6 media-right media-middle add_rm" id="doc_add_btn">
+                        <i class="icon-cloud-upload green font-large-1"><br></i>Upload
                       </div>
-                      <div class="media-right media-middle">
-                        <i class="icon-ios-help-outline cyan font-large-2 float-xs-right"></i>
+                       <div class="divider"></div>
+                      <div class="col-xl-6 col-lg-6 col-xs-6 media-right media-middle add_rm" id="doc_remove_btn">
+                       <i class="icon-remove red font-large-1"></i><br>Remove
                       </div>
                     </div>
                   </div>
@@ -106,41 +106,29 @@
                 $query=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_doc_type WHERE doc_type=doc_type_id AND doc_status=doc_status_id AND doc_user_id=$user_id");
                 while($row=mysqli_fetch_array($query)){
                   ?>
-                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
-                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
-                    <?php echo $row['doc_caption'];?>
+                  <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flipper">
+                      <div class="front" style="background: url(dwflip.jpg) 0 0 no-repeat;">
+                        <span class="name">David Walsh</span>
+                      </div>
+                      <div class="back" style="background:#f8f8f8;">
+                        <div class="back-logo"></div>
+                        <div class="back-title">@davidwalshblog</div>
+                        <p>Mozilla Web Developer, MooTools & jQuery Consultant, MooTools Core Developer, Javascript Fanatic, CSS Tinkerer, PHP Hacker, and web lover.</p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
-                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
-                    <?php echo $row['doc_caption'];?>
-                  </div>
-                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
-                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
-                    <?php echo $row['doc_caption'];?>
-                  </div>
-                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
-                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
-                    <?php echo $row['doc_caption'];?>
-                  </div>
-                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
-                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
-                    <?php echo $row['doc_caption'];?>
-                  </div>
-                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
-                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
-                    <?php echo $row['doc_caption'];?>
-                  </div>
-                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
-                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
-                    <?php echo $row['doc_caption'];?>
-                  </div>
-                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
-                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
-                    <?php echo $row['doc_caption'];?>
-                  </div>
-                  <div class="col-xl-2 col-md-3 col-sm-4 doc_items">
-                    <img src="./images/docs/1.jpg" height="100px" width="100%" class="col-xl-12 doc_item_tumbanail">
-                    <?php echo $row['doc_caption'];?>
+                  <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flipper">
+                      <div class="front" style="background: url(dwflip.jpg) 0 0 no-repeat;">
+                        <span class="name">David Walsh</span>
+                      </div>
+                      <div class="back" style="background:#f8f8f8;">
+                        <div class="back-logo"></div>
+                        <div class="back-title">@davidwalshblog</div>
+                        <p>Mozilla Web Developer, MooTools & jQuery Consultant, MooTools Core Developer, Javascript Fanatic, CSS Tinkerer, PHP Hacker, and web lover.</p>
+                      </div>
+                    </div>
                   </div>
                   <?php
                 }

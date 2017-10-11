@@ -5,21 +5,39 @@
 .dob{
   height: 37.21px;
 }
+.add_rm{
+  text-align: center;
+  margin:auto;
+  cursor: pointer;
+}
+.doc_head{
+  text-align: center;
+  margin-top: 5px;
+}
+.divider{
+    position:absolute;
+    left:50%;
+    top:10%;
+    bottom:10%;
+    border-left:1px solid red;
+}
 .doc-list{
   margin-bottom: 10px;
   margin-top: -20px;
   margin-right: -14px;
   margin-left: -14px;
   min-height: 500px;
-  padding: 10px;
+  padding: 20px;
+  overflow: auto;
 }
 .doc_item_tumbanail{
-  height: 100px;
+  height: 120px;
 }
 .doc_items{
+  padding: 10px;
   height: 230px;
   border: 1px solid red;
-  margin: 10px;
+  margin: 15px;
   -webkit-box-shadow: -2px 2px 24px 1px rgba(0,0,0,0.75);
   -moz-box-shadow: -2px 2px 24px 1px rgba(0,0,0,0.75);
   box-shadow: -2px 2px 24px 1px rgba(0,0,0,0.75);
