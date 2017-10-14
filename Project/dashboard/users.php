@@ -82,7 +82,7 @@
                 </div>
               </div>
             </div>
-              <div class="col-xl-3 col-lg-6 col-xs-12">
+            <div class="col-xl-3 col-lg-6 col-xs-12">
               <div class="card">
                 <div class="card-body">
                   <div class="card-block">
@@ -90,9 +90,9 @@
                       <div class="col-xl-6 col-lg-6 col-xs-6 media-right media-middle add_rm" id="doc_add_btn">
                         <i class="icon-cloud-upload green font-large-1"><br></i>Upload
                       </div>
-                       <div class="divider"></div>
+                      <div class="divider"></div>
                       <div class="col-xl-6 col-lg-6 col-xs-6 media-right media-middle add_rm" id="doc_remove_btn">
-                       <i class="icon-remove red font-large-1"></i><br>Remove
+                        <i class="icon-remove red font-large-1"></i><br>Remove
                       </div>
                     </div>
                   </div>
@@ -103,35 +103,21 @@
           <div class="col-xl-12 col-md-12 col-sm-12">
             <div class="card doc-list">
               <?php
-                $query=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_doc_type WHERE doc_type=doc_type_id AND doc_status=doc_status_id AND doc_user_id=$user_id");
-                while($row=mysqli_fetch_array($query)){
-                  ?>
-                  <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                    <div class="flipper">
-                      <div class="front" style="background: url(dwflip.jpg) 0 0 no-repeat;">
-                        <span class="name">David Walsh</span>
-                      </div>
-                      <div class="back" style="background:#f8f8f8;">
-                        <div class="back-logo"></div>
-                        <div class="back-title">@davidwalshblog</div>
-                        <p>Mozilla Web Developer, MooTools & jQuery Consultant, MooTools Core Developer, Javascript Fanatic, CSS Tinkerer, PHP Hacker, and web lover.</p>
-                      </div>
+              $query=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_doc_type WHERE doc_type=doc_type_id AND doc_status=doc_status_id AND doc_user_id=$user_id");
+              while($row=mysqli_fetch_array($query)){
+                ?>
+                <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
+                  <div class="flipper">
+                    <div class="front">
+                      <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
+                    </div>
+                    <div class="back">
+                      <p class="inner-flip">sfssa</p>
                     </div>
                   </div>
-                  <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                    <div class="flipper">
-                      <div class="front" style="background: url(dwflip.jpg) 0 0 no-repeat;">
-                        <span class="name">David Walsh</span>
-                      </div>
-                      <div class="back" style="background:#f8f8f8;">
-                        <div class="back-logo"></div>
-                        <div class="back-title">@davidwalshblog</div>
-                        <p>Mozilla Web Developer, MooTools & jQuery Consultant, MooTools Core Developer, Javascript Fanatic, CSS Tinkerer, PHP Hacker, and web lover.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <?php
-                }
+                </div>
+                <?php
+              }
               ?>
             </div>
           </div>
