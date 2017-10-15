@@ -126,7 +126,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="profile-phone-validate"){
   echo json_encode($arr);
   exit();
 }
-/** 
+/**
 * Profile-aadhaar validating (existing or not)
 * @var json
 */

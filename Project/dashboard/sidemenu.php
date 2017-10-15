@@ -1,31 +1,31 @@
 
-  <link rel="stylesheet" href="css/croppie.css">
+<link rel="stylesheet" href="css/croppie.css">
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-touch-fullscreen" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <!-- BEGIN VENDOR CSS-->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-  <!-- font icons-->
-  <link rel="stylesheet" type="text/css" href="fonts/icomoon.css">
-  <link rel="stylesheet" type="text/css" href="fonts/flag-icon-css/css/flag-icon.min.css">
-  <link rel="stylesheet" type="text/css" href="vendors/css/extensions/pace.css">
-  <!-- END VENDOR CSS-->
-  <!-- BEGIN ROBUST CSS-->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-extended.css">
-  <link rel="stylesheet" type="text/css" href="css/app.css">
-  <link rel="stylesheet" type="text/css" href="css/colors.css">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<!-- BEGIN VENDOR CSS-->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<!-- font icons-->
+<link rel="stylesheet" type="text/css" href="fonts/icomoon.css">
+<link rel="stylesheet" type="text/css" href="fonts/flag-icon-css/css/flag-icon.min.css">
+<link rel="stylesheet" type="text/css" href="vendors/css/extensions/pace.css">
+<!-- END VENDOR CSS-->
+<!-- BEGIN ROBUST CSS-->
+<link rel="stylesheet" type="text/css" href="css/bootstrap-extended.css">
+<link rel="stylesheet" type="text/css" href="css/app.css">
+<link rel="stylesheet" type="text/css" href="css/colors.css">
 
-  <!-- END ROBUST CSS-->
-  <!-- BEGIN Page Level CSS-->
-  <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-menu.css">
-  <link rel="stylesheet" type="text/css" href="css/custom.css">
-  <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-overlay-menu.css">
-  <link href="../css/login_css.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="css/popup.css">
-  <!-- END Page Level CSS-->
-  <!-- BEGIN Custom CSS-->
-  <!-- END Custom CSS-->
+<!-- END ROBUST CSS-->
+<!-- BEGIN Page Level CSS-->
+<link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-menu.css">
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+<link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-overlay-menu.css">
+<link href="../css/login_css.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/popup.css">
+<!-- END Page Level CSS-->
+<!-- BEGIN Custom CSS-->
+<!-- END Custom CSS-->
 </head>
 <?php
 $userid=$_SESSION['user_id'];
@@ -462,6 +462,40 @@ while ($row=mysqli_fetch_array($query)) {
                                             <span class="cd-error-message" id="pass-conf-error" >Password not matching</span>
                                           </div><hr>
                                           <input type="submit" class="btn btn-success" style="width:100%;" value="Change Password">
+                                          <a href="#0" class="cd-popup-close img-replace">Close</a>
+                                        </div> <!-- cd-popup-container -->
+                                      </form>
+                                    </div> <!-- cd-popup -->
+
+                                    <div class="cd-popup" id="doc_add_pop" role="alert">
+                                      <div class="cd-popup-container pasvs-pop">
+                                        <h3>Select Documents</h3>
+                                        <hr>
+                                        <form method="post" id="doc_add_form" onsubmit="return false">
+                                          <div class="form-group ">
+                                            <p>You can upload one or more documents/certificates, which should be in pdf format</p>
+                                            <input class="form-control" type="file" id="multiDocx" name="files[]" multiple="multiple" accept="application/pdf"/>
+                                            <span class="cd-error-message" id="docx_upload_error" >Invalid Password</span>
+                                          </div>
+                                          <hr>
+                                          <button id="upload-docx" class="btn btn-success" style="width:100%;">Upload</button>
+                                          <a href="#0" class="cd-popup-close img-replace">Close</a>
+                                        </div> <!-- cd-popup-container -->
+                                      </form>
+                                    </div> <!-- cd-popup -->
+
+
+                                    <div class="cd-popup" id="add_directory_pop" role="alert">
+                                      <div class="cd-popup-container pasvs-pop">
+                                        <h3>Add New Directory</h3>
+                                        <hr>
+                                        <form method="post" id="directory_add_form" onsubmit="return false">
+                                          <div class="form-group ">
+                                            <input class="form-control" type="text" id="dir_name_add" placeholder="Directory Name" name="dir_name_add"/>
+                                            <span class="cd-error-message" id="docx_upload_error" >Invalid Password</span>
+                                          </div>
+                                          <hr>
+                                          <input type="submit" class="btn btn-success" style="width:100%;" value="Create Directory">
                                           <a href="#0" class="cd-popup-close img-replace">Close</a>
                                         </div> <!-- cd-popup-container -->
                                       </form>

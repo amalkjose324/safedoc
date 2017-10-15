@@ -371,6 +371,19 @@ $(document).ready(function(){
     $("#cpass-icon").click();
   });
   /**
+  * check file in docx upload
+  * @return error message
+  */
+  $("#multiDocx").on("change",function(){
+    if(this.files.length>0){
+      $("#docx_upload_error").removeClass('is-visible');
+    }
+    else{
+      $("#docx_upload_error").addClass('is-visible');
+			$("#docx_upload_error").html('Select atleast one Document');
+    }
+  });
+  /**
   * Phone otp checking
   * @return error message
   */

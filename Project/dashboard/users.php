@@ -19,6 +19,11 @@
   if($page<>'users.php'){
     header("location: $page");
   }
+  $docx_dir=0;
+  $query=mysqli_query($con,"SELECT * FROM safedocx_directory WHERE directory_user_id=$user_id AND directory_parent_id=0");
+  while($row=mysqli_fetch_array($query)){
+    $docx_dir=$row['directory_id'];
+  }
   ?>
   <?php
   include_once 'lobibox.php'; ?>
@@ -91,8 +96,8 @@
                         <i class="icon-cloud-upload green font-large-1"><br></i>Upload
                       </div>
                       <div class="divider"></div>
-                      <div class="col-xl-6 col-lg-6 col-xs-6 media-right media-middle add_rm" id="doc_remove_btn">
-                        <i class="icon-remove red font-large-1"></i><br>Remove
+                      <div class="col-xl-6 col-lg-6 col-xs-6 media-right media-middle add_rm" id="directory_add_btn">
+                        <i class="icon-folder-plus red font-large-1"></i><br>Directory
                       </div>
                     </div>
                   </div>
@@ -103,16 +108,63 @@
           <div class="col-xl-12 col-md-12 col-sm-12">
             <div class="card doc-list">
               <?php
-              $query=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_doc_type WHERE doc_type=doc_type_id AND doc_status=doc_status_id AND doc_user_id=$user_id");
-              while($row=mysqli_fetch_array($query)){
+              $query1=mysqli_query($con,"SELECT * FROM safedocx_directory WHERE directory_user_id=$user_id AND directory_status=1 AND directory_parent_id=0");
+              $query2=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_directory WHERE doc_directory_id=directory_id AND doc_status=doc_status_id AND doc_directory_id=$docx_dir AND directory_user_id=$user_id");
+              while($row1=mysqli_fetch_array($query1)){
                 ?>
                 <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
                   <div class="flipper">
                     <div class="front">
+                      <div class="media-center">
+                        <i class="icon-folder pink font-large-5 "></i>
+                      </div>
                       <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
                     </div>
                     <div class="back">
-                      <p class="inner-flip">sfssa</p>
+                      <p class="inner-flip">sfssasdasasdasdasdasdsadsadsadsadasa</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
+                  <div class="flipper">
+                    <div class="front">
+                      <div class="media-center">
+                        <i class="icon-folder pink font-large-5 "></i>
+                      </div>
+                      <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
+                    </div>
+                    <div class="back">
+                      <p class="inner-flip">sfssasdasasdasdasdasdsadsadsadsadasa</p>
+                    </div>
+                  </div>
+                </div>
+                <?php
+              }
+              while($row2=mysqli_fetch_array($query2)){
+                ?>
+                <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
+                  <div class="flipper">
+                    <div class="front">
+                      <div class="media-center">
+                        <i class="icon-file-pdf-o pink font-large-5 "></i>
+                      </div>
+                      <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
+                    </div>
+                    <div class="back">
+                      <p class="inner-flip">sfssasdasasdasdasdasdsadsadsadsadasa</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
+                  <div class="flipper">
+                    <div class="front">
+                      <div class="media-center">
+                        <i class="icon-folder-open pink font-large-5 "></i>
+                      </div>
+                      <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
+                    </div>
+                    <div class="back">
+                      <p class="inner-flip">sfssasdasasdasdasdasdsadsadsadsadasa</p>
                     </div>
                   </div>
                 </div>
