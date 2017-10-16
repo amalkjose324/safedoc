@@ -1,9 +1,9 @@
 $(document).ready(function(){
 
-/**
-* District selection
-* @return error message
-*/
+  /**
+  * District selection
+  * @return error message
+  */
   $('#profile-state').on('change',function () {
     $state = $('#profile-state').val();
     $fun= "select_district";
@@ -235,14 +235,14 @@ $(document).ready(function(){
           var obj = JSON.parse(response)[0]['val'];
           if(obj){
             Lobibox.notify('success', {
-                delay:5000,
+              delay:5000,
               title: 'Details Updated',
               msg: 'Your details has been updated successfully..!'
             });
           }
           else{
             Lobibox.notify('error', {
-                delay:5000,
+              delay:5000,
               title: 'No Details Updated',
               msg: 'No any details has been updated right now..!'
             });
@@ -354,7 +354,7 @@ $(document).ready(function(){
           }
           else{
             Lobibox.notify('error', {
-                delay:5000,
+              delay:5000,
               title: 'Password Changing Failed',
               msg: 'Sorry, we can\' update your password right now. Please try again later..!'
             });
@@ -380,7 +380,7 @@ $(document).ready(function(){
     }
     else{
       $("#docx_upload_error").addClass('is-visible');
-			$("#docx_upload_error").html('Select atleast one Document');
+      $("#docx_upload_error").html('Select atleast one Document');
     }
   });
   /**
@@ -491,4 +491,129 @@ $(document).ready(function(){
       }
     });
   });
+  /**
+  * Directory name validate
+  * @return error message
+  */
+  $("#dir_name_add").focusout(function(){
+    $name = $("#dir_name_add").val();
+    var validator= /^[A-Za-z0-9_\s]{3,40}$/;
+    if(!validator.test($name)){
+      $("#dir_name_add_error").addClass('is-visible');
+    }
+    else {
+      $("#dir_name_add_error").removeClass('is-visible');
+    }
+  });
+  /**
+  * Directory name validate
+  * @return error message
+  */
+  $("#dir_description_add").focusout(function(){
+    $desc= $("#dir_description_add").val();
+    var validator= /^[^&]{6,100}$/;
+    if(!validator.test($desc)){
+      $("#dir_description_add_error").addClass('is-visible');
+    }
+    else {
+      $("#dir_description_add_error").removeClass('is-visible');
+    }
+  });
+  /**
+  * Add new directory
+  * @return error message
+  */
+  $("#directory_add_form").on("submit", function(){
+    $dir_name = $('#dir_name_add').val();
+    $dir_description = $('#dir_description_add').val();
+    $dir_parent = $('#directory_id').val();
+    var name_val=/^[A-Za-z0-9_\s]{3,40}$/;
+    var desc_val=/^[^&]{6,100}$/;
+    if(!name_val.test($dir_name)){
+      $("#dir_name_add").focusout();
+    }
+    else if (!desc_val.test($dir_description)) {
+      $("#dir_description_add").focusout();
+    }
+    else{
+      $fun="add-new-directory";
+      $('#add_directory_pop').removeClass('is-visible');
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{fun:$fun,dir_name:$dir_name,dir_description:$dir_description,dir_parent:$dir_parent},
+        success: function (response) {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $('#doc-list-div').load(document.URL +  ' #doc-list-div');
+            Lobibox.notify('success', {
+              delay:5000,
+              title: 'Directory Added',
+              msg: "Your new directory has been Added successfully!"
+            });
+          }
+          else{
+            Lobibox.notify('error', {
+              delay:5000,
+              title: 'Directory Error',
+              msg: "An error occured while creating a directory"
+            });
+          }
+        }
+      });
+    }
+  });
+//docs upload
+  $('#upload-docx').on('click', function () {
+		var form_data = new FormData();
+    $dir_parent = $('#doc_directory_id').val();
+		var ins = document.getElementById('multiDocx').files.length;
+		if(ins>0){
+			$("#docx_upload_error").removeClass('is-visible');
+      $('#doc_add_pop').removeClass('is-visible');
+			for (var x = 0; x < ins; x++) {
+				form_data.append("files[]", document.getElementById('multiDocx').files[x]);
+			}
+      form_data.append("doc_directory_id", $dir_parent);
+      form_data.append("fun", "safedocx-add-docs");
+			$.ajax({
+				url: './actions.php', // point to server-side PHP script
+				dataType: 'text', // what to expect back from the PHP script
+				cache: false,
+				contentType: false,
+				processData: false,
+				data: form_data,
+				type: 'post',
+				success: function (response) {
+					if(response==ins){
+            $('#doc-list-div').load(document.URL +  ' #doc-list-div');
+						Lobibox.notify('success', {
+                delay:5000,
+              title: 'Doucuments Uploaded',
+              msg: 'All of your documents has been uploaded successfully..!'
+            });
+					}
+					else if(response>0){
+            $('#doc-list-div').load(document.URL +  ' #doc-list-div');
+						Lobibox.notify('warning', {
+                delay:5000,
+              title: (ins-response)+' documents not uploaded',
+              msg: 'Due to invalid/curruped document, '+(ins-response)+' documents has not been uploaded'
+            });
+					}
+					else {
+						Lobibox.notify('error', {
+                delay:5000,
+              title: 'Upload Error',
+              msg: 'No documents has been uploaded due to invalid/curruped document'
+            });
+					}
+				}
+			});
+		}
+		else{
+			$("#docx_upload_error").addClass('is-visible');
+			$("#docx_upload_error").html('Select atleast one Document');
+		}
+	});
 });

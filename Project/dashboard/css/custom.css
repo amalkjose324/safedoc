@@ -47,7 +47,7 @@
   margin-left: -14px;
   min-height: 500px;
   padding: 20px;
-  overflow: auto;
+  overflow: hidden;
 }
 .doc_item_tumbanail{
   height: 120px;
@@ -60,6 +60,9 @@
   -webkit-box-shadow: -2px 2px 24px 1px rgba(0,0,0,0.75);
   -moz-box-shadow: -2px 2px 24px 1px rgba(0,0,0,0.75);
   box-shadow: -2px 2px 24px 1px rgba(0,0,0,0.75);
+}
+.inner-flip{
+  vertical-align: middle;
 }
 .action-list{
   margin-bottom: 10px;

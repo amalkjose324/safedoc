@@ -85,60 +85,13 @@ $(document).ready(function(){
 			$('#doc_add_pop').removeClass('is-visible');
 		}
 	});
-
-	$('#upload-docx').on('click', function () {
-		var form_data = new FormData();
-		var ins = document.getElementById('multiDocx').files.length;
-		if(ins>0){
-			$("#docx_upload_error").removeClass('is-visible');
-			for (var x = 0; x < ins; x++) {
-				form_data.append("files[]", document.getElementById('multiDocx').files[x]);
-			}
-			$.ajax({
-				url: 'upload_docx.php', // point to server-side PHP script
-				dataType: 'text', // what to expect back from the PHP script
-				cache: false,
-				contentType: false,
-				processData: false,
-				data: form_data,
-				type: 'post',
-				success: function (response) {
-					if(response==ins){
-						Lobibox.notify('success', {
-                delay:5000,
-              title: 'Doucuments Uploaded',
-              msg: 'All of your documents has been uploaded successfully..!'
-            });
-					}
-					else if(response>0){
-						Lobibox.notify('warning', {
-                delay:5000,
-              title: (ins-response)+' documents not uploaded',
-              msg: 'Due to invalid/curruped document, '+(ins-response)+' documents has not been uploaded'
-            });
-					}
-					else {
-						Lobibox.notify('error', {
-                delay:5000,
-              title: 'Upload Error',
-              msg: 'No documents has been uploaded due to invalid/curruped document'
-            });
-					}
-				}
-			});
-		}
-		else{
-			$("#docx_upload_error").addClass('is-visible');
-			$("#docx_upload_error").html('Select atleast one Document');
-		}
-	});
 	//open popup-do add directory
 	$('#directory_add_btn').on('click', function(event){
 		event.preventDefault();
 		$('#directory_add_form').trigger("reset");
-		$(".oh-autoval-error").remove();
+		$("#dir_name_add_error").removeClass('is-visible');
+		$("#dir_description_add_error").removeClass('is-visible');
 		$('#add_directory_pop').addClass('is-visible');
-
 	});
 
 	//close popup-add directory

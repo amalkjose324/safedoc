@@ -190,4 +190,5 @@ if(isset($_POST['fun']) && $_POST['fun']=="resetpw-submit"){
   echo json_encode($arr);
   exit();
 }
+
 ?>

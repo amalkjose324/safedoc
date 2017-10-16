@@ -257,19 +257,19 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
       $enc_otp = substr($enc_otp, 0, $position) . $enc_user[$i-1] . substr($enc_otp, $position);
     }
     $email_msg = "Hi, Help us secure your SafeDocx account by verifying your email address ($email). This will let you receive notifications and password resets from SafeDocx. <br><br><center><a style='border:1px solid black;background:blue;color:white;text-decoration:none;padding:5px;padding-left:30px;padding-right:30px;font-size:18px;font-weight:bold' href='http://localhost/safedocx/Project/dashboard/varify_email.php?otp=$enc_otp'>Varify Email Id</a></center><br><hr>Button not working? Paste the following link into your browser: <br><center>http://localhost/safedocx/Project/dashboard/varify_email.php?otp=$enc_otp</center><hr>You’re receiving this email because you recently created a new GitHub account or added a new email address. If this wasn’t you, please ignore this email.";
-    mysqli_query($con, "DELETE FROM `safedocx_otp` WHERE `otp_login_id`=$userid AND otp_type=1");
-    mysqli_query($con, "INSERT INTO `safedocx_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($userid,1,'$otp_code')");
-    $m=sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$email,"SafeDocx Password",$email_msg);
-    $arr = array();
-    if($m){
-      array_push($arr, array("val" => true));
-    }
-    else {
-      array_push($arr, array("val" => false));
-    }
+      mysqli_query($con, "DELETE FROM `safedocx_otp` WHERE `otp_login_id`=$userid AND otp_type=1");
+      mysqli_query($con, "INSERT INTO `safedocx_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($userid,1,'$otp_code')");
+      $m=sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$email,"SafeDocx Password",$email_msg);
+      $arr = array();
+      if($m){
+        array_push($arr, array("val" => true));
+      }
+      else {
+        array_push($arr, array("val" => false));
+      }
 
-    echo json_encode($arr);
-    exit();
+      echo json_encode($arr);
+      exit();
     }
   }
   /**
@@ -291,5 +291,63 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     echo json_encode($arr);
     exit();
   }
+  /**
+  * Add new directory
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="add-new-directory"){
+    $dir_name = $_POST['dir_name'];
+    $dir_description = $_POST['dir_description'];
+    $dir_parent = $_POST['dir_parent'];
+    $arr = array();
+    $query = mysqli_query($con, "INSERT INTO `safedocx_directory` (`directory_user_id`,`directory_name`,`directory_parent_id`,`directory_description`) VALUES($userid,'$dir_name',$dir_parent,'$dir_description')") or die(mysqli_error($con));
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
 
+  /**
+  * Add documents
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="safedocx-add-docs"){
+    if (isset($_FILES['files']) && !empty($_FILES['files'])) {
+      $no_files = count($_FILES["files"]['name']);
+      $dir_parent = $_POST['doc_directory_id'];
+      $success_count=0;
+      for ($i = 0; $i < $no_files; $i++) {
+        $extn=pathinfo($_FILES["files"]["name"][$i], PATHINFO_EXTENSION);
+        $file=pathinfo($_FILES["files"]["name"][$i])['filename'];
+
+        if(strtolower($extn)=='pdf'){
+          if ($_FILES["files"]["error"][$i] > 0) {
+            echo "Error: " . $_FILES["files"]["error"][$i] . "<br>";
+          }
+          else {
+            $fp = fopen($_FILES["files"]["tmp_name"][$i], 'r');
+            fseek($fp, 0);
+            $data = fread($fp, 5);
+            if(strcmp($data,"%PDF-")==0)
+            {
+              $temp_name=basename($_FILES["files"]["tmp_name"][$i]);
+              $temp_name=str_replace('php','',$temp_name);
+              $time=str_replace('.','',microtime(TRUE));
+              $file_store=$temp_name.''. $time.'.'.$extn;
+              move_uploaded_file($_FILES["files"]["tmp_name"][$i], 'docs/pdf/'.$file_store);
+              $file_name = preg_replace('/[^A-Za-z0-9\. -]/', '', $_FILES["files"]["name"][$i]);
+              mysqli_query($con,"INSERT INTO `safedocx_docs` (`doc_directory_id`,`doc_caption`,`doc_file`) VALUES($dir_parent,'$file','$file_store')") or die(mysqli_error($con));
+              $success_count++;
+            }
+            fclose($fp);
+          }
+        }
+      }
+      echo $success_count;
+    }
+  }
   ?>

@@ -105,10 +105,10 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-12 col-md-12 col-sm-12">
+          <div id="doc-list-div" class="col-xl-12 col-md-12 col-sm-12">
             <div class="card doc-list">
               <?php
-              $query1=mysqli_query($con,"SELECT * FROM safedocx_directory WHERE directory_user_id=$user_id AND directory_status=1 AND directory_parent_id=0");
+              $query1=mysqli_query($con,"SELECT * FROM safedocx_directory WHERE directory_user_id=$user_id AND directory_status=1 AND directory_parent_id=$docx_dir");
               $query2=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_directory WHERE doc_directory_id=directory_id AND doc_status=doc_status_id AND doc_directory_id=$docx_dir AND directory_user_id=$user_id");
               while($row1=mysqli_fetch_array($query1)){
                 ?>
@@ -118,10 +118,12 @@
                       <div class="media-center-folder">
                         <i style="color:#ff9933"class="icon-folder font-large-5 "></i>
                       </div>
-                      <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
+                      <div style="height:100px;">
+                        <p class="inner-flip"><?php echo $row1['directory_name'];?></p>
+                      </div>
                     </div>
                     <div class="back">
-                      <p class="inner-flip">sfssasdasasdasdasdasdsadsadsadsadasa</p>
+                      <p class="inner-flip"><?php echo $row1['directory_description'];?></p>
                     </div>
                   </div>
                 </div>
@@ -135,10 +137,12 @@
                       <div class="media-center-file">
                         <i style="color:#3366cc; " class="icon-file-pdf-o font-large-4 "></i>
                       </div>
-                      <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
+                      <div>
+                        <p class="inner-flip"><?php echo $row2['doc_caption'];?></p>
+                      </div>
                     </div>
                     <div class="back">
-                      <p class="inner-flip">sfssasdasasdasdasdasdsadsadsadsadasa</p>
+                      <p class="inner-flip"><?php echo $row2['doc_description'];?></p>
                     </div>
                   </div>
                 </div>
@@ -152,6 +156,46 @@
       </div>
     </div>
   </div>
+
+  <div class="cd-popup" id="doc_add_pop" role="alert">
+    <div class="cd-popup-container pasvs-pop">
+      <h3>Select Documents</h3>
+      <hr>
+      <form method="post" id="doc_add_form" onsubmit="return false">
+        <div class="form-group ">
+          <p>You can upload one or more documents/certificates, which should be in pdf format</p>
+          <input class="form-control" type="file" id="multiDocx" name="files[]" multiple="multiple" accept="application/pdf"/>
+          <span class="cd-error-message" id="docx_upload_error" >Invalid Password</span>
+        </div>
+        <input type="hidden" name="doc_directory_id" id="doc_directory_id" value="<?php echo $docx_dir;?>">
+        <hr>
+        <button id="upload-docx" class="btn btn-success" style="width:100%;">Upload</button>
+        <a href="#0" class="cd-popup-close img-replace">Close</a>
+      </div> <!-- cd-popup-container -->
+    </form>
+  </div> <!-- cd-popup -->
+
+
+  <div class="cd-popup" id="add_directory_pop" role="alert">
+    <div class="cd-popup-container pasvs-pop">
+      <h3>Add New Directory</h3>
+      <hr>
+      <form method="post" id="directory_add_form" onsubmit="return false">
+        <div class="form-group ">
+          <input class="form-control" type="text" id="dir_name_add" placeholder="Directory Name" name="dir_name_add"/>
+          <span class="cd-error-message" id="dir_name_add_error" >Invalid Name..!</span>
+        </div>
+        <div class="form-group ">
+          <textarea class="form-control" id="dir_description_add" placeholder="Directory Description" name="dir_description_add"/></textarea>
+          <span class="cd-error-message" id="dir_description_add_error" >Invalid Description..!</span>
+        </div>
+        <input type="hidden" name="directory_id" id="directory_id" value="<?php echo $docx_dir;?>">
+        <hr>
+        <input type="submit" class="btn btn-success" style="width:100%;" value="Create Directory">
+        <a href="#0" class="cd-popup-close img-replace">Close</a>
+      </div> <!-- cd-popup-container -->
+    </form>
+  </div> <!-- cd-popup -->
   <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
@@ -182,7 +226,6 @@
 
   <script src="js/ajaxscripts.js"></script>
   <script src="js/popup.js"></script>
-  <script src="js/oh-autoval-script.js"></script>
   <script src="js/core/app-menu.js" type="text/javascript"></script>
   <script>
   $(function(){
