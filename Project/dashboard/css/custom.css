@@ -10,16 +10,35 @@
   margin:auto;
   cursor: pointer;
 }
+@media (min-width: 544px) {
+  .doc-list .col-sm-4{
+    width: 32%;
+  }
+}
+@media (min-width: 768px) {
+  .doc-list .col-md-3{
+    width: 24%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .doc-list .col-xl-2{
+    width: 16%;
+  }
+}
+#dir_description_add{
+  resize: none;
+}
 .doc_head{
   text-align: center;
   margin-top: 5px;
 }
 .divider{
-    position:absolute;
-    left:50%;
-    top:10%;
-    bottom:10%;
-    border-left:1px solid red;
+  position:absolute;
+  left:50%;
+  top:10%;
+  bottom:10%;
+  border-left:1px solid red;
 }
 .doc-list{
   margin-bottom: 10px;

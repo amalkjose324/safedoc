@@ -28,6 +28,7 @@ section,
 summary {
   display: block; }
 
+
 audio,
 canvas,
 progress,
@@ -78,7 +79,7 @@ mark {
   color: #000; }
 
 small {
-  font-size: 80%; }
+  font-size: 83.33333%; }
 
 sub,
 sup {
@@ -478,7 +479,7 @@ hr {
 
 small,
 .small {
-  font-size: 80%;
+  font-size: 83.33333%;
   font-weight: normal; }
 
 mark,
@@ -511,7 +512,7 @@ mark,
 
 .blockquote-footer {
   display: block;
-  font-size: 80%;
+  font-size: 83.33333%;
   color: #818a91; }
   .blockquote-footer::before {
     content: "\2014 \00A0"; }
@@ -682,51 +683,51 @@ pre {
 
 .col-xs-1 {
   float: left;
-  width: 8%; }
+  width: 8.33333%; }
 
 .col-xs-2 {
   float: left;
-  width: 16%; }
+  width: 16.66667%; }
 
 .col-xs-3 {
   float: left;
-  width: 24%; }
+  width: 25%; }
 
 .col-xs-4 {
   float: left;
-  width: 32%; }
+  width: 33.33333%; }
 
 .col-xs-5 {
   float: left;
-  width: 40%; }
+  width: 41.66667%; }
 
 .col-xs-6 {
   float: left;
-  width: 48%; }
+  width: 50%; }
 
 .col-xs-7 {
   float: left;
-  width: 56%; }
+  width: 58.33333%; }
 
 .col-xs-8 {
   float: left;
-  width: 64%; }
+  width: 66.66667%; }
 
 .col-xs-9 {
   float: left;
-  width: 72%; }
+  width: 75%; }
 
 .col-xs-10 {
   float: left;
-  width: 80%; }
+  width: 83.33333%; }
 
 .col-xs-11 {
   float: left;
-  width: 88%; }
+  width: 91.66667; }
 
 .col-xs-12 {
   float: left;
-  width: 96%; }
+  width: 100%; }
 
 .pull-xs-0 {
   right: auto; }
@@ -842,40 +843,40 @@ pre {
 @media (min-width: 544px) {
   .col-sm-1 {
     float: left;
-    width: 8%; }
+    width: 8.33333%; }
   .col-sm-2 {
     float: left;
-    width: 16%; }
+    width: 16.66667%; }
   .col-sm-3 {
     float: left;
-    width: 24%; }
+    width: 25%; }
   .col-sm-4 {
     float: left;
-    width: 32%; }
+    width: 33.33333%; }
   .col-sm-5 {
     float: left;
-    width: 40%; }
+    width: 41.66667%; }
   .col-sm-6 {
     float: left;
-    width: 48%; }
+    width: 50%; }
   .col-sm-7 {
     float: left;
-    width: 56%; }
+    width: 58.33333%; }
   .col-sm-8 {
     float: left;
-    width: 64%; }
+    width: 66.66667%; }
   .col-sm-9 {
     float: left;
-    width: 72%; }
+    width: 75%; }
   .col-sm-10 {
     float: left;
-    width: 80%; }
+    width: 83.33333%; }
   .col-sm-11 {
     float: left;
-    width: 88%; }
+    width: 91.66667; }
   .col-sm-12 {
     float: left;
-    width: 96%; }
+    width: 100%; }
   .pull-sm-0 {
     right: auto; }
   .pull-sm-1 {
@@ -962,34 +963,34 @@ pre {
     width: 16; }
   .col-md-3 {
     float: left;
-    width: 24%; }
+    width: 25%; }
   .col-md-4 {
     float: left;
-    width: 32%; }
+    width: 33.33333%; }
   .col-md-5 {
     float: left;
-    width: 40%; }
+    width: 41.66667%; }
   .col-md-6 {
     float: left;
-    width: 48%; }
+    width: 50%; }
   .col-md-7 {
     float: left;
-    width: 56%; }
+    width: 58.33333%; }
   .col-md-8 {
     float: left;
-    width: 64%; }
+    width: 66.66667%; }
   .col-md-9 {
     float: left;
-    width: 72%; }
+    width: 75%; }
   .col-md-10 {
     float: left;
-    width: 80%; }
+    width: 83.33333%; }
   .col-md-11 {
     float: left;
-    width: 88%; }
+    width: 91.66667; }
   .col-md-12 {
     float: left;
-    width: 96%; }
+    width: 100%; }
   .pull-md-0 {
     right: auto; }
   .pull-md-1 {
@@ -1070,40 +1071,40 @@ pre {
 @media (min-width: 992px) {
   .col-lg-1 {
     float: left;
-    width: 8%; }
+    width: 8.33333%; }
   .col-lg-2 {
     float: left;
-    width: 16%; }
+    width: 16.66667%; }
   .col-lg-3 {
     float: left;
-    width: 24%; }
+    width: 25%; }
   .col-lg-4 {
     float: left;
-    width: 32%; }
+    width: 33.33333%; }
   .col-lg-5 {
     float: left;
-    width: 40%; }
+    width: 41.66667%; }
   .col-lg-6 {
     float: left;
-    width: 48%; }
+    width: 50%; }
   .col-lg-7 {
     float: left;
-    width: 56%; }
+    width: 58.33333%; }
   .col-lg-8 {
     float: left;
-    width: 64%; }
+    width: 66.66667%; }
   .col-lg-9 {
     float: left;
-    width: 72%; }
+    width: 75%; }
   .col-lg-10 {
     float: left;
-    width: 80%; }
+    width: 83.33333%; }
   .col-lg-11 {
     float: left;
-    width: 88%; }
+    width: 91.66667; }
   .col-lg-12 {
     float: left;
-    width: 96%; }
+    width: 100%; }
   .pull-lg-0 {
     right: auto; }
   .pull-lg-1 {
@@ -1184,40 +1185,40 @@ pre {
 @media (min-width: 1200px) {
   .col-xl-1 {
     float: left;
-    width: 8%; }
+    width: 8.33333%; }
   .col-xl-2 {
     float: left;
-    width: 16%; }
+    width: 16.66667%; }
   .col-xl-3 {
     float: left;
-    width: 24%; }
+    width: 25%; }
   .col-xl-4 {
     float: left;
-    width: 32%; }
+    width: 33.33333%; }
   .col-xl-5 {
     float: left;
-    width: 40%; }
+    width: 41.66667%; }
   .col-xl-6 {
     float: left;
-    width: 48%; }
+    width: 50%; }
   .col-xl-7 {
     float: left;
-    width: 56%; }
+    width: 58.33333%; }
   .col-xl-8 {
     float: left;
-    width: 64%; }
+    width: 66.66667%; }
   .col-xl-9 {
     float: left;
-    width: 72%; }
+    width: 75%; }
   .col-xl-10 {
     float: left;
-    width: 80%; }
+    width: 83.33333%; }
   .col-xl-11 {
     float: left;
-    width: 88%; }
+    width: 91.66667; }
   .col-xl-12 {
     float: left;
-    width: 96%; }
+    width: 100%; }
   .pull-xl-0 {
     right: auto; }
   .pull-xl-1 {

@@ -489,10 +489,13 @@ while ($row=mysqli_fetch_array($query)) {
                                       <div class="cd-popup-container pasvs-pop">
                                         <h3>Add New Directory</h3>
                                         <hr>
-                                        <form method="post" id="directory_add_form" onsubmit="return false">
+                                        <form method="post" class="oh-autoval-form" id="directory_add_form" onsubmit="return">
                                           <div class="form-group ">
-                                            <input class="form-control" type="text" id="dir_name_add" placeholder="Directory Name" name="dir_name_add"/>
-                                            <span class="cd-error-message" id="docx_upload_error" >Invalid Password</span>
+                                            <input class="form-control oh-autoval av-name" type="text" id="dir_name_add" placeholder="Directory Name" name="dir_name_add"/>
+                                          </div>
+                                          <div class="form-group ">
+                                            <textarea class="form-control oh-autoval av-textarea-all" id="dir_description_add" placeholder="Directory Description" name="dir_description_add"/></textarea>
+
                                           </div>
                                           <hr>
                                           <input type="submit" class="btn btn-success" style="width:100%;" value="Create Directory">

@@ -67,6 +67,8 @@ $(document).ready(function(){
 	//open popup-docadd
 	$('#doc_add_btn').on('click', function(event){
 		event.preventDefault();
+		$('#doc_add_form').trigger("reset");
+		$('#docx_upload_error').removeClass('is-visible');
 		$('#doc_add_pop').addClass('is-visible');
 	});
 
@@ -133,7 +135,10 @@ $(document).ready(function(){
 	//open popup-do add directory
 	$('#directory_add_btn').on('click', function(event){
 		event.preventDefault();
+		$('#directory_add_form').trigger("reset");
+		$('#oh-autoval-error').removeClass('is-visible');
 		$('#add_directory_pop').addClass('is-visible');
+
 	});
 
 	//close popup-add directory

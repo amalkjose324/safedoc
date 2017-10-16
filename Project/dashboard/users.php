@@ -35,7 +35,7 @@
         <div class="content-header row">
         </div>
         <div class="content-body"><!-- stats -->
-          <div class="row">
+          <div class="row card-head">
             <div class="col-xl-3 col-lg-6 col-xs-12">
               <div class="card">
                 <div class="card-body">
@@ -115,21 +115,8 @@
                 <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
                   <div class="flipper">
                     <div class="front">
-                      <div class="media-center">
-                        <i class="icon-folder pink font-large-5 "></i>
-                      </div>
-                      <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
-                    </div>
-                    <div class="back">
-                      <p class="inner-flip">sfssasdasasdasdasdasdsadsadsadsadasa</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
-                  <div class="flipper">
-                    <div class="front">
-                      <div class="media-center">
-                        <i class="icon-folder pink font-large-5 "></i>
+                      <div class="media-center-folder">
+                        <i style="color:#ff9933"class="icon-folder font-large-5 "></i>
                       </div>
                       <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
                     </div>
@@ -145,21 +132,8 @@
                 <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
                   <div class="flipper">
                     <div class="front">
-                      <div class="media-center">
-                        <i class="icon-file-pdf-o pink font-large-5 "></i>
-                      </div>
-                      <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
-                    </div>
-                    <div class="back">
-                      <p class="inner-flip">sfssasdasasdasdasdasdsadsadsadsadasa</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
-                  <div class="flipper">
-                    <div class="front">
-                      <div class="media-center">
-                        <i class="icon-folder-open pink font-large-5 "></i>
+                      <div class="media-center-file">
+                        <i style="color:#3366cc; " class="icon-file-pdf-o font-large-4 "></i>
                       </div>
                       <p class="inner-flip">sdsasadsadsadskdjfsdfisdhishdhsahdg</p>
                     </div>
@@ -208,6 +182,7 @@
 
   <script src="js/ajaxscripts.js"></script>
   <script src="js/popup.js"></script>
+  <script src="js/oh-autoval-script.js"></script>
   <script src="js/core/app-menu.js" type="text/javascript"></script>
   <script>
   $(function(){
