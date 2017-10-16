@@ -33,7 +33,7 @@ $(document).ready(function() {
     $autoval_value = $(object).val();
     if(!validator.test($autoval_value)){
       if (!$(object).next("#oh-autoval-error").length) {
-        $( "<span id='oh-autoval-error' class='cd-error-message is-visible'>"+msg+"</span>" ).insertAfter(object);
+        $( "<span id='oh-autoval-error' class='oh-autoval-error cd-error-message is-visible'>"+msg+"</span>" ).insertAfter(object);
       }
       $error_count++;
     }

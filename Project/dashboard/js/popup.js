@@ -136,7 +136,7 @@ $(document).ready(function(){
 	$('#directory_add_btn').on('click', function(event){
 		event.preventDefault();
 		$('#directory_add_form').trigger("reset");
-		$('#oh-autoval-error').removeClass('is-visible');
+		$(".oh-autoval-error").remove();
 		$('#add_directory_pop').addClass('is-visible');
 
 	});
