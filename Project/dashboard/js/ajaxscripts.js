@@ -234,6 +234,7 @@ $(document).ready(function(){
         {
           var obj = JSON.parse(response)[0]['val'];
           if(obj){
+            $('#safedocx_header').load(document.URL +  ' #safedocx_header');
             Lobibox.notify('success', {
               delay:5000,
               title: 'Details Updated',
@@ -419,6 +420,8 @@ $(document).ready(function(){
           if(obj){
             $('#var-phone_form').trigger("reset");
             $('#varify-phone').removeClass('is-visible');
+
+            $('#varification_div').load(document.URL +  ' #varification_div');
             Lobibox.notify('success', {
               delay:5000,
               title: 'Phone Varified',

@@ -61,55 +61,57 @@ include_once 'lobibox.php';
                           ?>
                           <center style="margin:18px !important;">  <div id="upload-demo-i" style="border-radius: 360px;width:202px;height:202px;box-shadow: 1px 1px 10px 3px #888888;"><img src="<?php echo('images/profile_pics/'.$profile_pic);?>" alt="No Image"></div></center>
                         </div>
-                        <?php
-                        $query=mysqli_query($con,"SELECT * FROM safedocx_varify WHERE varify_login_id=$user_id");
-                        while ($row=mysqli_fetch_array($query)) {
-                          if($row['varify_phone']==1){
-                            ?>
-                            <div class="form-group">
-                              <label for="profile-phone">Phone Number</label></br>
-                              <input type="text" id="profile-phone" class="in_icon form-control square" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
-                              <span class="cd-error-message" id="profile-phone-error" >Invalid Phone number!</span>
+                        <div id="varification_div">
+                          <?php
+                          $query=mysqli_query($con,"SELECT * FROM safedocx_varify WHERE varify_login_id=$user_id");
+                          while ($row=mysqli_fetch_array($query)) {
+                            if($row['varify_phone']==1){
+                              ?>
+                              <div class="form-group">
+                                <label for="profile-phone">Phone Number</label></br>
+                                <input type="text" id="profile-phone" class="in_icon form-control square" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
+                                <span class="cd-error-message" id="profile-phone-error" >Invalid Phone number!</span>
 
-                            </div>
-                            <?php
-                          }
-                          else{
-                            ?>
-                            <div class="form-group">
-                              <label for="profile-phone">Phone Number</label></br>
-                              <button type="button" id="varify-phone-btn" class="btn btn-primary bg-red">
-                                <i class="icon-check"></i> Varify
-                              </button>
-                              <input type="text" id="profile-phone" class="varify in_icon form-control square q3" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
-                              <span class="var-error cd-error-message" id="profile-phone-error" >Invalid Phone number!</span>
+                              </div>
+                              <?php
+                            }
+                            else{
+                              ?>
+                              <div class="form-group">
+                                <label for="profile-phone">Phone Number</label></br>
+                                <button type="button" id="varify-phone-btn" class="btn btn-primary bg-red">
+                                  <i class="icon-check"></i> Varify
+                                </button>
+                                <input type="text" id="profile-phone" class="varify in_icon form-control square q3" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
+                                <span class="var-error cd-error-message" id="profile-phone-error" >Invalid Phone number!</span>
 
-                            </div>
-                            <?php
+                              </div>
+                              <?php
+                            }
+                            if($row['varify_email']==1){
+                              ?>
+                              <div class="form-group">
+                                <label for="profile-email">Email ID</label></br>
+                                <input type="text" id="profile-email" class="in_icon form-control square" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
+                                <span class="cd-error-message" id="profile-email-error" >Invalid Email id!</span>
+                              </div>
+                              <?php
+                            }
+                            else{
+                              ?>
+                              <div class="form-group">
+                                <label for="profile-email">Email ID</label></br>
+                                <button type="button" id="varify-email-btn"  class="btn btn-primary bg-red">
+                                  <i class="icon-check"></i> Varify
+                                </button>
+                                <input type="text" id="profile-email" class="varify in_icon form-control square q3" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
+                                <span class="var-error cd-error-message" id="profile-email-error" >Invalid Email id!</span>
+                              </div>
+                              <?php
+                            }
                           }
-                          if($row['varify_email']==1){
-                            ?>
-                            <div class="form-group">
-                              <label for="profile-email">Email ID</label></br>
-                              <input type="text" id="profile-email" class="in_icon form-control square" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
-                              <span class="cd-error-message" id="profile-email-error" >Invalid Email id!</span>
-                            </div>
-                            <?php
-                          }
-                          else{
-                            ?>
-                            <div class="form-group">
-                              <label for="profile-email">Email ID</label></br>
-                              <button type="button" id="varify-email-btn"  class="btn btn-primary bg-red">
-                                <i class="icon-check"></i> Varify
-                              </button>
-                              <input type="text" id="profile-email" class="varify in_icon form-control square q3" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
-                              <span class="var-error cd-error-message" id="profile-email-error" >Invalid Email id!</span>
-                            </div>
-                            <?php
-                          }
-                        }
-                        ?>
+                          ?>
+                        </div>
                       </div>
                     </div>
                   </div>

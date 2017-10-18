@@ -31,17 +31,19 @@
 $userid=$_SESSION['user_id'];
 $u_name="New User";
 $u_image="default.png";
-$query=mysqli_query($con,"SELECT * FROM safedocx_users WHERE user_id=$userid");
-while ($row=mysqli_fetch_array($query)) {
-  $u_name=$row['user_name'];
-}
 $query=mysqli_query($con,"SELECT * FROM safedocx_profile_pic WHERE profile_pic_user_id=$userid");
 while ($row=mysqli_fetch_array($query)) {
   $u_image=$row['profile_pic_image'];
 }
 ?>
 <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-semi-dark navbar-shadow">
-  <div class="navbar-wrapper">
+  <div id="safedocx_header" class="navbar-wrapper">
+    <?php
+    $query=mysqli_query($con,"SELECT * FROM safedocx_users WHERE user_id=$userid");
+    while ($row=mysqli_fetch_array($query)) {
+      $u_name=$row['user_name'];
+    }
+    ?>
     <div class="navbar-header">
       <ul class="nav navbar-nav">
         <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1"></i></a></li>
