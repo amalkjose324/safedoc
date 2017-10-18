@@ -10,6 +10,8 @@
   <meta name="author" content="SafeDocx">
   <title>SafeDocx : Secure Document Storage &amp; Share</title>
   <link rel="stylesheet" href="./css/doc_item_card.css" type="text/css">
+  <link rel="stylesheet" href="./css/jquery.contextMenu.css">
+
   <?php
   include_once '../db_connect.php';
   include_once 'check_logout.php';
@@ -29,7 +31,6 @@
   include_once 'lobibox.php'; ?>
 
   <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
-
     <div class="app-content content container-fluid">
       <div class="content-wrapper">
         <div class="content-header row">
@@ -112,7 +113,7 @@
               $query2=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_directory WHERE doc_directory_id=directory_id AND doc_status=doc_status_id AND doc_directory_id=$docx_dir AND directory_user_id=$user_id");
               while($row1=mysqli_fetch_array($query1)){
                 ?>
-                <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
+                <div class="sd-directory flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
                   <div class="flipper">
                     <div class="front">
                       <div class="media-center-folder">
@@ -131,7 +132,7 @@
               }
               while($row2=mysqli_fetch_array($query2)){
                 ?>
-                <div class="flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
+                <div class="sd-document flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
                   <div class="flipper">
                     <div class="front">
                       <div class="media-center-file">
@@ -204,7 +205,9 @@
   </footer>
 
   <!-- BEGIN VENDOR JS-->
-
+  <script src="js/jquery.contextMenu.js"></script>
+  <script src="js/jquery.ui.position.js"></script>
+  <script src="js/context.js"></script>
   <script src="vendors/js/ui/tether.min.js" type="text/javascript"></script>
   <script src="js/core/libraries/bootstrap.min.js" type="text/javascript"></script>
   <script src="vendors/js/ui/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
