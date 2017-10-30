@@ -106,12 +106,14 @@
               </div>
             </div>
           </div>
-          <div id="doc-list-div" class="col-xl-12 col-md-12 col-sm-12">
+          <div id="doc-list-div" class="col-xl-12 col-md-12 col-sm-12" oncontextmenu="return false;">
             <div class="card doc-list">
               <?php
+              $items_count=0;
               $query1=mysqli_query($con,"SELECT * FROM safedocx_directory WHERE directory_user_id=$user_id AND directory_status=1 AND directory_parent_id=$docx_dir");
               $query2=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_directory WHERE doc_directory_id=directory_id AND doc_status=doc_status_id AND doc_directory_id=$docx_dir AND directory_user_id=$user_id");
               while($row1=mysqli_fetch_array($query1)){
+                $items_count++;
                 ?>
                 <div class="sd-directory flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
                   <div class="flipper">
@@ -131,6 +133,7 @@
                 <?php
               }
               while($row2=mysqli_fetch_array($query2)){
+                $items_count++;
                 ?>
                 <div class="sd-document flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
                   <div class="flipper">
@@ -147,6 +150,11 @@
                     </div>
                   </div>
                 </div>
+                <?php
+              }
+              if($items_count<1){
+                ?>
+                <div style="text-align:center;margin-top:230px;"><h3>No Documents Found..!</h3></div>
                 <?php
               }
               ?>

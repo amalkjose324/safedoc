@@ -460,6 +460,7 @@ $(document).ready(function(){
             title: 'Varification link Sent to Email',
             msg: "We just sent you an email with varification link. Varify your email id using this varification link."
           });
+          $.fn.myFunction();
         }
         else{
           Lobibox.notify('error', {
@@ -522,6 +523,12 @@ $(document).ready(function(){
       $("#dir_description_add_error").removeClass('is-visible');
     }
   });
+  
+  $.fn.myFunction = function(){
+    setInterval(function(){
+      $('#varification_div').load(document.URL +  ' #varification_div');
+    },1000);
+   }
   /**
   * Add new directory
   * @return error message
@@ -566,57 +573,58 @@ $(document).ready(function(){
       });
     }
   });
-//docs upload
+  //docs upload
   $('#upload-docx').on('click', function () {
-		var form_data = new FormData();
+    var form_data = new FormData();
     $dir_parent = $('#doc_directory_id').val();
-		var ins = document.getElementById('multiDocx').files.length;
-		if(ins>0){
-			$("#docx_upload_error").removeClass('is-visible');
+    var ins = document.getElementById('multiDocx').files.length;
+    if(ins>0){
+      $("#docx_upload_error").removeClass('is-visible');
       $('#doc_add_pop').removeClass('is-visible');
-			for (var x = 0; x < ins; x++) {
-				form_data.append("files[]", document.getElementById('multiDocx').files[x]);
-			}
+      for (var x = 0; x < ins; x++) {
+        form_data.append("files[]", document.getElementById('multiDocx').files[x]);
+      }
       form_data.append("doc_directory_id", $dir_parent);
       form_data.append("fun", "safedocx-add-docs");
-			$.ajax({
-				url: './actions.php', // point to server-side PHP script
-				dataType: 'text', // what to expect back from the PHP script
-				cache: false,
-				contentType: false,
-				processData: false,
-				data: form_data,
-				type: 'post',
-				success: function (response) {
-					if(response==ins){
+      $.ajax({
+        url: './actions.php', // point to server-side PHP script
+        dataType: 'text', // what to expect back from the PHP script
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function (response) {
+          if(response==ins){
             $('#doc-list-div').load(document.URL +  ' #doc-list-div');
-						Lobibox.notify('success', {
-                delay:5000,
+            Lobibox.notify('success', {
+              delay:5000,
               title: 'Doucuments Uploaded',
               msg: 'All of your documents has been uploaded successfully..!'
             });
-					}
-					else if(response>0){
+          }
+          else if(response>0){
             $('#doc-list-div').load(document.URL +  ' #doc-list-div');
-						Lobibox.notify('warning', {
-                delay:5000,
+            Lobibox.notify('warning', {
+              delay:5000,
               title: (ins-response)+' documents not uploaded',
               msg: 'Due to invalid/curruped document, '+(ins-response)+' documents has not been uploaded'
             });
-					}
-					else {
-						Lobibox.notify('error', {
-                delay:5000,
+          }
+          else {
+            Lobibox.notify('error', {
+              delay:5000,
               title: 'Upload Error',
               msg: 'No documents has been uploaded due to invalid/curruped document'
             });
-					}
-				}
-			});
-		}
-		else{
-			$("#docx_upload_error").addClass('is-visible');
-			$("#docx_upload_error").html('Select atleast one Document');
-		}
-	});
+          }
+        }
+      });
+    }
+    else{
+      $("#docx_upload_error").addClass('is-visible');
+      $("#docx_upload_error").html('Select atleast one Document');
+    }
+  });
+
 });

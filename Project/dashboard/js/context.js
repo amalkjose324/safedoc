@@ -8,6 +8,13 @@ $(function() {
         callback: function(key){
           alert("Clicked on " + key);
         }
+      },
+      cut: {
+        name: "Cut",
+        icon: "fa-cut",
+        callback: function(key){
+          alert("Clicked on " + key);
+        }
       }
     }
   })
