@@ -107,4 +107,30 @@ $(document).ready(function(){
 			$('#add_directory_pop').removeClass('is-visible');
 		}
 	});
+
+
+	//open popup-do edit user details
+	$('.form_user_edit').each(function () {
+		$(this).on('submit', function(event){
+			$uid=$(this).children('#user_id').val();
+			event.preventDefault();
+			$(this).trigger("reset");
+			$user_type=$(this).children('#user_type_id').val();
+			$('.user_area').load('./edit_users.php?user_id='+$uid+'&user_type_id='+$user_type);
+			$('.edit_user').addClass('is-visible');
+		});
+	})
+	//close popup-add directory
+	$('.edit_user').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.edit_user') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button--add directory
+	$(document).keyup(function(event){
+		if(event.which=='27'){
+			$('.edit_user').removeClass('is-visible');
+		}
+	});
 });

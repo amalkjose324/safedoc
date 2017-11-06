@@ -7,7 +7,7 @@ $(document).ready(function(){
     $fun="signup-phone-validate";
     $phone = $('#signup-phone').val();
 
-    var validator= /^[0-9]{9,12}$/;
+    var validator= /^[6-9]{1,1}[0-9]{9,9}$/;
     if(!validator.test($phone)){
       $("#signup-phone-error").addClass('is-visible');
       $("#signup-phone-error").html('Invalid Phone Number');
@@ -85,7 +85,7 @@ $(document).ready(function(){
   */
   $("#signup_form").on("submit", function(){
     var val_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
-    var val_phone= /^[0-9]{9,12}$/;
+    var val_phone= /^[6-9]{1,1}[0-9]{9,9}$/;
     var val_pword= /^[^&\s]{6,30}$/;
     $password = $('#signup-password').val();
     $email = $('#signup-email').val();
@@ -163,7 +163,7 @@ $(document).ready(function(){
   $("#login-email_phone").focusout(function(){
     $email_phone = $('#login-email_phone').val();
     var validator_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
-    var validator_phone= /^[0-9]{9,12}$/;
+    var validator_phone= /^[6-9]{1,1}[0-9]{9,9}$/;
     if((!validator_email.test($email_phone))&&(!validator_phone.test($email_phone))){
       $("#login-email_phone-error").addClass('is-visible');
       $("#login-email_phone-error").html('Invalid Email or Phone number');
@@ -192,7 +192,7 @@ $(document).ready(function(){
   */
   $("#login_form").on("submit", function(){
     var val_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
-    var val_phone= /^[0-9]{9,12}$/;
+    var val_phone= /^[6-9]{1,1}[0-9]{9,9}$/;
     var val_pword= /^[^&\s]{6,30}$/;
     $password = $('#login-password').val();
     $email_phone = $('#login-email_phone').val();
@@ -277,7 +277,7 @@ $(document).ready(function(){
   $("#resetpw-email_phone").focusout(function(){
     $email_phone = $('#resetpw-email_phone').val();
     var validator_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
-    var validator_phone= /^[0-9]{9,12}$/;
+    var validator_phone= /^[6-9]{1,1}[0-9]{9,9}$/;
     if((!validator_email.test($email_phone))&&(!validator_phone.test($email_phone))){
       $("#resetpw-email_phone-error").addClass('is-visible');
       $("#resetpw-email_phone-error").html('Invalid Email or Phone number');
@@ -292,7 +292,7 @@ $(document).ready(function(){
   */
   $("#resetpw_form").on("submit",function(){
     var val_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
-    var val_phone= /^[0-9]{9,12}$/;
+    var val_phone= /^[6-9]{1,1}[0-9]{9,9}$/;
     $email_phone = $('#resetpw-email_phone').val();
 
     if((!val_email.test($email_phone))&&(!val_phone.test($email_phone))){

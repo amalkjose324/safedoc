@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
   /**
   * District selection
   * @return error message
@@ -30,8 +29,7 @@ $(document).ready(function(){
   $("#profile-phone").focusout(function(){
     $fun="profile-phone-validate";
     $phone = $('#profile-phone').val();
-
-    var validator= /^[0-9]{9,12}$/;
+    var validator= /^[6-9]{1,1}[0-9]{9,9}$/;
     if(!validator.test($phone)){
       $("#profile-phone-error").addClass('is-visible');
       $("#profile-phone-error").html('Invalid Phone Number');
@@ -63,7 +61,6 @@ $(document).ready(function(){
   $("#profile-aadhaar").focusout(function(){
     $fun="profile-aadhaar-validate";
     $aadhaar = $('#profile-aadhaar').val();
-
     var validator= /^[0-9]{12}$/;
     if(!validator.test($aadhaar)){
       $("#profile-aadhaar-error").addClass('is-visible');
@@ -96,7 +93,6 @@ $(document).ready(function(){
   $("#profile-email").focusout(function(){
     $fun="profile-email-validate";
     $email = $('#profile-email').val();
-
     var validator= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
     if(!validator.test($email)){
       $("#profile-email-error").addClass('is-visible');
@@ -184,7 +180,7 @@ $(document).ready(function(){
   */
   $("#profile_form").on("submit", function(){
     var val_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
-    var val_phone= /^[0-9]{9,12}$/;
+    var val_phone= /^[6-9]{1,1}[0-9]{9,9}$/;
     var val_name= /^[A-Za-z.\s]{3,30}$/;
     var val_dob= /^[^&\s]{10}$/;
     var val_aadhaar= /^[0-9]{12}$/;
@@ -420,7 +416,6 @@ $(document).ready(function(){
           if(obj){
             $('#var-phone_form').trigger("reset");
             $('#varify-phone').removeClass('is-visible');
-
             $('#varification_div').load(document.URL +  ' #varification_div');
             Lobibox.notify('success', {
               delay:5000,
@@ -523,12 +518,11 @@ $(document).ready(function(){
       $("#dir_description_add_error").removeClass('is-visible');
     }
   });
-  
   $.fn.myFunction = function(){
     setInterval(function(){
       $('#varification_div').load(document.URL +  ' #varification_div');
     },1000);
-   }
+  }
   /**
   * Add new directory
   * @return error message
@@ -626,5 +620,233 @@ $(document).ready(function(){
       $("#docx_upload_error").html('Select atleast one Document');
     }
   });
+  /**
+  * User enable submit
+  * @return error message
+  */
+  $(".form_user_enable").each(function(){
+    $(this).on("submit",function (event) {
+      event.preventDefault();
+      $id = $(this).children('#user_id').val();
+      $user=$(this).children('#user_val').val();
+      $user_type=$(this).children('#user_type_id').val();
+      $fun="enable_user";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{id:$id,fun:$fun},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $('#datatable_data').load('./datatable_users.php?user='+$user_type);
+            Lobibox.notify('success', {
+              delay:5000,
+              title: $user+' Unlocked',
+              msg: $user+" has been Unlocked...!"
+            });
+          }
+          else{
+            Lobibox.notify('error', {
+              delay:5000,
+              title: $user+' Unlock Error',
+              msg: $user+" has not been Unlocked...!"
+            });
+          }
+        }
+      });
+    });
+  });
+  /**
+  * User disable submit
+  * @return error message
+  */
+  $(".form_user_disable").each(function(){
+    $(this).on("submit",function (event) {
+      event.preventDefault();
+      $id = $(this).children('#user_id').val();
+      $user=$(this).children('#user_val').val();
+      $user_type=$(this).children('#user_type_id').val();
+      $fun="disable_user";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{id:$id,fun:$fun},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $('#datatable_data').load('./datatable_users.php?user='+$user_type);
+            Lobibox.notify('success', {
+              delay:5000,
+              title: $user+' Locked',
+              msg: $user+" has been Locked...!"
+            });
 
+          }
+          else{
+            Lobibox.notify('error', {
+              delay:5000,
+              title: $user+' Lock Error',
+              msg: $user+" has not been Locked...!"
+            });
+          }
+        }
+      });
+    });
+  });
+
+  /**
+  * Admin reset password
+  * @return error message
+  */
+  $(".form_user_reset_pw").each(function(){
+    $(this).on("submit",function (event) {
+      event.preventDefault();
+      $id = $(this).children('#user_id').val();
+      $fun="reset_user_pw";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{id:$id,fun:$fun},
+        success:function(response)
+        {
+
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            Lobibox.notify('success', {
+              delay:5000,
+              title: ' Password Reset',
+              msg: " Reset Password has been Generated as 'Qwerty@123'...!"
+            });
+
+          }
+          else{
+            Lobibox.notify('error', {
+              delay:5000,
+              title: 'Password Error',
+              msg: "Reset Password has not been generated...!"
+            });
+          }
+        }
+      });
+    });
+  });
+  /**
+  * Phone edit focusout
+  * @return error message
+  */
+  $(".u_edit_phone").focusout(function(){
+    $phone=$(this).val();
+    $id=  $(this).closest('form').children('.user_id').val();
+    var validator= /^[6-9]{1,1}[0-9]{9,9}$/;
+    if(!validator.test($phone)){
+      $(".u_phone_edit_error").html('Invalid phone Format');
+      $(".u_phone_edit_error").addClass('is-visible');
+    }
+    else {
+      $(".u_phone_edit_error").removeClass('is-visible');
+      $fun="profile-phone-validate";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{phone:$phone,user_id:$id,fun:$fun},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $(".u_phone_edit_error").html('Phone number Already Registerd');
+            $(".u_phone_edit_error").addClass('is-visible');
+          }
+          else{
+            $(".u_phone_edit_error").removeClass('is-visible');
+          }
+        }
+      });
+    }
+  });
+  /**
+  * Email edit focusout
+  * @return error message
+  */
+  $(".u_edit_email").focusout(function(){
+    $email=$(this).val();
+    $id=  $(this).closest('form').children('.user_id').val();
+    var validator= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
+    if(!validator.test($email)){
+      $(".u_email_edit_error").html('Invalid Email Format');
+      $(".u_email_edit_error").addClass('is-visible');
+    }
+    else {
+      $(".u_email_edit_error").removeClass('is-visible');
+      $fun="profile-email-validate";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{email:$email,user_id:$id,fun:$fun},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $(".u_email_edit_error").html('Email Id Already Registerd');
+            $(".u_email_edit_error").addClass('is-visible');
+          }
+          else{
+            $(".u_email_edit_error").removeClass('is-visible');
+          }
+        }
+      });
+    }
+  });
+  /**
+  * User edit
+  * @return error message
+  */
+  $(".user_edit_form").each(function(){
+    $(this).on("submit",function (event) {
+      event.preventDefault();
+      $id = $(this).children('.user_id').val();
+      $phone=$(this).children('.form-group').children('.u_edit_phone').val();
+      $email=$(this).children('.form-group').children('.u_edit_email').val();
+      $user_type=$(this).children('#user_type_id').val();
+      var val_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
+      var val_phone= /^[6-9]{1,1}[0-9]{9,9}$/;
+      if(!val_phone.test($phone)){
+        $(".u_edit_phone").focusout();
+        return false;
+      }
+      else if (!val_email.test($email)) {
+        $(".u_edit_email").focusout();
+        return false;
+      }
+      else{
+        $fun="edit_user_admin";
+        $.ajax({
+          type:'post',
+          url:'./actions.php',
+          data:{id:$id,phone:$phone,email:$email,fun:$fun},
+          success:function(response)
+          {
+            $('.edit_user').removeClass('is-visible');
+            var obj = JSON.parse(response)[0]['val'];
+            if(obj){
+              $('#datatable_data').load('./datatable_users.php?user='+$user_type);
+              Lobibox.notify('success', {
+                delay:5000,
+                title: 'Details Updated',
+                msg: " User Details has been updated...!"
+              });
+            }
+            else{
+              Lobibox.notify('error', {
+                delay:5000,
+                title: 'No details Updated',
+                msg: "User Details has not been updated...!"
+              });
+            }
+          }
+        });
+      }
+    });
+  });
 });

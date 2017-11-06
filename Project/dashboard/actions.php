@@ -115,7 +115,11 @@ if(isset($_POST['fun']) && $_POST['fun']=="select_district"){
 */
 if(isset($_POST['fun']) && $_POST['fun']=="profile-phone-validate"){
   $phone= $_POST['phone'];
-  $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE login_phone='$phone' AND login_id<>$userid");
+  $uid=$userid;
+  if(isset($_POST['user_id'])){
+    $uid=$_POST['user_id'];
+  }
+  $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE login_phone='$phone' AND login_id<>$uid");
   $arr = array();
   if(mysqli_num_rows($query)>0){
     array_push($arr, array("val" => true));
@@ -150,8 +154,12 @@ if(isset($_POST['fun']) && $_POST['fun']=="profile-aadhaar-validate"){
 */
 if(isset($_POST['fun']) && $_POST['fun']=="profile-email-validate"){
   $uemail= $_POST['email'];
+  $uid=$userid;
+  if(isset($_POST['user_id'])){
+    $uid=$_POST['user_id'];
+  }
   $arr = array();
-  $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE login_email='$uemail' AND login_id<>$userid");
+  $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE login_email='$uemail' AND login_id<>$uid");
   if(mysqli_num_rows($query)>0){
     array_push($arr, array("val" => true));
   }
@@ -349,5 +357,79 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
       }
       echo $success_count;
     }
+  }
+
+  /**
+  * Enable user
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="enable_user"){
+    $id = $_POST['id'];
+    $arr = array();
+    $query = mysqli_query($con, "UPDATE safedocx_login SET login_status = 1 WHERE login_id=$id") or die(mysqli_error($con));
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+  /**
+  * Disable user
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="disable_user"){
+    $id = $_POST['id'];
+    $arr = array();
+    $query = mysqli_query($con, "UPDATE safedocx_login SET login_status = 0 WHERE login_id=$id") or die(mysqli_error($con));
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+
+  /**
+  * reset_user_pw
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="reset_user_pw"){
+    $id = $_POST['id'];
+    $arr = array();
+    mysqli_query($con,"DELETE FROM safedocx_pwreset WHERE pwreset_login_id=$id");
+    $password=SHA1("Qwerty@123");
+    $query = mysqli_query($con, "INSERT INTO `safedocx_pwreset`(`pwreset_login_id`,`pwreset_password`) VALUES($id,'$password')");
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+  /**
+  * edit user details
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="edit_user_admin"){
+    $id = $_POST['id'];
+    $phone=$_POST['phone'];
+    $email=$_POST['email'];
+    $arr = array();
+    $query = mysqli_query($con, "UPDATE safedocx_login SET login_phone='$phone',login_email='$email' WHERE login_id=$id");
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
   }
   ?>
