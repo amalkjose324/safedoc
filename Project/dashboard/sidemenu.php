@@ -171,9 +171,9 @@ while ($row=mysqli_fetch_array($query)) {
                                           if($user_type=="admin"){
                                             ?>
                                             <hr style="width:80%; border:0.4px solid white;">
-                                            <li class=" nav-item"><a href="./state_nodals.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">State Nodals</span></a></li>
-                                            <li class=" nav-item"><a href="./district_nodals.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">District Nodals</span></a></li>
-                                            <li class=" nav-item"><a href="./attesters.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Attestors </span></a></li>
+                                            <li class=" nav-item"><a href="./admin_state_nodals.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">State Nodals</span></a></li>
+                                            <li class=" nav-item"><a href="./admin_district_nodals.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">District Nodals</span></a></li>
+                                            <li class=" nav-item"><a href="./admin_attesters.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Attestors </span></a></li>
                                             <li class=" nav-item"><a href="./admin_users.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Users</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">
                                             <li class=" nav-item"><a href="#"><i class="icon-map"></i><span data-i18n="nav.page_layouts.main" class="menu-title">States</span></a></li>
