@@ -5,6 +5,11 @@
 .dob{
   height: 37.21px;
 }
+.dist_state{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
 .add_rm{
   text-align: center;
   margin:auto;
