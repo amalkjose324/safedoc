@@ -104,8 +104,17 @@ if(isset($_GET['user'])){
       <hr>
       <div class="user_area">
       </div>
-  </div> <!-- cd-popup -->
-</div>
+    </div> <!-- cd-popup -->
+  </div>
+
+  <div class="cd-popup add_user" id="add_user" role="alert">
+    <div class="cd-popup-container pasvs-pop">
+      <h3>Add User Details</h3>
+      <hr>
+      <div class="user_add_area">
+      </div>
+    </div> <!-- cd-popup -->
+  </div>
 <?php } ?>
 <script src="js/core/libraries/jquery.min.js" type="text/javascript"></script>
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>

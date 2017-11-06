@@ -432,4 +432,32 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     echo json_encode($arr);
     exit();
   }
+
+  /**
+  * Add new user details
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="add_user_admin"){
+    $phone=$_POST['phone'];
+    $email=$_POST['email'];
+    $user_type=$_POST['user_type'];
+    $password=SHA1("Qwerty@123");
+    $arr = array();
+    $query = mysqli_query($con, "INSERT INTO safedocx_login (login_phone,login_pword,login_email,login_user_type) VALUES('$phone','$password','$email',$user_type)");
+    if($query){
+      $query2=mysqli_query($con,"SELECT * FROM safedocx_login WHERE login_email='$email'");
+      while ($row=mysqli_fetch_array($query2)) {
+        $uid=$row['login_id'];
+        mysqli_query($con, "INSERT INTO `safedocx_profile_pic`(`profile_pic_user_id`) VALUES($uid)");
+        mysqli_query($con, "INSERT INTO `safedocx_varify`(`varify_login_id`) VALUES($uid)");
+        mysqli_query($con, "INSERT INTO `safedocx_users`(`user_id`) VALUES($uid)");
+      }
+      array_push($arr, array("val" => true));
+    }
+    else{
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
   ?>

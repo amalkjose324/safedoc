@@ -114,7 +114,6 @@ $(document).ready(function(){
 		$(this).on('submit', function(event){
 			$uid=$(this).children('#user_id').val();
 			event.preventDefault();
-			$(this).trigger("reset");
 			$user_type=$(this).children('#user_type_id').val();
 			$('.user_area').load('./edit_users.php?user_id='+$uid+'&user_type_id='+$user_type);
 			$('.edit_user').addClass('is-visible');
@@ -131,6 +130,28 @@ $(document).ready(function(){
 	$(document).keyup(function(event){
 		if(event.which=='27'){
 			$('.edit_user').removeClass('is-visible');
+		}
+	});
+	//open popup-do add user details
+	$('.form_user_add').each(function () {
+		$(this).on('submit', function(event){
+			event.preventDefault();
+			$user_type=$(this).children('#user_type_id').val();
+			$('.user_add_area').load('./add_users.php?user_type_id='+$user_type);
+			$('.add_user').addClass('is-visible');
+		});
+	})
+	//close popup-add directory
+	$('.add_user').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.add_user') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button--add directory
+	$(document).keyup(function(event){
+		if(event.which=='27'){
+			$('.add_user').removeClass('is-visible');
 		}
 	});
 });

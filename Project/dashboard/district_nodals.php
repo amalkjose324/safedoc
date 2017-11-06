@@ -21,7 +21,7 @@ if($page<>'admin.php'){
         <div id="doc-list-div" class="col-xl-12 col-md-12 col-sm-12" oncontextmenu="return false;">
           <div class="card doc-list dt_body">
             <form class="form_user_add" method="post"  onsubmit="return false;" style="display:inline-block;margin: 0px;">
-              <input type="hidden" id="user_type_id" class="user_type_id" value="3">
+              <input type="hidden" id="user_type_id" class="user_type_id" value="4">
             <button type="submit" class="btn btn-primary " style="margin:-14px;margin-left:0px;"><i class='icon-plus'></i>  Add New</button>
           </form>
             <div id="datatable_data">
@@ -29,7 +29,7 @@ if($page<>'admin.php'){
           </div>
           <script>
           $(document).ready( function () {
-            $('#datatable_data').load('./datatable_users.php?user=3');
+            $('#datatable_data').load('./datatable_users.php?user=4');
           });
           </script>
         </div>
