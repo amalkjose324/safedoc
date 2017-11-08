@@ -460,4 +460,102 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     echo json_encode($arr);
     exit();
   }
+
+  /**
+  * State id validating (existing or not)
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="state-id-validate"){
+    $id= $_POST['id'];
+    $cur_id=0;
+    if(isset($_POST['cur_id'])){
+      $cur_id=$_POST['cur_id'];
+    }
+    $query = mysqli_query($con, "SELECT * FROM safedocx_states WHERE state_id=$id AND state_def_id<>$cur_id");
+    $arr = array();
+    if(mysqli_num_rows($query)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+
+  /**
+  * State name validating (existing or not)
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="state-name-validate"){
+    $name= $_POST['name'];
+    $cur_id=0;
+    if(isset($_POST['cur_id'])){
+      $cur_id=$_POST['cur_id'];
+    }
+    $query = mysqli_query($con, "SELECT * FROM safedocx_states WHERE state_name='$name' AND state_def_id<>$cur_id");
+    $arr = array();
+    if(mysqli_num_rows($query)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+  /**
+  * Add new state details
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="add_state_admin"){
+    $id=$_POST['id'];
+    $name=$_POST['name'];
+    $arr = array();
+    $query = mysqli_query($con, "INSERT INTO safedocx_states (state_id,state_name) VALUES($id,'$name')");
+    if($query){
+      array_push($arr, array("val" => true));
+    }
+    else{
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+  /**
+  * edit user details
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="edit_state_admin"){
+    $id = $_POST['id'];
+    $name=$_POST['name'];
+    $def_id=$_POST['def_id'];
+    $arr = array();
+    $query = mysqli_query($con, "UPDATE safedocx_states SET state_id=$id,state_name='$name' WHERE state_def_id=$def_id");
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+  /**
+  * delete state
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="delete_state"){
+    $id = $_POST['id'];
+    $arr = array();
+    $query = mysqli_query($con, "DELETE FROM safedocx_states WHERE state_def_id=$id") or die(mysqli_error($con));
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
   ?>

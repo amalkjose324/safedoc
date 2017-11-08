@@ -18,23 +18,11 @@ if($page<>'admin.php'){
       </div>
       <div class="content-body dt_body"><!-- stats -->
         <?php include_once 'admin_header.php';?>
-        <div id="doc-list-div" class="col-xl-7 col-md-7 col-sm-7" oncontextmenu="return false;">
-          <div class="card doc-list dt_body ">
-              <p class="dist_state">Districts Details</p>
-            <form class="form_user_add" method="post"  onsubmit="return false;" style="display:inline-block;margin: 0px;float:right;">
-              <input type="hidden" id="user_type_id" class="user_type_id" value="4">
-              <button type="submit" class="btn btn-primary " style="margin:-14px;margin-left:0px;"><i class='icon-plus'></i>  Add New District</button>
-            </form>
-            <div id="district_data" class="col-xl-12 col-md-12 col-sm-12">
-            </div>
-          </div>
-        </div>
-        <div id="doc-list-div" class="col-xl-5 col-md-5 col-sm-5" oncontextmenu="return false;">
+        <div id="doc-list-div" class="col-xl-12 col-md-12 col-sm-12" oncontextmenu="return false;">
           <div class="card doc-list dt_body">
             <p class="dist_state">State Details </p>
-            <form class="form_user_add" method="post"  onsubmit="return false;" style="display:inline-block;margin: 0px;">
-              <input type="hidden" id="user_type_id" class="user_type_id" value="4">
-              <button type="submit" class="btn btn-primary " style="margin:-14px;margin-left:0px;"><i class='icon-plus'></i>  Add New State</button>
+            <form class="form_state_add" method="post"  onsubmit="return false;" style="display:inline-block;margin: 0px;">
+            <button type="submit" class="btn btn-primary " style="margin:-14px;margin-left:0px;"><i class='icon-plus'></i>  Add New State</button>
             </form>
             <div id="state_data" class="col-xl-12 col-md-12 col-sm-12">
             </div>
@@ -43,7 +31,6 @@ if($page<>'admin.php'){
         <script>
         $(document).ready( function () {
           $('#state_data').load('./states.php');
-          $('#district_data').load('./districts.php');
         });
         </script>
       </div>

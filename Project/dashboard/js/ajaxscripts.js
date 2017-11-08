@@ -969,4 +969,275 @@ $(document).ready(function(){
       }
     });
   });
+
+  /**
+  * State Id add focusout
+  * @return error message
+  */
+  $(".s_add_id").focusout(function(){
+    $id=$(this).val();
+    var validator= /^[0-9]{1,2}$/;
+    if(!validator.test($id)){
+      $(".s_add_id_error").html('Invalid Id Format');
+      $(".s_add_id_error").addClass('is-visible');
+    }
+    else {
+      $(".s_add_id_error").removeClass('is-visible');
+      $fun="state-id-validate";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{id:$id,fun:$fun},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $(".s_add_id_error").html('State Id Already Used');
+            $(".s_add_id_error").addClass('is-visible');
+          }
+          else{
+            $(".s_add_id_error").removeClass('is-visible');
+          }
+        }
+      });
+    }
+  });
+  /**
+  * State Id edit focusout
+  * @return error message
+  */
+  $(".s_edit_id").focusout(function(){
+    $id=$(this).val();
+    $def_id=$(this).closest('form').children('.state_def_id').val();
+    var validator= /^[0-9]{1,2}$/;
+    if(!validator.test($id)){
+      $(".s_edit_id_error").html('Invalid Id Format');
+      $(".s_edit_id_error").addClass('is-visible');
+    }
+    else {
+      $(".s_edit_id_error").removeClass('is-visible');
+      $fun="state-id-validate";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{id:$id,fun:$fun,cur_id:$def_id},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $(".s_edit_id_error").html('State Id Already Used');
+            $(".s_edit_id_error").addClass('is-visible');
+          }
+          else{
+            $(".s_edit_id_error").removeClass('is-visible');
+          }
+        }
+      });
+    }
+  });
+  /**
+  * State name add focusout
+  * @return error message
+  */
+  $(".s_add_name").focusout(function(){
+    $name=$(this).val();
+    var validator= /^[a-zA-Z\s]{3,30}$/;
+    if(!validator.test($name)){
+      $(".s_add_name_error").html('Invalid Name Format');
+      $(".s_add_name_error").addClass('is-visible');
+    }
+    else {
+      $(".s_add_name_error").removeClass('is-visible');
+      $fun="state-name-validate";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{name:$name,fun:$fun},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $(".s_add_name_error").html('State Name Already Used');
+            $(".s_add_name_error").addClass('is-visible');
+          }
+          else{
+            $(".s_add_name_error").removeClass('is-visible');
+          }
+        }
+      });
+    }
+  });
+
+  /**
+  * State name edit focusout
+  * @return error message
+  */
+  $(".s_edit_name").focusout(function(){
+    $name=$(this).val();
+    $def_id=$(this).closest('form').children('.state_def_id').val();
+    var validator= /^[a-zA-Z\s]{3,30}$/;
+    if(!validator.test($name)){
+      $(".s_edit_name_error").html('Invalid Name Format');
+      $(".s_edit_name_error").addClass('is-visible');
+    }
+    else {
+      $(".s_edit_name_error").removeClass('is-visible');
+      $fun="state-name-validate";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{name:$name,fun:$fun,cur_id:$def_id},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $(".s_edit_name_error").html('State Name Already Used');
+            $(".s_edit_name_error").addClass('is-visible');
+          }
+          else{
+            $(".s_edit_name_error").removeClass('is-visible');
+          }
+        }
+      });
+    }
+  });
+
+  /**
+  * State edit
+  * @return error message
+  */
+  $(".state_edit_form").each(function(){
+    $(this).on("submit",function (event) {
+      event.stopImmediatePropagation();
+      event.preventDefault();
+      $id=$(this).children('.form-group').children('.s_edit_id').val();
+      $name=$(this).children('.form-group').children('.s_edit_name').val();
+      $def_id=$(this).children('.state_def_id').val();
+      var val_id= /^[0-9]{1,2}$/;
+      var val_name= /^[a-zA-Z\s]{3,30}$/;
+      if(!val_id.test($id)){
+        $(".s_edit_id").focusout();
+        return false;
+      }
+      else if (!val_name.test($name)) {
+        $(".s_edit_name").focusout();
+        return false;
+      }
+      else{
+        $fun="edit_state_admin";
+        $.ajax({
+          type:'post',
+          url:'./actions.php',
+          data:{id:$id,name:$name,fun:$fun,def_id:$def_id},
+          success:function(response)
+          {
+            $('.edit_state').removeClass('is-visible');
+            var obj = JSON.parse(response)[0]['val'];
+            if(obj){
+              Lobibox.notify('success', {
+                delay:5000,
+                title: 'State Updated',
+                msg: "State has been updated...!"
+              });
+              $('#datatable_data').load('./states.php');
+            }
+            else{
+              Lobibox.notify('error', {
+                delay:5000,
+                title: 'State Update Error',
+                msg: "State Updation failed...!"
+              });
+            }
+          }
+        });
+      }
+    });
+  });
+
+    /**
+    * State add
+    * @return error message
+    */
+    $(".state_add_form").each(function(){
+      $(this).on("submit",function (event) {
+        event.stopImmediatePropagation();
+        event.preventDefault();
+        $id=$(this).children('.form-group').children('.s_add_id').val();
+        $name=$(this).children('.form-group').children('.s_add_name').val();
+        var val_id= /^[0-9]{1,2}$/;
+        var val_name= /^[a-zA-Z\s]{3,30}$/;
+        if(!val_id.test($id)){
+          $(".s_add_id").focusout();
+          return false;
+        }
+        else if (!val_name.test($name)) {
+          $(".s_add_name").focusout();
+          return false;
+        }
+        else{
+          $fun="add_state_admin";
+          $.ajax({
+            type:'post',
+            url:'./actions.php',
+            data:{id:$id,name:$name,fun:$fun},
+            success:function(response)
+            {
+              $('.add_state').removeClass('is-visible');
+              var obj = JSON.parse(response)[0]['val'];
+              if(obj){
+                Lobibox.notify('success', {
+                  delay:5000,
+                  title: 'State Added',
+                  msg: "New State has been added...!"
+                });
+                $('#datatable_data').load('./states.php');
+              }
+              else{
+                Lobibox.notify('error', {
+                  delay:5000,
+                  title: 'New State Error',
+                  msg: "State creaton failed...!"
+                });
+              }
+            }
+          });
+        }
+      });
+    });
+    /**
+    * User state_delete submit
+    * @return error message
+    */
+    $(".form_state_delete").each(function(){
+      $(this).on("submit",function (event) {
+        event.preventDefault();
+        $id = $(this).children('#state_def_id').val();
+        $fun="delete_state";
+        $.ajax({
+          type:'post',
+          url:'./actions.php',
+          data:{id:$id,fun:$fun},
+          success:function(response)
+          {
+            var obj = JSON.parse(response)[0]['val'];
+            if(obj){
+              Lobibox.notify('success', {
+                delay:5000,
+                title: 'State Deleted',
+                msg: "State has been Deleted...!"
+              });
+              $('#datatable_data').load('./states.php');
+            }
+            else{
+              Lobibox.notify('error', {
+                delay:5000,
+                title: 'State Deletion Error',
+                msg: "No any states has been Deleted...!"
+              });
+
+            }
+          }
+        });
+      });
+    });
 });

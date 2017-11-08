@@ -176,7 +176,8 @@ while ($row=mysqli_fetch_array($query)) {
                                             <li class=" nav-item"><a href="./admin_attesters.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Attestors </span></a></li>
                                             <li class=" nav-item"><a href="./admin_users.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Users</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">
-                                            <li class=" nav-item"><a href="./states_districts.php"><i class="icon-map"></i><span data-i18n="nav.page_layouts.main" class="menu-title">States & Districts</span></a></li>
+                                            <li class=" nav-item"><a href="./admin_states.php"><i class="icon-map"></i><span data-i18n="nav.page_layouts.main" class="menu-title">States</span></a></li>
+                                            <li class=" nav-item"><a href="./admin_districts.php"><i class="icon-map"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Districts</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">
                                             <li class=" nav-item"><a href="#"><i class="icon-notification"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Notification Area</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">

@@ -154,4 +154,49 @@ $(document).ready(function(){
 			$('.add_user').removeClass('is-visible');
 		}
 	});
+
+	//open popup-do add state details
+	$('.form_state_add').each(function () {
+		$(this).on('submit', function(event){
+			event.preventDefault();
+			$('.state_add_area').load('./add_states.php');
+			$('.add_state').addClass('is-visible');
+		});
+	})
+	//close popup-add directory
+	$('.add_state').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.add_state') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button--add directory
+	$(document).keyup(function(event){
+		if(event.which=='27'){
+			$('.add_state').removeClass('is-visible');
+		}
+	});
+
+	//open popup-do edit state details
+	$('.form_state_edit').each(function () {
+		$(this).on('submit', function(event){
+			$sid=$(this).children('#state_def_id').val();
+			event.preventDefault();
+			$('.state_area').load('./edit_state.php?state_def_id='+$sid);
+			$('.edit_state').addClass('is-visible');
+		});
+	})
+	//close popup-add directory
+	$('.edit_state').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.edit_state') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button--add directory
+	$(document).keyup(function(event){
+		if(event.which=='27'){
+			$('.edit_state').removeClass('is-visible');
+		}
+	});
 });
