@@ -6,13 +6,20 @@ include_once 'lobibox.php';
 $page=$_SESSION['user_page'];
 if($page<>'admin.php'){
   if($page<>'s_nodal.php'){
-    header("location: $page");
+    if($page<>'d_nodal.php'){
+      header("location: $page");
+    }
   }
 }
 $state_nodal_select="";
 if($page=='s_nodal.php'){
   while ($h_row=mysqli_fetch_array($head_query)) {
     $state_nodal_select= "district_state_id=".$h_row['district_state_id']." and ";
+  }
+}
+else if($page=='d_nodal.php'){
+  while ($h_row=mysqli_fetch_array($head_query)) {
+    $state_nodal_select= "user_district_id=".$h_row['user_district_id']." and ";
   }
 }
 $user_type_id=0;

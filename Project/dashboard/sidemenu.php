@@ -193,6 +193,13 @@ while ($row=mysqli_fetch_array($query)) {
 
                                             <?php
                                           }
+                                          else if($user_type=="d_nodal"){
+                                            ?>
+                                            <hr style="width:80%; border:0.4px solid white;">
+                                            <li class=" nav-item"><a href="./dn_attesters.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Attestors</span></a></li>
+                                            <hr style="width:80%; border:0.4px solid white;">
+                                            <?php
+                                          }
                                           else{
                                             ?>
                                             <li class=" nav-item"><a href="#"><i class="icon-stack-2"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Page layouts</span></a>

@@ -6,7 +6,9 @@ include_once 'lobibox.php';
 $page=$_SESSION['user_page'];
 if($page<>'admin.php'){
   if($page<>'s_nodal.php'){
-    header("location: $page");
+    if($page<>'d_nodal.php'){
+      header("location: $page");
+    }
   }
 }
 if(isset($_GET['user_type_id'])){
@@ -42,6 +44,17 @@ if(isset($_GET['user_type_id'])){
           }
           ?>
         </select>
+      </div>
+      <?php
+    }
+    else if($page=='d_nodal.php'){
+      $dist_id=0;
+      while($r=mysqli_fetch_array($head_query)){
+        $dist_id=$r['user_district_id'];
+      }
+      ?>
+      <div class="form-group ">
+        <input type="hidden" id="u_add_dname" class="u_add_dname form-control" name="u_add_dname" value="<?php echo $dist_id;?>">
       </div>
       <?php
     }

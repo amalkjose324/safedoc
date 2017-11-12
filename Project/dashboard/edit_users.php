@@ -6,7 +6,9 @@ include_once 'lobibox.php';
 $page=$_SESSION['user_page'];
 if($page<>'admin.php'){
   if($page<>'s_nodal.php'){
-    header("location: $page");
+    if($page<>'d_nodal.php'){
+      header("location: $page");
+    }
   }
 }
 if(isset($_GET['user_id'])){
