@@ -199,4 +199,49 @@ $(document).ready(function(){
 			$('.edit_state').removeClass('is-visible');
 		}
 	});
+
+	//open popup-do add district details
+	$('.form_district_add').each(function () {
+		$(this).on('submit', function(event){
+			event.preventDefault();
+			$('.district_add_area').load('./add_districts.php');
+			$('.add_district').addClass('is-visible');
+		});
+	})
+	//close popup-add directory
+	$('.add_district').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.add_district') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button--add directory
+	$(document).keyup(function(event){
+		if(event.which=='27'){
+			$('.add_district').removeClass('is-visible');
+		}
+	});
+
+	//open popup-do edit district details
+	$('.form_district_edit').each(function () {
+		$(this).on('submit', function(event){
+			$sid=$(this).children('#district_def_id').val();
+			event.preventDefault();
+			$('.district_edit_area').load('./edit_district.php?district_def_id='+$sid);
+			$('.edit_district').addClass('is-visible');
+		});
+	})
+	//close popup-add directory
+	$('.edit_district').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.edit_district') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button--add directory
+	$(document).keyup(function(event){
+		if(event.which=='27'){
+			$('.edit_district').removeClass('is-visible');
+		}
+	});
 });

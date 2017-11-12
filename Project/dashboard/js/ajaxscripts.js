@@ -994,6 +994,7 @@ $(document).ready(function(){
           if(obj){
             $(".s_add_id_error").html('State Id Already Used');
             $(".s_add_id_error").addClass('is-visible');
+            return false;
           }
           else{
             $(".s_add_id_error").removeClass('is-visible');
@@ -1027,9 +1028,44 @@ $(document).ready(function(){
           if(obj){
             $(".s_edit_id_error").html('State Id Already Used');
             $(".s_edit_id_error").addClass('is-visible');
+            return false;
           }
           else{
             $(".s_edit_id_error").removeClass('is-visible');
+          }
+        }
+      });
+    }
+  });
+  /**
+  * District Id edit focusout
+  * @return error message
+  */
+  $(".d_edit_id").focusout(function(){
+    $id=$(this).val();
+    $def_id=$(this).closest('form').children('.district_def_id').val();
+    var validator= /^[0-9]{1,2}$/;
+    if(!validator.test($id)){
+      $(".d_edit_id_error").html('Invalid Id Format');
+      $(".d_edit_id_error").addClass('is-visible');
+    }
+    else {
+      $(".d_edit_id_error").removeClass('is-visible');
+      $fun="district-id-validate";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{id:$id,fun:$fun,cur_id:$def_id},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $(".d_edit_id_error").html('District Id Already Used');
+            $(".d_edit_id_error").addClass('is-visible');
+            return false;
+          }
+          else{
+            $(".d_edit_id_error").removeClass('is-visible');
           }
         }
       });
@@ -1101,7 +1137,39 @@ $(document).ready(function(){
       });
     }
   });
-
+  /**
+  * District name edit focusout
+  * @return error message
+  */
+  $(".d_edit_name").focusout(function(){
+    $name=$(this).val();
+    $def_id=$(this).closest('form').children('.district_def_id').val();
+    var validator= /^[a-zA-Z\s]{3,30}$/;
+    if(!validator.test($name)){
+      $(".d_edit_name_error").html('Invalid Name Format');
+      $(".d_edit_name_error").addClass('is-visible');
+    }
+    else {
+      $(".d_edit_name_error").removeClass('is-visible');
+      $fun="district-name-validate";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{name:$name,fun:$fun,cur_id:$def_id},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(obj){
+            $(".d_edit_name_error").html('District Name Already Used');
+            $(".d_edit_name_error").addClass('is-visible');
+          }
+          else{
+            $(".d_edit_name_error").removeClass('is-visible');
+          }
+        }
+      });
+    }
+  });
   /**
   * State edit
   * @return error message
@@ -1153,7 +1221,58 @@ $(document).ready(function(){
       }
     });
   });
-
+  /**
+  * District edit
+  * @return error message
+  */
+  $(".district_edit_form").each(function(){
+    $(this).on("submit",function (event) {
+      event.stopImmediatePropagation();
+      event.preventDefault();
+      $id=$(this).children('.form-group').children('.d_edit_id').val();
+      $name=$(this).children('.form-group').children('.d_edit_name').val();
+      $state=$(this).children('.form-group').children('.d_edit_sname').val();
+      $def_id=$(this).children('.district_def_id').val();
+      var val_id= /^[0-9]{1,2}$/;
+      var val_name= /^[a-zA-Z\s]{3,30}$/;
+      if(!val_id.test($id)){
+        $(".d_edit_id").focusout();
+        return false;
+      }
+      else if (!val_name.test($name)) {
+        $(".d_edit_name").focusout();
+        return false;
+      }
+      else{
+        $fun="edit_district_admin";
+        $.ajax({
+          type:'post',
+          url:'./actions.php',
+          data:{id:$id,state:$state,name:$name,fun:$fun,def_id:$def_id},
+          success:function(response)
+          {
+            $('.edit_district').removeClass('is-visible');
+            var obj = JSON.parse(response)[0]['val'];
+            if(obj){
+              Lobibox.notify('success', {
+                delay:5000,
+                title: 'District Updated',
+                msg: "District has been updated...!"
+              });
+              $('#datatable_data').load('./districts.php');
+            }
+            else{
+              Lobibox.notify('error', {
+                delay:5000,
+                title: 'District Update Error',
+                msg: "District Updation failed...!"
+              });
+            }
+          }
+        });
+      }
+    });
+  });
     /**
     * State add
     * @return error message
@@ -1204,6 +1323,62 @@ $(document).ready(function(){
         }
       });
     });
+
+    /**
+    * District add
+    * @return error message
+    */
+    $(".district_add_form").each(function(){
+      $(this).on("submit",function (event) {
+        event.stopImmediatePropagation();
+        event.preventDefault();
+        $id=$(this).children('.form-group').children('.d_add_id').val();
+        $name=$(this).children('.form-group').children('.d_add_name').val();
+        $state=$(this).children('.form-group').children('.d_add_sname').val();
+        var val_id= /^[0-9]{1,3}$/;
+        var val_name= /^[a-zA-Z\s]{3,30}$/;
+        if(!val_id.test($id)){
+          $(".d_add_id").focusout();
+          return false;
+        }
+        else if (!val_name.test($name)) {
+          $(".d_add_name").focusout();
+          return false;
+        }
+        else if (!val_id.test($state)) {
+          $(".d_add_sname").focusout();
+          return false;
+        }
+        else{
+          $fun="add_district_admin";
+          $.ajax({
+            type:'post',
+            url:'./actions.php',
+            data:{id:$id,state:$state,name:$name,fun:$fun},
+            success:function(response)
+            {
+              $('.add_district').removeClass('is-visible');
+              var obj = JSON.parse(response)[0]['val'];
+              if(obj){
+                Lobibox.notify('success', {
+                  delay:5000,
+                  title: 'District Added',
+                  msg: "New District has been added...!"
+                });
+                $('#datatable_data').load('./districts.php');
+              }
+              else{
+                Lobibox.notify('error', {
+                  delay:5000,
+                  title: 'New District Error',
+                  msg: "District creaton failed...!"
+                });
+              }
+            }
+          });
+        }
+      });
+    });
     /**
     * User state_delete submit
     * @return error message
@@ -1240,4 +1415,124 @@ $(document).ready(function(){
         });
       });
     });
+    /**
+    * User district_delete submit
+    * @return error message
+    */
+    $(".form_district_delete").each(function(){
+      $(this).on("submit",function (event) {
+        event.preventDefault();
+        $id = $(this).children('#district_def_id').val();
+        $fun="delete_district";
+        $.ajax({
+          type:'post',
+          url:'./actions.php',
+          data:{id:$id,fun:$fun},
+          success:function(response)
+          {
+            var obj = JSON.parse(response)[0]['val'];
+            if(obj){
+              Lobibox.notify('success', {
+                delay:5000,
+                title: 'District Deleted',
+                msg: "District has been Deleted...!"
+              });
+              $('#datatable_data').load('./districts.php');
+            }
+            else{
+              Lobibox.notify('error', {
+                delay:5000,
+                title: 'District Deletion Error',
+                msg: "No any District has been Deleted...!"
+              });
+
+            }
+          }
+        });
+      });
+    });
+
+    /**
+    * State Id add focusout
+    * @return error message
+    */
+    $(".d_add_id").focusout(function(){
+      $id=$(this).val();
+      var validator= /^[0-9]{1,3}$/;
+      if(!validator.test($id)){
+        $(".d_add_id_error").html('Invalid Id Format');
+        $(".d_add_id_error").addClass('is-visible');
+      }
+      else {
+        $(".d_add_id_error").removeClass('is-visible');
+        $fun="district-id-validate";
+        $.ajax({
+          type:'post',
+          url:'./actions.php',
+          data:{id:$id,fun:$fun},
+          success:function(response)
+          {
+            var obj = JSON.parse(response)[0]['val'];
+            if(obj){
+              $(".d_add_id_error").html('District Id Already Used');
+              $(".d_add_id_error").addClass('is-visible');
+              return false;
+            }
+            else{
+              $(".d_add_id_error").removeClass('is-visible');
+            }
+          }
+        });
+      }
+    });
+
+    /**
+    * District name add focusout
+    * @return error message
+    */
+    $(".d_add_name").focusout(function(){
+      $name=$(this).val();
+      var validator= /^[a-zA-Z\s]{3,30}$/;
+      if(!validator.test($name)){
+        $(".d_add_name_error").html('Invalid Name Format');
+        $(".d_add_name_error").addClass('is-visible');
+      }
+      else {
+        $(".d_add_name_error").removeClass('is-visible');
+        $fun="district-name-validate";
+        $.ajax({
+          type:'post',
+          url:'./actions.php',
+          data:{name:$name,fun:$fun},
+          success:function(response)
+          {
+            var obj = JSON.parse(response)[0]['val'];
+            if(obj){
+              $(".d_add_name_error").html('District Name Already Used');
+              $(".d_add_name_error").addClass('is-visible');
+              return false;
+            }
+            else{
+              $(".d_add_name_error").removeClass('is-visible');
+            }
+          }
+        });
+      }
+    });
+    /**
+    * District state add focusout
+    * @return error message
+    */
+    $(".d_add_sname").focusout(function(){
+      $name=$(this).val();
+      var validator= /^[0-9]{1,3}$/;
+      if(!validator.test($name)){
+        $(".d_add_sname_error").html('Select State');
+        $(".d_add_sname_error").addClass('is-visible');
+      }
+      else {
+        $(".d_add_sname_error").removeClass('is-visible');
+      }
+    });
+
 });

@@ -4,7 +4,7 @@ include_once 'check_logout.php';
 include_once 'profile_check.php';
 include_once 'lobibox.php';
 $page=$_SESSION['user_page'];
-if($page<>'admin.php'){
+if($page<>'s_nodal.php'){
   header("location: $page");
 }
 ?>
@@ -25,13 +25,13 @@ if($page<>'admin.php'){
               <input type="hidden" id="user_type_id" class="user_type_id" value="4">
               <button type="submit" class="btn btn-primary " style="margin:-14px;margin-left:0px;"><i class='icon-plus'></i>  Add New District</button>
             </form>
-            <div id="district_data" class="col-xl-12 col-md-12 col-sm-12">
+            <div id="sn_district_data" class="col-xl-12 col-md-12 col-sm-12">
             </div>
           </div>
         </div>
         <script>
         $(document).ready( function () {
-          $('#district_data').load('./districts.php');
+          $('#sn_district_data').load('./districts.php');
         });
         </script>
       </div>

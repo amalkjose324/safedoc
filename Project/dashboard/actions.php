@@ -482,6 +482,27 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     echo json_encode($arr);
     exit();
   }
+  /**
+  * District id validating (existing or not)
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="district-id-validate"){
+    $id= $_POST['id'];
+    $cur_id=0;
+    if(isset($_POST['cur_id'])){
+      $cur_id=$_POST['cur_id'];
+    }
+    $query = mysqli_query($con, "SELECT * FROM safedocx_districts WHERE district_id=$id AND district_def_id<>$cur_id");
+    $arr = array();
+    if(mysqli_num_rows($query)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
 
   /**
   * State name validating (existing or not)
@@ -494,6 +515,27 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
       $cur_id=$_POST['cur_id'];
     }
     $query = mysqli_query($con, "SELECT * FROM safedocx_states WHERE state_name='$name' AND state_def_id<>$cur_id");
+    $arr = array();
+    if(mysqli_num_rows($query)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+  /**
+  * District name validating (existing or not)
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="district-name-validate"){
+    $name= $_POST['name'];
+    $cur_id=0;
+    if(isset($_POST['cur_id'])){
+      $cur_id=$_POST['cur_id'];
+    }
+    $query = mysqli_query($con, "SELECT * FROM safedocx_districts WHERE district_name='$name' AND district_def_id<>$cur_id");
     $arr = array();
     if(mysqli_num_rows($query)>0){
       array_push($arr, array("val" => true));
@@ -523,6 +565,25 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     exit();
   }
   /**
+  * Add new district details
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="add_district_admin"){
+    $id=$_POST['id'];
+    $name=$_POST['name'];
+    $state=$_POST['state'];
+    $arr = array();
+    $query = mysqli_query($con, "INSERT INTO safedocx_districts (district_id,district_name,district_state_id) VALUES($id,'$name',$state)");
+    if($query){
+      array_push($arr, array("val" => true));
+    }
+    else{
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+  /**
   * edit user details
   * @var json
   */
@@ -541,6 +602,27 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     echo json_encode($arr);
     exit();
   }
+
+  /**
+  * edit district details
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="edit_district_admin"){
+    $id = $_POST['id'];
+    $name=$_POST['name'];
+    $state=$_POST['state'];
+    $def_id=$_POST['def_id'];
+    $arr = array();
+    $query = mysqli_query($con, "UPDATE safedocx_districts SET district_id=$id,district_name='$name',district_state_id=$state WHERE district_def_id=$def_id");
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
   /**
   * delete state
   * @var json
@@ -549,6 +631,24 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     $id = $_POST['id'];
     $arr = array();
     $query = mysqli_query($con, "DELETE FROM safedocx_states WHERE state_def_id=$id") or die(mysqli_error($con));
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else {
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+
+  /**
+  * delete districts
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="delete_district"){
+    $id = $_POST['id'];
+    $arr = array();
+    $query = mysqli_query($con, "DELETE FROM safedocx_districts WHERE district_def_id=$id") or die(mysqli_error($con));
     if(mysqli_affected_rows($con)>0){
       array_push($arr, array("val" => true));
     }
