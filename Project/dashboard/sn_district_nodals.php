@@ -19,27 +19,20 @@ if($page<>'s_nodal.php'){
       <div class="content-body dt_body"><!-- stats -->
         <?php include_once 'admin_header.php';?>
         <div id="doc-list-div" class="col-xl-12 col-md-12 col-sm-12" oncontextmenu="return false;">
-          <div class="card doc-list dt_body ">
-              <p class="dist_state">Districts Details</p>
-            <form class="form_district_add" method="post"  onsubmit="return false;" style="display:inline-block;margin: 0px;float:left;">
+          <div class="card doc-list dt_body">
+            <form class="form_user_add" method="post"  onsubmit="return false;" style="display:inline-block;margin: 0px;">
               <input type="hidden" id="user_type_id" class="user_type_id" value="4">
-              <button type="submit" class="btn btn-primary " style="margin:-14px;margin-left:0px;"><i class='icon-plus'></i>  Add New District</button>
-            </form>
-            <div id="sn_district_data" class="col-xl-12 col-md-12 col-sm-12">
+            <button type="submit" class="btn btn-primary " style="margin:-14px;margin-left:0px;"><i class='icon-plus'></i>  Add New</button>
+          </form>
+            <div id="datatable_data">
             </div>
           </div>
+          <script>
+          $(document).ready( function () {
+            $('#datatable_data').load('./datatable_users.php?user=4');
+          });
+          </script>
         </div>
-        <?php
-          while ($head_row=mysqli_fetch_array($head_query)) {
-            ?> <input type="hidden" id="sn_district_id" class="sn_district_id" value="<?php echo $head_row['user_district_id'];?>"><?php
-          }
-         ?>
-        <script>
-        $(document).ready( function () {
-          $did=$('#sn_district_id').val();
-          $('#sn_district_data').load('./districts.php?state_id='+$did);
-        });
-        </script>
       </div>
     </div>
   </div>

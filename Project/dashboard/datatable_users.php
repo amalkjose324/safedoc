@@ -5,7 +5,15 @@ include_once 'profile_check.php';
 include_once 'lobibox.php';
 $page=$_SESSION['user_page'];
 if($page<>'admin.php'){
-  header("location: $page");
+  if($page<>'s_nodal.php'){
+    header("location: $page");
+  }
+}
+$state_nodal_select="";
+if($page=='s_nodal.php'){
+  while ($h_row=mysqli_fetch_array($head_query)) {
+    $state_nodal_select= "district_state_id=".$h_row['district_state_id']." and ";
+  }
 }
 $user_type_id=0;
 $user_text="User";
@@ -46,7 +54,7 @@ if(isset($_GET['user'])){
       <tbody>
         <?php
         $row_count=0;
-        $query=mysqli_query($con,"SELECT * FROM safedocx_login LEFT JOIN safedocx_users ON  user_id=login_id LEFT JOIN safedocx_districts ON user_district_id=district_id WHERE login_user_type=$user_type_id ORDER BY user_name");
+        $query=mysqli_query($con,"SELECT * FROM safedocx_login LEFT JOIN safedocx_users ON  user_id=login_id LEFT JOIN safedocx_districts ON user_district_id=district_id WHERE $state_nodal_select login_user_type=$user_type_id ORDER BY user_name");
         while($row=mysqli_fetch_array($query)){
           $row_count++;
           ?>

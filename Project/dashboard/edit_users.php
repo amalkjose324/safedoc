@@ -5,7 +5,9 @@ include_once 'profile_check.php';
 include_once 'lobibox.php';
 $page=$_SESSION['user_page'];
 if($page<>'admin.php'){
-  header("location: $page");
+  if($page<>'s_nodal.php'){
+    header("location: $page");
+  }
 }
 if(isset($_GET['user_id'])){
   $user_id=$_GET['user_id'];

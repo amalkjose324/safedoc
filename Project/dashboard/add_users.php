@@ -5,7 +5,9 @@ include_once 'profile_check.php';
 include_once 'lobibox.php';
 $page=$_SESSION['user_page'];
 if($page<>'admin.php'){
-  header("location: $page");
+  if($page<>'s_nodal.php'){
+    header("location: $page");
+  }
 }
 if(isset($_GET['user_type_id'])){
   $user_type_id=$_GET['user_type_id'];
@@ -21,6 +23,29 @@ if(isset($_GET['user_type_id'])){
       <input type="text" id="u_add_email" class="u_add_email form-control" placeholder="Email Id" name="u_add_name">
       <span class="cd-error-message u_email_add_error" id="u_email_add_error" >Invalid Email Id</span>
     </div>
+    <?php
+    if($page=='s_nodal.php'){
+      $state_id=0;
+      while($r=mysqli_fetch_array($head_query)){
+        $state_id=$r['district_state_id'];
+      }
+      ?>
+      <div class="form-group ">
+        <select id="u_add_dname" class="u_add_dname form-control" name="u_add_dname">
+          <option selected disabled>Select District</option>
+          <?php
+          $query=mysqli_query($con,"SELECT * FROM safedocx_districts WHERE district_state_id=$state_id");
+          while ($row=mysqli_fetch_array($query)) {
+            ?>
+            <option value="<?php echo $row['district_id'];?>"><?php echo $row['district_name'];?></option>
+            <?php
+          }
+          ?>
+        </select>
+      </div>
+      <?php
+    }
+    ?>
     <hr>
     <input type="hidden" id="user_type_id" class="user_type_id" value="<?php echo $user_type_id;?>">
     <input type="submit" class="btn btn-success" style="width:100%;" value="Submit">

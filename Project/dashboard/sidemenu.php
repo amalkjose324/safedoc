@@ -186,7 +186,7 @@ while ($row=mysqli_fetch_array($query)) {
                                           else if($user_type=="s_nodal"){
                                             ?>
                                             <hr style="width:80%; border:0.4px solid white;">
-                                            <li class=" nav-item"><a href="./admin_district_nodals.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">District Nodals</span></a></li>
+                                            <li class=" nav-item"><a href="./sn_district_nodals.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">District Nodals</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">
                                             <li class=" nav-item"><a href="./sn_districts.php"><i class="icon-map"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Districts</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">

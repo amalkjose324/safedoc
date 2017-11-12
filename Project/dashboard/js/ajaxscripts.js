@@ -929,6 +929,7 @@ $(document).ready(function(){
       $phone=$(this).children('.form-group').children('.u_add_phone').val();
       $email=$(this).children('.form-group').children('.u_add_email').val();
       $user_type=$(this).children('#user_type_id').val();
+      $user_dist=$(this).children('.form-group').children('.u_add_dname').val();
       var val_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
       var val_phone= /^[6-9]{1,1}[0-9]{9,9}$/;
       if(!val_phone.test($phone)){
@@ -944,7 +945,7 @@ $(document).ready(function(){
         $.ajax({
           type:'post',
           url:'./actions.php',
-          data:{phone:$phone,user_type:$user_type,email:$email,fun:$fun},
+          data:{phone:$phone,user_type:$user_type,email:$email,fun:$fun,dist:$user_dist},
           success:function(response)
           {
             $('.add_user').removeClass('is-visible');
@@ -1037,40 +1038,7 @@ $(document).ready(function(){
       });
     }
   });
-  /**
-  * District Id edit focusout
-  * @return error message
-  */
-  $(".d_edit_id").focusout(function(){
-    $id=$(this).val();
-    $def_id=$(this).closest('form').children('.district_def_id').val();
-    var validator= /^[0-9]{1,2}$/;
-    if(!validator.test($id)){
-      $(".d_edit_id_error").html('Invalid Id Format');
-      $(".d_edit_id_error").addClass('is-visible');
-    }
-    else {
-      $(".d_edit_id_error").removeClass('is-visible');
-      $fun="district-id-validate";
-      $.ajax({
-        type:'post',
-        url:'./actions.php',
-        data:{id:$id,fun:$fun,cur_id:$def_id},
-        success:function(response)
-        {
-          var obj = JSON.parse(response)[0]['val'];
-          if(obj){
-            $(".d_edit_id_error").html('District Id Already Used');
-            $(".d_edit_id_error").addClass('is-visible');
-            return false;
-          }
-          else{
-            $(".d_edit_id_error").removeClass('is-visible');
-          }
-        }
-      });
-    }
-  });
+
   /**
   * State name add focusout
   * @return error message
@@ -1143,7 +1111,7 @@ $(document).ready(function(){
   */
   $(".d_edit_name").focusout(function(){
     $name=$(this).val();
-    $def_id=$(this).closest('form').children('.district_def_id').val();
+    $id=$(this).closest('form').children('.district_id').val();
     var validator= /^[a-zA-Z\s]{3,30}$/;
     if(!validator.test($name)){
       $(".d_edit_name_error").html('Invalid Name Format');
@@ -1155,7 +1123,7 @@ $(document).ready(function(){
       $.ajax({
         type:'post',
         url:'./actions.php',
-        data:{name:$name,fun:$fun,cur_id:$def_id},
+        data:{name:$name,fun:$fun,cur_id:$id},
         success:function(response)
         {
           var obj = JSON.parse(response)[0]['val'];
@@ -1229,17 +1197,12 @@ $(document).ready(function(){
     $(this).on("submit",function (event) {
       event.stopImmediatePropagation();
       event.preventDefault();
-      $id=$(this).children('.form-group').children('.d_edit_id').val();
       $name=$(this).children('.form-group').children('.d_edit_name').val();
       $state=$(this).children('.form-group').children('.d_edit_sname').val();
-      $def_id=$(this).children('.district_def_id').val();
-      var val_id= /^[0-9]{1,2}$/;
+      $id=$(this).children('.district_id').val();
+      $did=$('#sn_district_id').val();
       var val_name= /^[a-zA-Z\s]{3,30}$/;
-      if(!val_id.test($id)){
-        $(".d_edit_id").focusout();
-        return false;
-      }
-      else if (!val_name.test($name)) {
+      if (!val_name.test($name)) {
         $(".d_edit_name").focusout();
         return false;
       }
@@ -1248,7 +1211,7 @@ $(document).ready(function(){
         $.ajax({
           type:'post',
           url:'./actions.php',
-          data:{id:$id,state:$state,name:$name,fun:$fun,def_id:$def_id},
+          data:{id:$id,state:$state,name:$name,fun:$fun},
           success:function(response)
           {
             $('.edit_district').removeClass('is-visible');
@@ -1259,7 +1222,7 @@ $(document).ready(function(){
                 title: 'District Updated',
                 msg: "District has been updated...!"
               });
-              $('#datatable_data').load('./districts.php');
+              $('#datatable_data').load('./districts.php?state_id='+$did);
             }
             else{
               Lobibox.notify('error', {
@@ -1332,16 +1295,12 @@ $(document).ready(function(){
       $(this).on("submit",function (event) {
         event.stopImmediatePropagation();
         event.preventDefault();
-        $id=$(this).children('.form-group').children('.d_add_id').val();
         $name=$(this).children('.form-group').children('.d_add_name').val();
         $state=$(this).children('.form-group').children('.d_add_sname').val();
         var val_id= /^[0-9]{1,3}$/;
         var val_name= /^[a-zA-Z\s]{3,30}$/;
-        if(!val_id.test($id)){
-          $(".d_add_id").focusout();
-          return false;
-        }
-        else if (!val_name.test($name)) {
+        $did=$('#sn_district_id').val();
+        if (!val_name.test($name)) {
           $(".d_add_name").focusout();
           return false;
         }
@@ -1354,7 +1313,7 @@ $(document).ready(function(){
           $.ajax({
             type:'post',
             url:'./actions.php',
-            data:{id:$id,state:$state,name:$name,fun:$fun},
+            data:{state:$state,name:$name,fun:$fun},
             success:function(response)
             {
               $('.add_district').removeClass('is-visible');
@@ -1365,7 +1324,7 @@ $(document).ready(function(){
                   title: 'District Added',
                   msg: "New District has been added...!"
                 });
-                $('#datatable_data').load('./districts.php');
+                $('#datatable_data').load('./districts.php?state_id='+$did);
               }
               else{
                 Lobibox.notify('error', {
@@ -1422,7 +1381,8 @@ $(document).ready(function(){
     $(".form_district_delete").each(function(){
       $(this).on("submit",function (event) {
         event.preventDefault();
-        $id = $(this).children('#district_def_id').val();
+        $id = $(this).children('#district_id').val();
+        $did=$('#sn_district_id').val();
         $fun="delete_district";
         $.ajax({
           type:'post',
@@ -1437,7 +1397,7 @@ $(document).ready(function(){
                 title: 'District Deleted',
                 msg: "District has been Deleted...!"
               });
-              $('#datatable_data').load('./districts.php');
+              $('#datatable_data').load('./districts.php?state_id='+$did);
             }
             else{
               Lobibox.notify('error', {

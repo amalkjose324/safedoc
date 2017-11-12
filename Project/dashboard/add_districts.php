@@ -13,16 +13,13 @@ if($page<>'admin.php'){
   <link rel="stylesheet" type="text/css" href="css/popup.css">
   <link rel="stylesheet" type="text/css" href="css/custom.css">
   <form method="post" id="district_add_form" class="district_add_form" onsubmit="return false">
-    <div class="form-group ">
-      <input type="text" id="d_add_id" class="d_add_id form-control" placeholder="District Id" name="d_add_id">
-      <span class="cd-error-message d_add_id_error" id="d_add_id_error" >Invalid Id</span>
-    </div>
+
     <div class="form-group ">
       <input type="text" id="d_add_name" class="d_add_name form-control" placeholder="District Name" name="d_add_name">
       <span class="cd-error-message d_add_name_error" id="d_add_name_error" >Invalid District Name</span>
     </div>
-    <div class="form-group ">
     <?php if($page=='s_nodal.php'){
+      ?>  <div class="form-group "><?php
       $userid=$_SESSION['user_id'];
       $q=mysqli_query($con,"SELECT * FROM safedocx_users WHERE user_id=$userid");
       while ($r=mysqli_fetch_array($q)) {

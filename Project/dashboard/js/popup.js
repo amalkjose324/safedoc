@@ -225,9 +225,9 @@ $(document).ready(function(){
 	//open popup-do edit district details
 	$('.form_district_edit').each(function () {
 		$(this).on('submit', function(event){
-			$sid=$(this).children('#district_def_id').val();
+			$sid=$(this).children('#district_id').val();
 			event.preventDefault();
-			$('.district_edit_area').load('./edit_district.php?district_def_id='+$sid);
+			$('.district_edit_area').load('./edit_district.php?district_id='+$sid);
 			$('.edit_district').addClass('is-visible');
 		});
 	})

@@ -440,6 +440,10 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
   if(isset($_POST['fun']) && $_POST['fun']=="add_user_admin"){
     $phone=$_POST['phone'];
     $email=$_POST['email'];
+    $dist="NULL";
+    if(isset($_POST['dist'])){
+      $dist=$_POST['dist'];
+    }
     $user_type=$_POST['user_type'];
     $password=SHA1("Qwerty@123");
     $arr = array();
@@ -450,7 +454,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
         $uid=$row['login_id'];
         mysqli_query($con, "INSERT INTO `safedocx_profile_pic`(`profile_pic_user_id`) VALUES($uid)");
         mysqli_query($con, "INSERT INTO `safedocx_varify`(`varify_login_id`) VALUES($uid)");
-        mysqli_query($con, "INSERT INTO `safedocx_users`(`user_id`) VALUES($uid)");
+        mysqli_query($con, "INSERT INTO `safedocx_users`(`user_id`,`user_district_id`) VALUES($uid,$dist)");
       }
       array_push($arr, array("val" => true));
     }
@@ -472,27 +476,6 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
       $cur_id=$_POST['cur_id'];
     }
     $query = mysqli_query($con, "SELECT * FROM safedocx_states WHERE state_id=$id AND state_def_id<>$cur_id");
-    $arr = array();
-    if(mysqli_num_rows($query)>0){
-      array_push($arr, array("val" => true));
-    }
-    else {
-      array_push($arr, array("val" => false));
-    }
-    echo json_encode($arr);
-    exit();
-  }
-  /**
-  * District id validating (existing or not)
-  * @var json
-  */
-  if(isset($_POST['fun']) && $_POST['fun']=="district-id-validate"){
-    $id= $_POST['id'];
-    $cur_id=0;
-    if(isset($_POST['cur_id'])){
-      $cur_id=$_POST['cur_id'];
-    }
-    $query = mysqli_query($con, "SELECT * FROM safedocx_districts WHERE district_id=$id AND district_def_id<>$cur_id");
     $arr = array();
     if(mysqli_num_rows($query)>0){
       array_push($arr, array("val" => true));
@@ -535,7 +518,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     if(isset($_POST['cur_id'])){
       $cur_id=$_POST['cur_id'];
     }
-    $query = mysqli_query($con, "SELECT * FROM safedocx_districts WHERE district_name='$name' AND district_def_id<>$cur_id");
+    $query = mysqli_query($con, "SELECT * FROM safedocx_districts WHERE district_name='$name' AND district_id<>$cur_id");
     $arr = array();
     if(mysqli_num_rows($query)>0){
       array_push($arr, array("val" => true));
@@ -569,11 +552,10 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
   * @var json
   */
   if(isset($_POST['fun']) && $_POST['fun']=="add_district_admin"){
-    $id=$_POST['id'];
     $name=$_POST['name'];
     $state=$_POST['state'];
     $arr = array();
-    $query = mysqli_query($con, "INSERT INTO safedocx_districts (district_id,district_name,district_state_id) VALUES($id,'$name',$state)");
+    $query = mysqli_query($con, "INSERT INTO safedocx_districts (district_name,district_state_id) VALUES('$name',$state)");
     if($query){
       array_push($arr, array("val" => true));
     }
@@ -611,9 +593,8 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     $id = $_POST['id'];
     $name=$_POST['name'];
     $state=$_POST['state'];
-    $def_id=$_POST['def_id'];
     $arr = array();
-    $query = mysqli_query($con, "UPDATE safedocx_districts SET district_id=$id,district_name='$name',district_state_id=$state WHERE district_def_id=$def_id");
+    $query = mysqli_query($con, "UPDATE safedocx_districts SET district_name='$name',district_state_id=$state WHERE district_id=$id");
     if(mysqli_affected_rows($con)>0){
       array_push($arr, array("val" => true));
     }
@@ -648,7 +629,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
   if(isset($_POST['fun']) && $_POST['fun']=="delete_district"){
     $id = $_POST['id'];
     $arr = array();
-    $query = mysqli_query($con, "DELETE FROM safedocx_districts WHERE district_def_id=$id") or die(mysqli_error($con));
+    $query = mysqli_query($con, "DELETE FROM safedocx_districts WHERE district_id=$id") or die(mysqli_error($con));
     if(mysqli_affected_rows($con)>0){
       array_push($arr, array("val" => true));
     }
