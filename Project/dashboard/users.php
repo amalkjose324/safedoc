@@ -21,11 +21,6 @@
   if($page<>'users.php'){
     header("location: $page");
   }
-  $docx_dir=0;
-  $query=mysqli_query($con,"SELECT * FROM safedocx_directory WHERE directory_user_id=$user_id AND directory_parent_id=0");
-  while($row=mysqli_fetch_array($query)){
-    $docx_dir=$row['directory_id'];
-  }
   ?>
   <?php
   include_once 'lobibox.php'; ?>
@@ -98,7 +93,7 @@
                       </div>
                       <div class="divider"></div>
                       <div class="col-xl-6 col-lg-6 col-xs-6 media-right media-middle add_rm" id="directory_add_btn">
-                        <i class="icon-folder-plus red font-large-1"></i><br>Directory
+                        <i class="icon-folder-plus red font-large-1"></i><br>ShareBox
                       </div>
                     </div>
                   </div>
@@ -110,28 +105,7 @@
             <div class="card doc-list">
               <?php
               $items_count=0;
-              $query1=mysqli_query($con,"SELECT * FROM safedocx_directory WHERE directory_user_id=$user_id AND directory_status=1 AND directory_parent_id=$docx_dir");
-              $query2=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_directory WHERE doc_directory_id=directory_id AND doc_status=doc_status_id AND doc_directory_id=$docx_dir AND directory_user_id=$user_id");
-              while($row1=mysqli_fetch_array($query1)){
-                $items_count++;
-                ?>
-                <div class="sd-directory flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
-                  <div class="flipper">
-                    <div class="front">
-                      <div class="media-center-folder">
-                        <i style="color:#ff9933"class="icon-folder font-large-5 "></i>
-                      </div>
-                      <div style="height:100px;">
-                        <p class="inner-flip"><?php echo $row1['directory_name'];?></p>
-                      </div>
-                    </div>
-                    <div class="back">
-                      <p class="inner-flip"><?php echo $row1['directory_description'];?></p>
-                    </div>
-                  </div>
-                </div>
-                <?php
-              }
+              $query2=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status WHERE doc_status=doc_status_id AND doc_user_id=$user_id");
               while($row2=mysqli_fetch_array($query2)){
                 $items_count++;
                 ?>
@@ -176,7 +150,6 @@
           <input class="form-control" type="file" id="multiDocx" name="files[]" multiple="multiple" accept="application/pdf"/>
           <span class="cd-error-message" id="docx_upload_error" >Invalid Password</span>
         </div>
-        <input type="hidden" name="doc_directory_id" id="doc_directory_id" value="<?php echo $docx_dir;?>">
         <hr>
         <button id="upload-docx" class="btn btn-success" style="width:100%;">Upload</button>
         <a href="#0" class="cd-popup-close img-replace">Close</a>
@@ -187,7 +160,7 @@
 
   <div class="cd-popup" id="add_directory_pop" role="alert">
     <div class="cd-popup-container pasvs-pop">
-      <h3>Add New Directory</h3>
+      <h3>Add New ShareBox</h3>
       <hr>
       <form method="post" id="directory_add_form" onsubmit="return false">
         <div class="form-group ">
@@ -198,7 +171,6 @@
           <textarea class="form-control" id="dir_description_add" placeholder="Directory Description" name="dir_description_add"/></textarea>
           <span class="cd-error-message" id="dir_description_add_error" >Invalid Description..!</span>
         </div>
-        <input type="hidden" name="directory_id" id="directory_id" value="<?php echo $docx_dir;?>">
         <hr>
         <input type="submit" class="btn btn-success" style="width:100%;" value="Create Directory">
         <a href="#0" class="cd-popup-close img-replace">Close</a>
