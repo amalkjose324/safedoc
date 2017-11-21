@@ -85,6 +85,7 @@ $(document).ready(function(){
 			$('#doc_add_pop').removeClass('is-visible');
 		}
 	});
+
 	//open popup-do add directory
 	$('#directory_add_btn').on('click', function(event){
 		event.preventDefault();
@@ -108,6 +109,33 @@ $(document).ready(function(){
 		}
 	});
 
+	//close popup-add share doc
+	$('#doc_share_pop').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('#doc_share_pop') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button-share doc
+	$(document).keyup(function(event){
+		if(event.which=='27'){
+			$('#doc_share_pop').removeClass('is-visible');
+		}
+	});
+
+	//close popup-add public link doc
+	$('#public_doc_link_pop').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('#public_doc_link_pop') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button-share public link
+	$(document).keyup(function(event){
+		if(event.which=='27'){
+			$('#public_doc_link_pop').removeClass('is-visible');
+		}
+	});
 
 	//open popup-do edit user details
 	$('.form_user_edit').each(function () {

@@ -179,6 +179,49 @@
       </div> <!-- cd-popup-container -->
     </form>
   </div> <!-- cd-popup -->
+
+
+  <div class="cd-popup" id="doc_share_pop" role="alert">
+    <div class="cd-popup-container pasvs-pop">
+      <h3>Share Document</h3>
+      <hr>
+      <form method="post" id="doc_share_form" onsubmit="return false">
+        <div class="form-group ">
+          <input class="form-control" type="text" id="doc_share_email_phone" placeholder="Recipient's Email / Phone" name="doc_share_email_phone"/>
+          <span class="cd-error-message" id="doc_share_email_phone_error" >Invalid details..!</span>
+        </div>
+        <div class="common-div-share-doc">
+        <div class="form-group ">
+          <input class="form-control" type="text" id="doc_resp_name" disabled placeholder="Recipient Name" name="doc_resp_name"/>
+        </div>
+        <hr>
+        <input type="hidden" name="share_doc_id" id="share_doc_id" class="share_doc_id">
+        <input type="hidden" name="share_resp_id" id="share_resp_id" class="share_resp_id">
+        <input type="submit" id="doc_share_submit" class="btn btn-success" style="width:100%;" value="Share Now">
+      </div>
+        <a href="#0" class="cd-popup-close img-replace">Close</a>
+      </div> <!-- cd-popup-container -->
+    </form>
+  </div> <!-- cd-popup -->
+
+  <div class="cd-popup" id="public_doc_link_pop" role="alert">
+    <div class="cd-popup-container pasvs-pop">
+      <h3>Public Link Generation</h3>
+      <hr>
+      <form method="post" id="public_doc_link_form" onsubmit="return false">
+        <div class="form-group">
+          <input class="form-control" type="text" id="public_doc_link" placeholder="Custom Link" name="public_doc_link"/>
+          <span class="cd-error-message" id="public_doc_link_error" >Invalid details..!</span>
+        </div>
+        <hr>
+        <div class="common-div-share-doc">
+        <input type="hidden" name="public_link_doc_id" id="public_link_doc_id" class="public_link_doc_id">
+        <input type="submit" id="public_doc_link_submit" class="btn btn-success" style="width:100%;" value="Generate Link">
+      </div>
+        <a href="#0" class="cd-popup-close img-replace">Close</a>
+      </div> <!-- cd-popup-container -->
+    </form>
+  </div> <!-- cd-popup -->
   <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
