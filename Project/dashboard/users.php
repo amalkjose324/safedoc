@@ -10,6 +10,7 @@
   <meta name="author" content="SafeDocx">
   <title>SafeDocx : Secure Document Storage &amp; Share</title>
   <link rel="stylesheet" href="./css/doc_item_card.css" type="text/css">
+  <link rel="stylesheet" href="./css/radio.scss" type="text/css">
   <link rel="stylesheet" href="./css/jquery.contextMenu.css">
 
   <?php
@@ -110,6 +111,7 @@
                 $items_count++;
                 ?>
                 <div class="sd-document flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
+                  <input type="hidden" class="idval" value="<?php echo $row2['doc_id'];?>">
                   <div class="flipper">
                     <div class="front">
                       <div class="media-center-file">
@@ -164,15 +166,15 @@
       <hr>
       <form method="post" id="directory_add_form" onsubmit="return false">
         <div class="form-group ">
-          <input class="form-control" type="text" id="dir_name_add" placeholder="Directory Name" name="dir_name_add"/>
+          <input class="form-control" type="text" id="dir_name_add" placeholder="ShareBox Name" name="dir_name_add"/>
           <span class="cd-error-message" id="dir_name_add_error" >Invalid Name..!</span>
         </div>
         <div class="form-group ">
-          <textarea class="form-control" id="dir_description_add" placeholder="Directory Description" name="dir_description_add"/></textarea>
+          <textarea class="form-control" id="dir_description_add" placeholder="ShareBox Description" name="dir_description_add"/></textarea>
           <span class="cd-error-message" id="dir_description_add_error" >Invalid Description..!</span>
         </div>
         <hr>
-        <input type="submit" class="btn btn-success" style="width:100%;" value="Create Directory">
+        <input type="submit" class="btn btn-success" style="width:100%;" value="Create ShareBox">
         <a href="#0" class="cd-popup-close img-replace">Close</a>
       </div> <!-- cd-popup-container -->
     </form>
@@ -181,7 +183,7 @@
 
 
   <footer class="footer footer-static footer-light navbar-border">
-    <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">PIXINVENT </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
+    <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">SafeDocx </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
   </footer>
 
   <!-- BEGIN VENDOR JS-->

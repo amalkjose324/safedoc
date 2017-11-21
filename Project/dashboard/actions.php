@@ -306,9 +306,8 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
   if(isset($_POST['fun']) && $_POST['fun']=="add-new-directory"){
     $dir_name = $_POST['dir_name'];
     $dir_description = $_POST['dir_description'];
-    $dir_parent = $_POST['dir_parent'];
     $arr = array();
-    $query = mysqli_query($con, "INSERT INTO `safedocx_directory` (`directory_user_id`,`directory_name`,`directory_parent_id`,`directory_description`) VALUES($userid,'$dir_name',$dir_parent,'$dir_description')") or die(mysqli_error($con));
+    $query = mysqli_query($con, "INSERT INTO `safedocx_shareboxs` (`sharebox_user_id`,`sharebox_caption`,`sharebox_description`) VALUES($userid,'$dir_name','$dir_description')") or die(mysqli_error($con));
     if(mysqli_affected_rows($con)>0){
       array_push($arr, array("val" => true));
     }
@@ -326,7 +325,6 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
   if(isset($_POST['fun']) && $_POST['fun']=="safedocx-add-docs"){
     if (isset($_FILES['files']) && !empty($_FILES['files'])) {
       $no_files = count($_FILES["files"]['name']);
-      $dir_parent = $_POST['doc_directory_id'];
       $success_count=0;
       for ($i = 0; $i < $no_files; $i++) {
         $extn=pathinfo($_FILES["files"]["name"][$i], PATHINFO_EXTENSION);
@@ -348,7 +346,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
               $file_store=$temp_name.''. $time.'.'.$extn;
               move_uploaded_file($_FILES["files"]["tmp_name"][$i], 'docs/pdf/'.$file_store);
               $file_name = preg_replace('/[^A-Za-z0-9\. -]/', '', $_FILES["files"]["name"][$i]);
-              mysqli_query($con,"INSERT INTO `safedocx_docs` (`doc_directory_id`,`doc_caption`,`doc_file`) VALUES($dir_parent,'$file','$file_store')") or die(mysqli_error($con));
+              mysqli_query($con,"INSERT INTO `safedocx_docs` (`doc_user_id`,`doc_caption`,`doc_file`) VALUES($userid,'$file','$file_store')") or die(mysqli_error($con));
               $success_count++;
             }
             fclose($fp);

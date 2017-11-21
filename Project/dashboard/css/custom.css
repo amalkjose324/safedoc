@@ -142,6 +142,9 @@ th{
 .q4{
   width: 100%;
 }
+.context-menu-root .fa{
+  font:normal normal 17px/2 FontAwesome !important;
+}
 .varify{
   display: inline-block !important;
   float: left;

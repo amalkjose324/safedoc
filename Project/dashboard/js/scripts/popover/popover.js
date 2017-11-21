@@ -5,7 +5,7 @@
 	----------------------------------------------------------------------------------------
 	Item Name: Robust - Responsive Admin Theme
 	Version: 1.2
-	Author: PIXINVENT
+	Author: SafeDocx
 	Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 (function(window, document, $) {

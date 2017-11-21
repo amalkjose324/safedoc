@@ -698,12 +698,25 @@ var Lobibox = Lobibox || {};
         getValue: function () {
             return this.$input.val();
         },
+        getMinLength: function(){
+          return this.$input[0].getAttribute("min");
+        },
+        checkPattern: function(){
+          var value=this.$input.val();
+          var pattern=this.$input[0].getAttribute("pattern");
+          if(pattern.test(value)){
+            return true;
+          }
+          else{
+            return false;
+          }
+        },
+
 
         isValid: function () {
             var me = this,
                 $error = me.$el.find('.lobibox-input-error-message');
-
-            if (me.$options.required && !me.getValue()){
+            if (me.$options.required && (!me.getValue() || me.getValue().length < me.getMinLength())){
                 me.$input.addClass('invalid');
                 if ($error.length === 0){
                     me.$el.find('.lobibox-body').append('<p class="lobibox-input-error-message">'+me.$options.errorMessage+'</p>');
@@ -730,7 +743,7 @@ var Lobibox = Lobibox || {};
         type: 'text',       // Prompt type. Available types (text|number|color)
         label: '',          // Set some text which will be shown exactly on top of textfield
         required: true,
-        errorMessage: 'The field is required'
+        errorMessage: 'Minimum 3 charectors required'
     };
 //------------------------------------------------------------------------------
 //-------------------------LobiboxConfirm---------------------------------------

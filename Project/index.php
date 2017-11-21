@@ -1,21 +1,17 @@
 <?php
 include_once 'db_connect.php';
 include_once 'check_login.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png"  href="./asset/icons/android-icon-192x192.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
-
   <title>SafeDocx : Secure Document Storage</title>
-
   <?php include_once 'lobibox.php';
   include_once 'login.php'; ?>
   <!-- Bootstrap Core CSS -->
@@ -23,25 +19,18 @@ include_once 'check_login.php';
   <!-- Font Awesome CSS -->
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <!-- Custom messagebx and notification CSS -->
-
   <!-- Animate CSS -->
   <link href="css/animate.css" rel="stylesheet" >
-
   <!-- Owl-Carousel -->
   <link rel="stylesheet" href="css/owl.carousel.css" >
   <link rel="stylesheet" href="css/owl.theme.css" >
   <link rel="stylesheet" href="css/owl.transitions.css" >
-
   <!-- Custom CSS -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/custom.css" rel="stylesheet">
   <link href="css/responsive.css" rel="stylesheet">
-
   <!-- Colors CSS -->
   <link rel="stylesheet" type="text/css" href="css/color/green.css">
-
-
-
   <!-- Colors CSS -->
   <link rel="stylesheet" type="text/css" href="css/color/green.css" title="green">
   <link rel="stylesheet" type="text/css" href="css/color/light-red.css" title="light-red">
@@ -49,24 +38,16 @@ include_once 'check_login.php';
   <link rel="stylesheet" type="text/css" href="css/color/light-blue.css" title="light-blue">
   <link rel="stylesheet" type="text/css" href="css/color/yellow.css" title="yellow">
   <link rel="stylesheet" type="text/css" href="css/color/light-green.css" title="light-green">
-
   <!-- Custom Fonts -->
   <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-
-
   <!-- Modernizer js -->
   <script src="js/modernizr.custom.js"></script>
-
-
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
-
 </head>
-
 <body class="index">
-
   <!-- Navigation -->
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -80,7 +61,6 @@ include_once 'check_login.php';
         </button>
         <a class="navbar-brand page-scroll" href="./"><span style="color:white;">Safe</span>Docx</a>
       </div>
-
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
@@ -117,16 +97,11 @@ include_once 'check_login.php';
     </div>
     <!-- /.container-fluid -->
   </nav>
-
-
-
-
   <!-- Start Home Page Slider -->
   <section id="page-top">
     <!-- Carousel -->
     <div id="main-slide" class="carousel slide" data-ride="carousel">
       <!--/ Indicators end-->
-
       <!-- Carousel inner -->
       <div class="carousel-inner">
         <div class="item active">
@@ -138,7 +113,6 @@ include_once 'check_login.php';
               </h1>
               <p class="animated2">Place to keep your certificates safely and <br>easily sharable as per your needs..!</p>
               <a class="animated3 slider btn btn-primary btn-min-block log-btn-main" href="#">Login / Signup</a><a class="animated3 slider btn btn-default btn-min-block btn-downloads-main">Downloads</a>
-
             </div>
           </div>
         </div>
@@ -149,9 +123,6 @@ include_once 'check_login.php';
     <!-- /carousel -->
   </section>
   <!-- End Home Page Slider -->
-
-
-
   <!-- Start Feature Section -->
   <section id="feature" class="feature-section">
     <div class="container">
@@ -234,8 +205,6 @@ include_once 'check_login.php';
     </div><!-- /.container -->
   </section>
   <!-- End Feature Section -->
-
-
   <!-- Start Call to Action Section -->
   <section class="call-to-action" id="download">
     <div class="container">
@@ -254,8 +223,6 @@ include_once 'check_login.php';
     </div>
   </section>
   <!-- End Call to Action Section -->
-
-
   <!-- Start About Us Section -->
   <section id="about-us" class="about-us-section-1">
     <div class="container">
@@ -268,7 +235,6 @@ include_once 'check_login.php';
         </div>
       </div>
       <div class="row">
-
         <div class="col-md-4">
           <div class="welcome-section text-center">
             <img src="images/about-01.jpg" class="img-responsive" alt="..">
@@ -277,7 +243,6 @@ include_once 'check_login.php';
             <p>Duis aute irure dolor in reprehen derit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Lorem reprehenderit</p>
           </div>
         </div>
-
         <div class="col-md-4">
           <div class="welcome-section text-center">
             <img src="images/about-02.jpg" class="img-responsive" alt="..">
@@ -286,7 +251,6 @@ include_once 'check_login.php';
             <p>Duis aute irure dolor in reprehen derit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Lorem reprehenderit</p>
           </div>
         </div>
-
         <div class="col-md-4">
           <div class="welcome-section text-center">
             <img src="images/about-03.jpg" class="img-responsive" alt="..">
@@ -295,13 +259,10 @@ include_once 'check_login.php';
             <p>Duis aute irure dolor in reprehen derit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Lorem reprehenderit</p>
           </div>
         </div>
-
       </div><!-- /.row -->
-
     </div><!-- /.container -->
   </section>
   <!-- End About Us Section -->
-
   <!-- Start Fun Facts Section -->
   <section class="fun-facts">
     <div class="container">
@@ -338,9 +299,6 @@ include_once 'check_login.php';
     </div>
   </section>
   <!-- End Fun Facts Section -->
-
-
-
   <!-- Start Team Member Section -->
   <section id="team" class="team-member-section">
     <div class="container">
@@ -352,17 +310,10 @@ include_once 'check_login.php';
           </div>
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-12">
           <div id="team-section">
-
-
-
-
-
             <div class="our-team">
-
               <div class="team-member">
                 <img src="images/team/manage-1.png" class="img-responsive" alt="">
                 <div class="team-details">
@@ -377,7 +328,6 @@ include_once 'check_login.php';
                   </ul>
                 </div>
               </div>
-
               <div class="team-member">
                 <img src="images/team/manage-2.png" class="img-responsive" alt="">
                 <div class="team-details">
@@ -392,7 +342,6 @@ include_once 'check_login.php';
                   </ul>
                 </div>
               </div>
-
               <div class="team-member">
                 <img src="images/team/manage-3.png" class="img-responsive" alt="">
                 <div class="team-details">
@@ -407,7 +356,6 @@ include_once 'check_login.php';
                   </ul>
                 </div>
               </div>
-
               <div class="team-member">
                 <img src="images/team/manage-4.png" class="img-responsive" alt="">
                 <div class="team-details">
@@ -422,7 +370,6 @@ include_once 'check_login.php';
                   </ul>
                 </div>
               </div>
-
               <div class="team-member">
                 <img src="images/team/manage-1.png" class="img-responsive" alt="">
                 <div class="team-details">
@@ -437,7 +384,6 @@ include_once 'check_login.php';
                   </ul>
                 </div>
               </div>
-
               <div class="team-member">
                 <img src="images/team/manage-2.png" class="img-responsive" alt="">
                 <div class="team-details">
@@ -452,21 +398,13 @@ include_once 'check_login.php';
                   </ul>
                 </div>
               </div>
-
-
             </div>
-
-
           </div>
         </div>
       </div>
-
     </div>
   </section>
   <!-- End Team Member Section -->
-
-
-
   <!-- Start Pricing Table Section -->
   <div id="pricing" class="pricing-section">
     <div class="container">
@@ -480,11 +418,8 @@ include_once 'check_login.php';
           </div>
         </div>
       </div>
-
       <div class="row">
-
         <div class="pricing">
-
           <div class="col-md-12">
             <div class="pricing-table">
               <div class="plan-name">
@@ -503,11 +438,9 @@ include_once 'check_login.php';
                 </ul>
               </div>
               <div class="plan-signup">
-
               </div>
             </div>
           </div>
-
           <div class="col-md-12">
             <div class="pricing-table">
               <div class="plan-name">
@@ -526,7 +459,6 @@ include_once 'check_login.php';
                 </ul>
               </div>
               <div class="plan-signup">
-
               </div>
             </div>
           </div>
@@ -548,11 +480,9 @@ include_once 'check_login.php';
                 </ul>
               </div>
               <div class="plan-signup">
-
               </div>
             </div>
           </div>
-
           <div class="col-md-12">
             <div class="pricing-table">
               <div class="plan-name">
@@ -571,21 +501,14 @@ include_once 'check_login.php';
                 </ul>
               </div>
               <div class="plan-signup">
-
               </div>
             </div>
           </div>
-
         </div>
-
-
       </div>
     </div>
   </div>
   <!-- End Pricing Table Section -->
-
-
-
   <!-- Clients Aside -->
   <section id="partner">
     <div class="container">
@@ -599,56 +522,40 @@ include_once 'check_login.php';
       </div>
       <div class="row">
         <div class="clients">
-
           <div class="col-md-12">
             <img src="images/logos/themeforest.jpg" class="img-responsive" alt="...">
           </div>
-
           <div class="col-md-12">
             <img src="images/logos/creative-market.jpg" class="img-responsive" alt="...">
           </div>
-
           <div class="col-md-12">
             <img src="images/logos/designmodo.jpg" class="img-responsive" alt="...">
           </div>
-
           <div class="col-md-12">
             <img src="images/logos/creative-market.jpg" class="img-responsive" alt="...">
           </div>
-
           <div class="col-md-12">
             <img src="images/logos/microlancer.jpg" class="img-responsive" alt="...">
           </div>
-
           <div class="col-md-12">
             <img src="images/logos/themeforest.jpg" class="img-responsive" alt="...">
           </div>
-
           <div class="col-md-12">
             <img src="images/logos/microlancer.jpg" class="img-responsive" alt="...">
           </div>
-
           <div class="col-md-12">
             <img src="images/logos/designmodo.jpg" class="img-responsive" alt="...">
           </div>
-
           <div class="col-md-12">
             <img src="images/logos/creative-market.jpg" class="img-responsive" alt="...">
           </div>
-
           <div class="col-md-12">
             <img src="images/logos/designmodo.jpg" class="img-responsive" alt="...">
           </div>
-
         </div>
       </div>
     </div>
   </section>
-
-
-
-
-
   <section id="contact" class="contact">
     <div class="container">
       <div class="row">
@@ -726,18 +633,14 @@ include_once 'check_login.php';
       </div>
     </footer>
   </section>
-
-
   <div id="loader">
     <div class="spinner">
       <div class="dot1"></div>
       <div class="dot2"></div>
     </div>
   </div>
-
   <!-- Bootstrap Core JavaScript -->
   <script src="asset/js/bootstrap.min.js"></script>
-
   <!-- Plugin JavaScript -->
   <script src="js/jquery.easing.1.3.js"></script>
   <script src="js/classie.js"></script>
@@ -749,14 +652,9 @@ include_once 'check_login.php';
   <script src="js/jquery.fitvids.js"></script>
   <script src="js/styleswitcher.js"></script>
   <script src="js/ajaxscripts.js"></script>
-
   <!-- Contact Form JavaScript -->
   <script src="js/jqBootstrapValidation.js"></script>
-
-
   <!-- Custom Theme JavaScript -->
   <script src="js/script.js"></script>
-
 </body>
-
 </html>

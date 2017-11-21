@@ -16,7 +16,6 @@ if(isset($_POST['fun']) && $_POST['fun']=="signup-phone-validate"){
   echo json_encode($arr);
   exit();
 }
-
 /**
 * Signup-email validating (existing or not)
 * @var json
@@ -34,7 +33,6 @@ if(isset($_POST['fun']) && $_POST['fun']=="signup-email-validate"){
   echo json_encode($arr);
   exit();
 }
-
 /**
 * Signup-submit first
 * @var json
@@ -79,7 +77,6 @@ function sendsms($to,$message)
 */
 function sendmail($username,$from,$to,$subject,$message)
 {
-
   define("MAIL_FROM",$from);
   define("MAIL_USERNAME",$username);
   define("MAIL_PASSWORD","safedocx2017");
@@ -132,7 +129,6 @@ if(isset($_POST['fun']) && $_POST['fun']=="login-submit"){
   echo json_encode($arr);
   exit();
 }
-
 /**
 * Check mail or phone validate (exist)
 * @var json
@@ -150,7 +146,6 @@ if(isset($_POST['fun']) && $_POST['fun']=="check_mail_phone"){
   echo json_encode($arr);
   exit();
 }
-
 /**
 * ResetPw-submit
 * @var json
@@ -190,5 +185,4 @@ if(isset($_POST['fun']) && $_POST['fun']=="resetpw-submit"){
   echo json_encode($arr);
   exit();
 }
-
 ?>
