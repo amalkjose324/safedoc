@@ -106,11 +106,11 @@
             <div class="card doc-list">
               <?php
               $items_count=0;
-              $query2=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status WHERE doc_status=doc_status_id AND doc_user_id=$user_id");
+              $query2=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status,safedocx_shares WHERE doc_status=doc_status_id AND share_doc_id=doc_id AND share_recipient_id=$user_id");
               while($row2=mysqli_fetch_array($query2)){
                 $items_count++;
                 ?>
-                <div class="sd-document flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
+                <div class="shared-with-me-document flip-container col-xl-2 col-md-3 col-sm-4" ontouchstart="this.classList.toggle('hover');">
                   <input type="hidden" class="idval" value="<?php echo $row2['doc_id'];?>">
                   <div class="flipper">
                     <div class="front">
@@ -127,7 +127,7 @@
                     <div class="back">
                       <p class="inner-flip"><?php echo $row2['doc_description'];?></p>
                     </div>
-                    
+
                   </div>
                 </div>
                 <?php

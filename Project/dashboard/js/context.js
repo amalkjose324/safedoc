@@ -36,18 +36,6 @@ $(function() {
               }
             }
           });
-
-
-          alert($val);
-          Lobibox.window({
-            title: 'Document Viewer',
-            horizontalOffset: 5,                //If the messagebox is larger (in width) than window's width. The messagebox's width is reduced to window width - 2 * horizontalOffset
-            verticalOffset: 5,                  //If the messagebox is larger (in height) than window's height. The messagebox's height is reduced to window height - 2 * verticalOffset
-            width: 550,
-            height: 780,
-            content:
-            '<embed src="docs/pdf/1EC8.tmp15110781956427.pdf" type="application/pdf"   height="99%" width="99%">'
-          });
         }
       },
       "sep0": "-",
@@ -262,6 +250,86 @@ $(function() {
             }
           });
 
+        }
+      }
+    }
+  })
+
+  $.contextMenu({
+    selector: '.shared-with-me-document',
+    items: {
+      Priview: {
+        name: "Priview",
+        icon: "fa-eye",
+        callback: function(key,option){
+          $doc_id = option.$trigger.children(".idval").val();
+          $fun="doc_priview";
+          $.ajax({
+            type:'post',
+            url:'./context_actions.php',
+            data:{doc_id:$doc_id,fun:$fun},
+            success:function(response)
+            {
+              var obj = JSON.parse(response)[0]['val'];
+              if(obj){
+                var doc_name=JSON.parse(response)[1]['doc'];
+                Lobibox.window({
+                  title: 'Document Viewer',
+                  horizontalOffset: 5,                //If the messagebox is larger (in width) than window's width. The messagebox's width is reduced to window width - 2 * horizontalOffset
+                  verticalOffset: 5,                  //If the messagebox is larger (in height) than window's height. The messagebox's height is reduced to window height - 2 * verticalOffset
+                  width: 550,
+                  height: 780,
+                  content:
+                  '<embed src="docs/pdf/'+doc_name+'" type="application/pdf"   height="99%" width="99%">'
+                });
+              }
+              else{
+                Lobibox.notify('error', {
+                  delay:5000,
+                  title: 'Priview Failed',
+                  msg: "You can't view this document right now..!"
+                });
+              }
+            }
+          });
+        }
+      },
+      download: {
+        name: "Download",
+        icon: "fa-download",
+        callback: function(key,option){
+          $doc_id = option.$trigger.children(".idval").val();
+          $fun="doc_download";
+          $.ajax({
+            type:'post',
+            url:'./context_actions.php',
+            data:{doc_id:$doc_id,fun:$fun},
+            success:function(response)
+            {
+              var obj = JSON.parse(response)[0]['val'];
+              if(obj){
+                var doc_name=JSON.parse(response)[1]['doc'];
+                var doc_caption=JSON.parse(response)[2]['cap'];
+                var filepath = "docs/pdf/"+doc_name;
+                var link = document.createElement("a");
+                link.download = doc_caption;
+                link.href = filepath;
+                link.click();
+                Lobibox.notify('success', {
+                  delay:5000,
+                  title: 'Download Success',
+                  msg: "Your document will download shortly...!"
+                });
+              }
+              else{
+                Lobibox.notify('error', {
+                  delay:5000,
+                  title: 'Download Failed',
+                  msg: "You can't download this document right now..!"
+                });
+              }
+            }
+          });
         }
       }
     }

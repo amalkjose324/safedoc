@@ -106,7 +106,7 @@
             <div class="card doc-list">
               <?php
               $items_count=0;
-              $query2=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status WHERE doc_status=doc_status_id AND doc_user_id=$user_id");
+              $query2=mysqli_query($con,"SELECT * FROM safedocx_docs,safedocx_doc_status WHERE doc_status=doc_status_id AND doc_status=1 AND doc_user_id=$user_id");
               while($row2=mysqli_fetch_array($query2)){
                 $items_count++;
                 ?>
@@ -127,7 +127,7 @@
                     <div class="back">
                       <p class="inner-flip"><?php echo $row2['doc_description'];?></p>
                     </div>
-                    
+
                   </div>
                 </div>
                 <?php

@@ -157,3 +157,10 @@ th{
   background-color: transparent !important;
   color: black !important;
 }
+.doc_status_flip{
+  background-color: red;
+  height:25px;
+  text-align: center;
+  font-weight: normal;
+
+}

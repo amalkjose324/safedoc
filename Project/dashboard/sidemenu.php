@@ -187,12 +187,12 @@ while ($row=mysqli_fetch_array($query)) {
                                           else if($user_type=="user"){
                                             ?>
                                             <hr style="width:80%; border:0.4px solid white;">
-                                            <li class=" nav-item"><a href="./sn_district_nodals.php"><i class="icon-check-square-o"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Verified Documents</span></a></li>
-                                            <li class=" nav-item"><a href="./sn_district_nodals.php"><i class="icon-clock-o"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Pending Documents</span></a></li>
-                                            <li class=" nav-item"><a href="./sn_district_nodals.php"><i class="icon-times"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Rejected Documents</span></a></li>
+                                            <li class=" nav-item"><a href="./varified_docs.php"><i class="icon-check-square-o"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Verified Documents</span></a></li>
+                                            <li class=" nav-item"><a href="./pending_docs.php"><i class="icon-clock-o"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Pending Documents</span></a></li>
+                                            <li class=" nav-item"><a href="./rejected_docs.php"><i class="icon-times"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Rejected Documents</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">
                                             <li class=" nav-item"><a href="./sn_district_nodals.php"><i class="icon-box"></i><span data-i18n="nav.page_layouts.main" class="menu-title">ShareBoxes</span></a></li>
-                                            <li class=" nav-item"><a href="./sn_district_nodals.php"><i class="icon-archive"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Shared With Me</span></a></li>
+                                            <li class=" nav-item"><a href="./shared_me_docs.php"><i class="icon-archive"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Shared With Me</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">
                                             <?php
                                           }

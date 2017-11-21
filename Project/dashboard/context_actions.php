@@ -8,7 +8,7 @@ $userid=$_SESSION['user_id'];
 */
 if(isset($_POST['fun']) && $_POST['fun']=="doc_download"){
   $doc_id = $_POST['doc_id'];
-  $query = mysqli_query($con, "SELECT * FROM safedocx_docs WHERE `doc_id`=$doc_id AND `doc_user_id`=$userid");
+  $query = mysqli_query($con, "SELECT * FROM safedocx_docs WHERE `doc_id`=$doc_id");
   $arr = array();
   if(mysqli_num_rows($query)>0){
     while ($row = mysqli_fetch_array($query)) {
@@ -37,7 +37,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="doc_download"){
 */
 if(isset($_POST['fun']) && $_POST['fun']=="check_doc_share_email_phone"){
   $email_phone= $_POST['email_phone'];
-  $query = mysqli_query($con, "SELECT * FROM safedocx_login LEFT JOIN safedocx_users ON `safedocx_login`.`login_id`=`safedocx_users`.`user_id` WHERE `login_id`<>$userid AND (`login_phone`='$email_phone' OR `login_email`='$email_phone')");
+  $query = mysqli_query($con, "SELECT * FROM safedocx_login LEFT JOIN safedocx_users ON `safedocx_login`.`login_id`=`safedocx_users`.`user_id` WHERE `login_id`<>$userid AND login_user_type=1 AND (`login_phone`='$email_phone' OR `login_email`='$email_phone')");
   $arr = array();
   if(mysqli_num_rows($query)>0){
     while ($row = mysqli_fetch_array($query)) {
@@ -63,7 +63,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="check_doc_share_email_phone"){
 */
 if(isset($_POST['fun']) && $_POST['fun']=="doc_priview"){
   $doc_id = $_POST['doc_id'];
-  $query = mysqli_query($con, "SELECT * FROM safedocx_docs WHERE `doc_id`=$doc_id AND `doc_user_id`=$userid");
+  $query = mysqli_query($con, "SELECT * FROM safedocx_docs WHERE `doc_id`=$doc_id");
   $arr = array();
   if(mysqli_num_rows($query)>0){
     while ($row = mysqli_fetch_array($query)) {
