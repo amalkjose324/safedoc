@@ -162,5 +162,7 @@ th{
   height:25px;
   text-align: center;
   font-weight: normal;
-
+}
+td{
+    text-align: center;
 }

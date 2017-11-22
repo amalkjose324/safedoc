@@ -158,7 +158,7 @@ while ($row=mysqli_fetch_array($query)) {
                                     <div data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow">
                                       <!-- main menu header-->
                                       <div class="main-menu-header">
-                                        <input type="text" placeholder="Search" class="menu-search form-control round"/>
+                                        <input type="text" style="text-align:center" placeholder="Search" value="<?php echo ucfirst($_SESSION['user_type'])." Login";?>" disabled class="menu-search form-control round"/>
                                       </div>
                                       <!-- / main menu header-->
                                       <!-- main menu content-->
@@ -173,7 +173,7 @@ while ($row=mysqli_fetch_array($query)) {
                                             <hr style="width:80%; border:0.4px solid white;">
                                             <li class=" nav-item"><a href="./admin_state_nodals.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">State Nodals</span></a></li>
                                             <li class=" nav-item"><a href="./admin_district_nodals.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">District Nodals</span></a></li>
-                                            <li class=" nav-item"><a href="./admin_attesters.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Attestors </span></a></li>
+                                            <li class=" nav-item"><a href="./admin_.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Attestors </span></a></li>
                                             <li class=" nav-item"><a href="./admin_users.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Users</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">
                                             <li class=" nav-item"><a href="./admin_states.php"><i class="icon-map"></i><span data-i18n="nav.page_layouts.main" class="menu-title">States</span></a></li>
@@ -209,7 +209,16 @@ while ($row=mysqli_fetch_array($query)) {
                                           else if($user_type=="d_nodal"){
                                             ?>
                                             <hr style="width:80%; border:0.4px solid white;">
-                                            <li class=" nav-item"><a href="./dn_attesters.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Attestors</span></a></li>
+                                            <li class=" nav-item"><a href="./dn_.php"><i class="icon-user"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Attestors</span></a></li>
+                                            <hr style="width:80%; border:0.4px solid white;">
+                                            <?php
+                                          }
+                                          else if($user_type=="attestor"){
+                                            ?>
+                                            <hr style="width:80%; border:0.4px solid white;">
+                                            <li class=" nav-item"><a href="./attestor_requests.php"><i class="icon-arrow-down"></i><span data-i18n="nav.page_layouts.main" class="menu-title">New Requests</span></a></li>
+                                            <li class=" nav-item"><a href="./attestor_varified.php"><i class="icon-check-square-o"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Varified Documents</span></a></li>
+                                            <li class=" nav-item"><a href="./attestor_rejected.php"><i class="icon-times"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Rejected Documents</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">
                                             <?php
                                           }

@@ -63,16 +63,17 @@ $(function() {
           $('#public_link_doc_id').val($val);
         }
       },
-      Add_ShareBox: {
-        name: "Add to ShareBox",
-        icon: "fa-plus",
-        callback: function(key,option){
-          Lobibox.window({
-            title: 'Window title',
-            content: '...'
-          });
-        }
-      },
+      // Add_ShareBox: {
+      //   name: "Add to ShareBox",
+      //   icon: "fa-plus",
+      //   callback: function(key,option){
+      //     // Lobibox.window({
+      //     //   title: 'Window title',
+      //     //   content: '...'
+      //     // });
+      //     alert("ShareBox option coming soon..!")
+      //   }
+      // },
       download: {
         name: "Download",
         icon: "fa-download",
