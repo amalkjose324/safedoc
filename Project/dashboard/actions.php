@@ -637,4 +637,40 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     echo json_encode($arr);
     exit();
   }
+
+  /**
+  * Doc varify -submit first
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="doc_varify"){
+    $doc_id= $_POST['doc_id'];
+    $arr = array();
+    $query = mysqli_query($con, "UPDATE safedocx_docs SET doc_status=1 WHERE doc_id=$doc_id");
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else{
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+
+  /**
+  * Doc reject -submit first
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="doc_reject"){
+    $doc_id= $_POST['doc_id'];
+    $arr = array();
+    $query = mysqli_query($con, "UPDATE safedocx_docs SET doc_status=3 WHERE doc_id=$doc_id");
+    if(mysqli_affected_rows($con)>0){
+      array_push($arr, array("val" => true));
+    }
+    else{
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
   ?>

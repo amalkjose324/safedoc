@@ -1494,5 +1494,124 @@ $(document).ready(function(){
     }
   });
 
+  /**
+  * User details bbview in datatables
+  * @return error message
+  */
+  $(".form_doc_user_view").on("submit",function(){
+    $user_id=$(this).children("#user_id").val();
+    Lobibox.window({
+      title: 'User Details',
+      horizontalOffset: 5,                //If the messagebox is larger (in width) than window's width. The messagebox's width is reduced to window width - 2 * horizontalOffset
+      verticalOffset: 5,                  //If the messagebox is larger (in height) than window's height. The messagebox's height is reduced to window height - 2 * verticalOffset
+      width: 550,
+      height: 300,
+      url:'user_view.php?user_id='+$user_id,
+    });
+  });
 
+  /**
+  * Document bview in datatables
+  * @return error message
+  */
+  $(".form_doc_view").on("submit",function(){
+    $doc_id=$(this).children("#doc_id").val();
+    $fun="doc_priview";
+    $.ajax({
+      type:'post',
+      url:'./context_actions.php',
+      data:{doc_id:$doc_id,fun:$fun},
+      success:function(response)
+      {
+        var obj = JSON.parse(response)[0]['val'];
+        if(obj){
+          var doc_name=JSON.parse(response)[1]['doc'];
+          Lobibox.window({
+            title: 'Document Viewer',
+            horizontalOffset: 5,                //If the messagebox is larger (in width) than window's width. The messagebox's width is reduced to window width - 2 * horizontalOffset
+            verticalOffset: 5,                  //If the messagebox is larger (in height) than window's height. The messagebox's height is reduced to window height - 2 * verticalOffset
+            width: 550,
+            height: 780,
+            content:
+            '<embed src="docs/pdf/'+doc_name+'" type="application/pdf"   height="99%" width="99%">'
+          });
+        }
+        else{
+          Lobibox.notify('error', {
+            delay:5000,
+            title: 'Priview Failed',
+            msg: "You can't view this document right now..!"
+          });
+        }
+      }
+    });
+  });
+
+  /**
+  * Document  varify in datatables
+  * @return error message
+  */
+  $(".form_doc_reject").on("submit",function(){
+    $doc_id=$(this).children("#doc_id").val();
+    $fun="doc_reject";
+    $.ajax({
+      type:'post',
+      url:'./actions.php',
+      data:{doc_id:$doc_id,fun:$fun},
+      success:function(response)
+      {
+        var obj = JSON.parse(response)[0]['val'];
+        if(obj){
+          $('#doc-list-div-attest').load(document.URL +  ' #doc-list-div-attest');
+          Lobibox.notify('success', {
+            delay:5000,
+            title: 'Document Rejected',
+            msg: "Document has been Rejected..!"
+          });
+        }
+        else{
+          $('#doc-list-div-attest').load(document.URL +  ' #doc-list-div-attest');
+          Lobibox.notify('error', {
+            delay:5000,
+            title: 'Rejection Failed',
+            msg: "You can't reject this document right now..!"
+          });
+        }
+      }
+    });
+  });
+
+  /**
+  * Document  varify in datatables
+  * @return error message
+  */
+  $(".form_doc_varify").on("submit",function(){
+    $doc_id=$(this).children("#doc_id").val();
+    $fun="doc_varify";
+    $.ajax({
+      type:'post',
+      url:'./actions.php',
+      data:{doc_id:$doc_id,fun:$fun},
+      success:function(response)
+      {
+        var obj = JSON.parse(response)[0]['val'];
+        if(obj){
+          $('#doc-list-div-attest').load(document.URL +  ' #doc-list-div-attest');
+          Lobibox.notify('success', {
+            delay:5000,
+            title: 'Document Verified',
+            msg: "Document has been Verified..!"
+          });
+        }
+        else{
+          $('#doc-list-div-attest').load(document.URL +  ' #doc-list-div-attest');
+          Lobibox.notify('error', {
+            delay:5000,
+            title: 'Varification Failed',
+            msg: "You can't varify this document right now..!"
+          });
+        }
+      }
+    });
+  });
 });

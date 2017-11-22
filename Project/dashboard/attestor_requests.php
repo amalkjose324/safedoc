@@ -16,7 +16,7 @@ if($page<>'attestor.php'){
       </div>
       <div class="content-body dt_body"><!-- stats -->
         <?php include_once 'admin_header.php';?>
-        <div id="doc-list-div" class="col-xl-12 col-md-12 col-sm-12" oncontextmenu="return false;">
+        <div id="doc-list-div-attest" class="col-xl-12 col-md-12 col-sm-12" oncontextmenu="return false;">
           <div class="card doc-list dt_body">
             <div id="datatable_data">
             </div>
