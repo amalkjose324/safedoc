@@ -1553,6 +1553,7 @@ $(document).ready(function(){
   */
   $(".form_doc_reject").on("submit",function(){
     $doc_id=$(this).children("#doc_id").val();
+    $doc_type=$(this).children("#doc_type").val();
     $fun="doc_reject";
     $.ajax({
       type:'post',
@@ -1562,7 +1563,7 @@ $(document).ready(function(){
       {
         var obj = JSON.parse(response)[0]['val'];
         if(obj){
-          $('#doc-list-div-attest').load(document.URL +  ' #doc-list-div-attest');
+          $('#datatable_data').load('./datatable_documents.php?doc_type='+$doc_type);
           Lobibox.notify('success', {
             delay:5000,
             title: 'Document Rejected',
@@ -1570,7 +1571,7 @@ $(document).ready(function(){
           });
         }
         else{
-          $('#doc-list-div-attest').load(document.URL +  ' #doc-list-div-attest');
+          $('#datatable_data').load('./datatable_documents.php?doc_type='+$doc_type);
           Lobibox.notify('error', {
             delay:5000,
             title: 'Rejection Failed',
@@ -1587,6 +1588,7 @@ $(document).ready(function(){
   */
   $(".form_doc_varify").on("submit",function(){
     $doc_id=$(this).children("#doc_id").val();
+    $doc_type=$(this).children("#doc_type").val();
     $fun="doc_varify";
     $.ajax({
       type:'post',
@@ -1596,7 +1598,7 @@ $(document).ready(function(){
       {
         var obj = JSON.parse(response)[0]['val'];
         if(obj){
-          $('#doc-list-div-attest').load(document.URL +  ' #doc-list-div-attest');
+          $('#datatable_data').load('./datatable_documents.php?doc_type='+$doc_type);
           Lobibox.notify('success', {
             delay:5000,
             title: 'Document Verified',
@@ -1604,7 +1606,7 @@ $(document).ready(function(){
           });
         }
         else{
-          $('#doc-list-div-attest').load(document.URL +  ' #doc-list-div-attest');
+          $('#datatable_data').load('./datatable_documents.php?doc_type='+$doc_type);
           Lobibox.notify('error', {
             delay:5000,
             title: 'Varification Failed',
