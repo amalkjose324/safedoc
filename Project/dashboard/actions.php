@@ -267,7 +267,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     $email_msg = "Hi, Help us secure your SafeDocx account by verifying your email address ($email). This will let you receive notifications and password resets from SafeDocx. <br><br><center><a style='border:1px solid black;background:blue;color:white;text-decoration:none;padding:5px;padding-left:30px;padding-right:30px;font-size:18px;font-weight:bold' href='http://localhost/safedocx/Project/dashboard/varify_email.php?otp=$enc_otp'>Varify Email Id</a></center><br><hr>Button not working? Paste the following link into your browser: <br><center>http://localhost/safedocx/Project/dashboard/varify_email.php?otp=$enc_otp</center><hr>You’re receiving this email because you recently created a new GitHub account or added a new email address. If this wasn’t you, please ignore this email.";
       mysqli_query($con, "DELETE FROM `safedocx_otp` WHERE `otp_login_id`=$userid AND otp_type=1");
       mysqli_query($con, "INSERT INTO `safedocx_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($userid,1,'$otp_code')");
-      $m=sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$email,"SafeDocx Password",$email_msg);
+      $m=sendmail("pw.safedocx@gmail.com",$email,"SafeDocx Password",$email_msg);
       $arr = array();
       if($m){
         array_push($arr, array("val" => true));
