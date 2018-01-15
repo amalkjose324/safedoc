@@ -448,6 +448,7 @@ $(document).ready(function(){
       data:{fun:$fun},
       success:function(response)
       {
+
         var obj = JSON.parse(response)[0]['val'];
         if(obj){
           Lobibox.notify('success', {
@@ -546,7 +547,6 @@ $(document).ready(function(){
         url:'./actions.php',
         data:{fun:$fun,dir_name:$dir_name,dir_description:$dir_description},
         success: function (response) {
-          alert(response);
           var obj = JSON.parse(response)[0]['val'];
           if(obj){
             $('#doc-list-div').load(document.URL +  ' #doc-list-div');

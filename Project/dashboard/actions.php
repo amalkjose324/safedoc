@@ -29,6 +29,7 @@ function sendmail($username,$from,$to,$subject,$message)
   $mail->SMTPSecure = "ssl";      // Connect using a TLS connection
   $mail->Host = "smtp.gmail.com";  //Gmail SMTP server address
   $mail->Port = 465;  //Gmail SMTP port
+
   //Set who the message is to be sent from
   $mail->setFrom($from, "SafeDocx - Password");
   //Set who the message is to be sent to

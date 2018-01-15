@@ -196,12 +196,17 @@ $(document).ready(function(){
     var val_pword= /^[^&\s]{6,30}$/;
     $password = $('#login-password').val();
     $email_phone = $('#login-email_phone').val();
+    var v = grecaptcha.getResponse();
     if((!val_email.test($email_phone))&&(!val_phone.test($email_phone))){
       $("#login-email_phone").focusout();
       return false;
     }
     else if (!val_pword.test($password)) {
       $("#login-password").focusout();
+      return false;
+    }
+    else if(v.length==0){
+      $("#login-captcha-error").addClass('is-visible');
       return false;
     }
     else{

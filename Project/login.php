@@ -1,4 +1,5 @@
 <link href="css/login_css.css" rel="stylesheet">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="js/login_js.js"></script>
 <div class="cd-user-modal" style="z-index: 300;"> <!-- this is the entire modal form, including the background -->
   <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
@@ -19,6 +20,10 @@
           <a class="hide-password link_btn">Show</a>
           <span class="cd-error-message" id="login-password-error">Invalid Password</span>
         </p>
+        <p class="fieldset">
+          <span class="g-recaptcha" style="width:100%" id="captcha" data-sitekey="6LcovUAUAAAAAPcdU2mXck7NMAMMLwF-BsNqke6_"></span>
+          <span class="cd-error-message" id="login-captcha-error">You must varify captcha</span>
+          </p>
         <p class="fieldset">
           <input class="full-width" type="submit" value="Login">
         </p>
