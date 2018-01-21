@@ -104,6 +104,7 @@ while ($row=mysqli_fetch_array($query)) {
                                 </ul>
                               </li>
 
+
                                 <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                   <li class="dropdown-menu-header">
                                     <h6 class="dropdown-header m-0"><span class="grey darken-2">Messages</span><span class="notification-tag tag tag-default tag-info float-xs-right m-0">4 New</span></h6>
@@ -153,7 +154,21 @@ while ($row=mysqli_fetch_array($query)) {
                                           </div>
                                         </div>
                                       </div>
+
                                     </nav>
+
+                                    <span class="chat_icon fa-stack fa-3x" style="  bottom: 0 !important; right: 0 !important;">
+                                      <i class="fa fa-circle fa-stack-2x" style="color: #427fe1;"></i>
+                                      <i class="fa fa-commenting fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                    <span class="chat_bar">
+                                    Chat Now</span>
+                                    <div class="chat_card">
+                                      <div class="col-md-12">
+                                        df
+                                      </div>
+                                      </div>
+                                    </div>
                                     <!-- main menu-->
                                     <div data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow">
                                       <!-- main menu header-->
@@ -493,6 +508,7 @@ while ($row=mysqli_fetch_array($query)) {
                                             <li class=" nav-item"><a href="https://pixinvent.com/free-bootstrap-template/robust-lite/documentation"><i class="icon-document-text"></i><span data-i18n="nav.support_documentation.main" class="menu-title">Documentation</span></a>
                                             </li>
                                           </ul>
+
                                           <?php
                                         }
                                         ?>

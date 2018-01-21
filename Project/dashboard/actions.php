@@ -19,17 +19,15 @@ function sendsms($to,$message)
 */
 function sendmail($username,$from,$to,$subject,$message)
 {
-
   define("MAIL_FROM",$from);
   define("MAIL_USERNAME",$username);
   define("MAIL_PASSWORD","safedocx2017");
   require_once "mail_sms/class.phpmailer.php";
   $mail->IsSMTP();                // Sets up a SMTP connection
   $mail->SMTPAuth = true;         // Connection with the SMTP does require authorization
-  $mail->SMTPSecure = "ssl";      // Connect using a TLS connection
+  $mail->SMTPSecure = "tls";      // Connect using a TLS connection
   $mail->Host = "smtp.gmail.com";  //Gmail SMTP server address
-  $mail->Port = 465;  //Gmail SMTP port
-
+  $mail->Port = 587;  //Gmail SMTP port
   //Set who the message is to be sent from
   $mail->setFrom($from, "SafeDocx - Password");
   //Set who the message is to be sent to

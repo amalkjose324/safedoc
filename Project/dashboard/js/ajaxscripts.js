@@ -23,6 +23,24 @@ $(document).ready(function(){
     });
   });
   /**
+  * chat_bar animation
+  * @return error message
+  */
+  $(".chat_icon").hover(function(){
+       $(".chat_bar").animate({width: "230px"});
+       }, function(){
+       $(".chat_bar").animate({width: "10px"});
+   });
+   /**
+   * chat_start
+   * @return error message
+   */
+   $(".chat_icon").click(function(){
+     $(".chat_card").css({display:"block"});
+     $(".chat_card").animate({height: "500px"});
+
+    });
+  /**
   * profile-edit-phone checking for alredy taken or not
   * @return error message
   */
