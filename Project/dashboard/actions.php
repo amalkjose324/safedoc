@@ -672,4 +672,66 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     echo json_encode($arr);
     exit();
   }
+
+  /**
+  * Check chat mail or phone validate (exist)
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="check_chat_address"){
+    $email_phone= $_POST['email_phone'];
+    $arr = array();
+    $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE (login_phone='$email_phone' OR login_email='$email_phone' OR login_id='$email_phone')");
+    while ($row=mysqli_fetch_array($query)) {
+      $user1=$row['login_id'];
+      $user2=$userid;
+      $qry=mysqli_query($con,"SELECT * FROM safedocx_chat WHERE (chat_sender_id=$user1 AND chat_receiver_id=$user2) OR (chat_sender_id=$user2 AND chat_receiver_id=$user1) ORDER BY chat_time");
+      while ($chat_row=mysqli_fetch_array($qry)) {
+        $msg=$chat_row['chat_message'];
+        if($chat_row['chat_sender_id']==$user2){
+          echo "<div class='talk-bubble-right'><div class='talktext'><p>$msg</p></div></div>";
+        }
+        else {
+          echo "<div class='talk-bubble-left'><div class='talktext'><p>$msg</p></div></div>";
+        }
+      }
+      if(mysqli_num_rows($qry)==0){
+        array_push($arr, array("val" => true));
+      }
+    }
+    if(mysqli_num_rows($query)==0){
+      array_push($arr, array("val" => false));
+    }
+    echo json_encode($arr);
+    exit();
+  }
+
+  /**
+  * Submit chat
+  * @var json
+  */
+  if(isset($_POST['fun']) && $_POST['fun']=="submit_chat_msg"){
+    $email_phone= $_POST['email_phone'];
+    $message=$_POST['message'];
+    $arr = array();
+    $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE (login_phone='$email_phone' OR login_email='$email_phone')");
+    while ($row=mysqli_fetch_array($query)) {
+      $to=$row['login_id'];
+      $from=$userid;
+      if($to!=$from){
+        $qry=mysqli_query($con,"INSERT INTO safedocx_chat (chat_sender_id,chat_receiver_id,chat_message) VALUES($from,$to,'$message')");
+        if(mysqli_affected_rows($con)>0){
+          array_push($arr, array("val" => true));
+        }
+        else {
+          array_push($arr, array("val" => false));
+        }
+      }
+      else {
+        array_push($arr, array("val" => false));
+      }
+    }
+    echo json_encode($arr);
+    exit();
+  }
+
   ?>

@@ -30,12 +30,33 @@ $(document).ready(function(){
        $(".chat_bar").animate({width: "230px"});
        }, function(){
        $(".chat_bar").animate({width: "10px"});
+       $('.chat_to_add').css({width:"104%"});
+       $('.chat_nav').css({visibility:"visible"});
+       $('.chat_to_add').prop('disabled', false);
+       $('.chat_content').css({visibility:"hidden"});
+       $('.type_msg').css({visibility:"hidden"});
+       $('.msg_sub').css({visibility:"hidden"});
+       $('.back_chat').css({visibility:"hidden"});
+
    });
+
+   /**
+   * chat_bar hide
+   * @return error message
+   */
+   $(".chat_header").click(function(){
+     $('#chat_form').trigger("reset");
+     $("#chat_to_error").removeClass('is-visible');
+     $(".chat_card").animate({height: "10px"});
+     $(".chat_card").css({display:"none"});
+    });
    /**
    * chat_start
    * @return error message
    */
    $(".chat_icon").click(function(){
+     $('#chat_form').trigger("reset");
+     $("#chat_to_error").removeClass('is-visible');
      $(".chat_card").css({display:"block"});
      $(".chat_card").animate({height: "500px"});
 
@@ -1511,7 +1532,161 @@ $(document).ready(function(){
       $(".d_add_sname_error").removeClass('is-visible');
     }
   });
+  /**
+  * Chat to add focusout
+  * @return error message
+  */
+  $(".chat_to_add").focusout(function(){
+    $content=$email_phone=$(this).val();
+    var validator_phone= /^[6-9]{1,1}[0-9]{9,9}$/;
+    var validator_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
+    if(validator_phone.test($email_phone.split("- ").pop())){
+      $email_phone=$(this).val().split("- ").pop();
+    }
+    if((!validator_email.test($email_phone))&&(!validator_phone.test($email_phone))){
+      $("#chat_to_error").addClass('is-visible');
+      $("#chat_to_error").html('Invalid Email or Phone number');
+      $(this).focus();
+      $('.type_msg').prop('disabled', true);
+      return false;
+    }else {
+      $fun="check_chat_address";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{email_phone:$email_phone,fun:$fun},
+        success:function(response)
+        {
+          if(response.length<20){
+            var obj = JSON.parse(response)[0]['val'];
+            if(!obj){
+              $(this).focus();
+              $('.type_msg').prop('disabled', true);
+              $("#chat_to_error").addClass('is-visible');
+              $("#chat_to_error").html('Non registered Email / Phone');
+            }
+            else{
+              $('.chat_nav').css({visibility:"hidden"});
+              $('.chat_to_add').css({width:"90%"});
+              $('.back_chat').css({visibility:"visible"});
+              $('.chat_to_add').prop('disabled', true);
+              $('.chat_to_add').val($content);
+              $('.chat_content').css({visibility:"visible"});
+              $('.type_msg').css({visibility:"visible"});
+              $('.msg_sub').css({visibility:"visible"});
+              $("#chat_to_error").removeClass('is-visible');
+              $('.type_msg').prop('disabled', false);
+              $('.chat_content').html("<center><br><br><br><br><br><br><b>No chat history available on this User<br><h2>Start Chat Here..!</h2></b></center>");
+            }
+          }
+          else {
+            $('.chat_nav').css({visibility:"hidden"});
+            $('.chat_to_add').css({width:"90%"});
+            $('.back_chat').css({visibility:"visible"});
+            $('.chat_to_add').prop('disabled', true);
+            $('.chat_to_add').val($content);
+            $('.chat_content').css({visibility:"visible"});
+            $('.type_msg').css({visibility:"visible"});
+            $('.msg_sub').css({visibility:"visible"});
+            $('.chat_content').html(response.slice(0,-2));
+            $("#chat_to_error").removeClass('is-visible');
+            $('.type_msg').prop('disabled', false);
+          }
+        }
+      });
+    }
+  });
+  /**
+  * function to get chat messages
+  * @return error message
+  */
+  function getChatMessages(contact) {
+      $fun="check_chat_address";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{email_phone:contact,fun:$fun},
+        success:function(response)
+        {
+          if(response.length<20){
+            var obj = JSON.parse(response)[0]['val'];
+            if(!obj){
+              $(this).focus();
+              $('.type_msg').prop('disabled', true);
+              $("#chat_to_error").addClass('is-visible');
+              $("#chat_to_error").html('Non registered Email / Phone');
+            }
+            else{
+              $("#chat_to_error").removeClass('is-visible');
+              $('.type_msg').prop('disabled', false);
+              $('.chat_content').html("<center><br><br><br><br><br><br><b>No chat history available on this User<br><h2>Start Chat Here..!</h2></b></center>");
+            }
+          }
+          else {
+            $('.chat_content').html(response.slice(0,-2));
+            $("#chat_to_error").removeClass('is-visible');
+            $('.type_msg').prop('disabled', false);
+          }
+        }
+      });
+  }
 
+  /**
+  * Chat submission  form validation
+  * @return error message
+  */
+  $("#chat_form").on("submit", function(){
+    $email_phone=$(".chat_to_add").val().split("- ").pop();
+    $message=$(".type_msg").val();
+    var validator_email= /^[A-Za-z0-9._]*\@[A-Za-z0-9._]*\.[A-Za-z]{2,5}$/;
+    var validator_phone= /^[6-9]{1,1}[0-9]{9,9}$/;
+    var validator_msg= /^[^]{1,}$/;
+    if((!validator_email.test($email_phone))&&(!validator_phone.test($email_phone))){
+      $(".chat_to_add").focusout();
+      return false;
+    }
+    else if(!validator_msg.test($message)){
+      $(".type_msg").focusout();
+      return false;
+    }
+    else{
+      $fun="submit_chat_msg";
+      $.ajax({
+        type:'post',
+        url:'./actions.php',
+        data:{email_phone:$email_phone,message:$message,fun:$fun},
+        success:function(response)
+        {
+          var obj = JSON.parse(response)[0]['val'];
+          if(!obj){
+            Lobibox.notify('error', {
+              delay:5000,
+              title: 'Message Can\'t send',
+              msg: "You can not send message to this number right now..!"
+            });
+          }
+          else {
+            $(".type_msg").val('');
+            $(".chat_to_add").focusout()
+          }
+        }
+      });
+    }
+  });
+  /**
+  * Chat to messagefocusout
+  * @return error message
+  */
+  $(".type_msg").focusout(function(){
+    $msg=$(this).val();
+    var validator_msg= /^[^]{1,}$/;
+    if(!validator_msg.test($msg)){
+      $('.msg_sub').prop('disabled', true);
+      $('.sub_chat').prop('color', 'green');
+    }else {
+      $('.msg_sub').prop('disabled', false);
+    }
+  });
   /**
   * User details bbview in datatables
   * @return error message
@@ -1634,4 +1809,50 @@ $(document).ready(function(){
       }
     });
   });
+
+  /**
+  * chat_header click
+  * @return error message
+  */
+  $('.chat_nav').on('click','.chat_div', function(){
+    $x=$(this).children('.chat_head_id').val();
+    $user=$(this).children('.chat_user_head').html();
+    $('.chat_nav').css({visibility:"hidden"});
+    $('.chat_to_add').css({width:"90%"});
+    $('.back_chat').css({visibility:"visible"});
+    getChatMessages($x);
+    $('.chat_to_add').prop('disabled', true);
+    $('.chat_content').scrollTop($('.chat_content').height())
+    $('.chat_to_add').val($user);
+    $('.chat_content').css({visibility:"visible"});
+    $('.type_msg').css({visibility:"visible"});
+    $('.msg_sub').css({visibility:"visible"});
+    $(".chat_content").animate({ scrollTop: $('.chat_content').prop("scrollHeight")}, 30);
+   });
+   /**
+   * chat back click
+   * @return error message
+   */
+   $(".back_chat").click(function(){
+     $('.chat_to_add').val('');
+     $('.chat_to_add').css({width:"104%"});
+     $('.chat_nav').css({visibility:"visible"});
+     $('.chat_to_add').prop('disabled', false);
+     $('.chat_content').css({visibility:"hidden"});
+     $('.type_msg').css({visibility:"hidden"});
+     $('.msg_sub').css({visibility:"hidden"});
+     $('.back_chat').css({visibility:"hidden"});
+    });
+   /**
+   * Refresh chat
+   * @return error message
+   */
+   function chatRefresh() {
+       $(".chat_nav").load(location.href+" .chat_nav>*","");
+       $val=$(".chat_to_add").val();
+       if($val !== "") {
+           $(".chat_to_add").focusout();
+       }
+     }
+   var interval = setInterval(chatRefresh, 5000);
 });

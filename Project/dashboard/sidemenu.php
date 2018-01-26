@@ -164,9 +164,31 @@ while ($row=mysqli_fetch_array($query)) {
                                     <span class="chat_bar">
                                     Chat Now</span>
                                     <div class="chat_card">
-                                      <div class="col-md-12">
-                                        df
+                                      <div class="col-md-12 chat_header">
+                                        <i class="fa fa-commenting fa-1x"></i>  Live Chat
                                       </div>
+                                        <form id="chat_form" method="post" onsubmit="return false">
+                                      <div class="col-md-12 chat_to">
+                                        <i class="fa fa-arrow-left back_chat fa-2x" aria-hidden="true"></i><input type="text" id="chat_to_add"class="chat_to_add"placeholder="Enter Email / Phone to start Chat">
+
+                                        <span class="cd-error-message" id="chat_to_error" style="position: sticky;">Invalid Password</span>
+                                      </div>
+                                      <div class="chat_nav">
+                                        <?php
+                                        $userid=$_SESSION['user_id'];
+                                          $chat_h=mysqli_query($con,"SELECT DISTINCT(user_name),login_phone,login_email,login_id from safedocx_chat,safedocx_login,safedocx_users WHERE login_id=user_id AND (login_id=chat_sender_id OR login_id=chat_receiver_id) AND (chat_sender_id=$userid OR chat_receiver_id=$userid) AND login_id<>$userid");
+                                          while ($c_h=mysqli_fetch_array($chat_h)) {
+                                            echo "<div class='chat_div'><input type='hidden' class='chat_head_id' value='".$c_h['login_id']."'/><b class='chat_user_head'>".$c_h['user_name']." - ".$c_h['login_phone']."</b><br>".$c_h['login_email']."</div></hr>";
+                                          }
+                                         ?>
+                                      </div>
+                                      <div class="chat_content">
+                                      </div>
+                                      <div>
+                                        <textarea placeholder="Type a message" class="type_msg" disabled="disable" onkeyup="auto_grow(this)"></textarea>
+                                        <button type="submit" class="msg_sub" disabled="disable"><i class="fa fa-paper-plane fa-2x sub_chat" aria-hidden="true"></i></button>
+                                      </div>
+                                      </form>
                                       </div>
                                     </div>
                                     <!-- main menu-->
@@ -541,3 +563,9 @@ while ($row=mysqli_fetch_array($query)) {
                                         </div> <!-- cd-popup-container -->
                                       </form>
                                     </div> <!-- cd-popup -->
+                                    <script>
+                                    function auto_grow(element) {
+                                      element.style.height = "40px";
+                                      element.style.height = (element.scrollHeight)+"px";
+                                    }
+                                    </script>
