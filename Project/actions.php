@@ -75,29 +75,19 @@ function sendsms($to,$message)
 * Function to send mail
 * @var json
 */
-function sendmail($username,$from,$to,$subject,$message)
+function sendmail($username,$to,$subject,$message)
 {
-  define("MAIL_FROM",$from);
-  define("MAIL_USERNAME",$username);
-  define("MAIL_PASSWORD","safedocx2017");
-  require_once "mail_sms/class.phpmailer.php";
-  $mail->IsSMTP();                // Sets up a SMTP connection
-  $mail->SMTPAuth = true;         // Connection with the SMTP does require authorization
-  $mail->SMTPSecure = "ssl";      // Connect using a TLS connection
-  $mail->Host = "smtp.gmail.com";  //Gmail SMTP server address
-  $mail->Port = 465;  //Gmail SMTP port
-  //Set who the message is to be sent from
-  $mail->setFrom($from, "SafeDocx - Password");
-  //Set who the message is to be sent to
-  $mail->addAddress($to);
-  $mail->Subject = $subject;
-  $mail->Body = $message;
-  if ($mail->Send()) {
-    return true;
-  }
-  else {
-    return false;
-  }
+
+  $headers = "MIME-Version: 1.0" . "\r\n";
+  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+  $headers .= 'From: <password@safedocx.ml>' . "\r\n";
+    if (mail($to,$subject,$message,$headers)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+
 }
 /**
 * Login-submit
@@ -169,7 +159,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="resetpw-submit"){
       $email_msg = "Hello $name, <br>&nbsp;&nbsp;&nbsp;&nbsp;You can now login with the password : <b>$password</b>. This password is valid only for 30 minutes and for one-time use.You should change your password immediately after this login.";
       mysqli_query($con, "DELETE FROM `safedocx_pwreset` WHERE `pwreset_login_id`=$id");
       mysqli_query($con, "INSERT INTO `safedocx_pwreset`(`pwreset_login_id`,`pwreset_password`) VALUES($id,'$password2')");
-      $m=sendmail("pw.safedocx@gmail.com","password@safedocx.ml",$row['login_email'],"SafeDocx Password",$email_msg);
+      $m=sendmail("pw.safedocx@gmail.com",$row['login_email'],"SafeDocx Password",$email_msg);
       if($m){
         sendsms($row['login_phone'],$sms_msg);
         array_push($arr, array("val" => true));

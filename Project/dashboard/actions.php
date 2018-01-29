@@ -17,29 +17,37 @@ function sendsms($to,$message)
 * Function to send mail
 * @var json
 */
-function sendmail($username,$from,$to,$subject,$message)
+function sendmail($username,$to,$subject,$message)
 {
-  define("MAIL_FROM",$from);
-  define("MAIL_USERNAME",$username);
-  define("MAIL_PASSWORD","safedocx2017");
-  require_once "mail_sms/class.phpmailer.php";
-  $mail->IsSMTP();                // Sets up a SMTP connection
-  $mail->SMTPAuth = true;         // Connection with the SMTP does require authorization
-  $mail->SMTPSecure = "tls";      // Connect using a TLS connection
-  $mail->Host = "smtp.gmail.com";  //Gmail SMTP server address
-  $mail->Port = 587;  //Gmail SMTP port
-  //Set who the message is to be sent from
-  $mail->setFrom($from, "SafeDocx - Password");
-  //Set who the message is to be sent to
-  $mail->addAddress($to);
-  $mail->Subject = $subject;
-  $mail->Body = $message;
-  if ($mail->Send()) {
+// Always set content-type when sending HTML email
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+// More headers
+$headers .= 'From: <password@safedocx.ml>' . "\r\n";
+
+  // define("MAIL_FROM",$from);
+  // define("MAIL_USERNAME",$username);
+  // define("MAIL_PASSWORD","safedocx2017");
+  // require_once "mail_sms/class.phpmailer.php";
+  // $mail->IsSMTP();                // Sets up a SMTP connection
+  // $mail->SMTPAuth = true;         // Connection with the SMTP does require authorization
+  // $mail->SMTPSecure = "tls";      // Connect using a TLS connection
+  // $mail->Host = "smtp.gmail.com";  //Gmail SMTP server address
+  // $mail->Port = 587;  //Gmail SMTP port
+  // //Set who the message is to be sent from
+  // $mail->setFrom($from, "SafeDocx - Password");
+  // //Set who the message is to be sent to
+  // $mail->addAddress($to);
+  // $mail->Subject = $subject;
+  // $mail->Body = $message;
+  if (mail($to,$subject,$message,$headers)) {
     return true;
   }
   else {
     return false;
   }
+
 }
 /**
 * Function to encryption

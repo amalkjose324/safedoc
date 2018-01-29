@@ -170,7 +170,6 @@ while ($row=mysqli_fetch_array($query)) {
                                         <form id="chat_form" method="post" onsubmit="return false">
                                       <div class="col-md-12 chat_to">
                                         <i class="fa fa-arrow-left back_chat fa-2x" aria-hidden="true"></i><input type="text" id="chat_to_add"class="chat_to_add"placeholder="Enter Email / Phone to start Chat">
-
                                         <span class="cd-error-message" id="chat_to_error" style="position: sticky;">Invalid Password</span>
                                       </div>
                                       <div class="chat_nav">
