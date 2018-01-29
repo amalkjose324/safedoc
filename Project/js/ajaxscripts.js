@@ -230,16 +230,16 @@ $(document).ready(function(){
             }
             var $form_modal = $('.cd-user-modal'),
             $form_login = $form_modal.find('#cd-login'),
-            $form_varify = $form_modal.find('#cd-varify'),
+            $form_verify = $form_modal.find('#cd-verify'),
             $form_modal_tab = $('.cd-switcher'),
             $tab_login = $form_modal_tab.children('li').eq(0).children('a'),
             $tab_signup = $form_modal_tab.children('li').eq(1).children('a');
             $form_login.removeClass('is-selected');
-            $form_varify.addClass('is-selected');
+            $form_verify.addClass('is-selected');
             $tab_signup.removeClass('selected');
             $tab_login.addClass('selected');
             var timer2 = "3:00";
-            $fun="varify-email-phone-sendotp";
+            $fun="verify-email-phone-sendotp";
             $.ajax({
               type:'post',
               url:'./actions.php',
@@ -254,7 +254,7 @@ $(document).ready(function(){
               if (minutes < 0){
                 clearInterval(interval);
                 $form_login.addClass('is-selected');
-                $form_varify.removeClass('is-selected');
+                $form_verify.removeClass('is-selected');
                 $tab_signup.removeClass('selected');
                 $tab_login.addClass('selected');
               }

@@ -468,21 +468,21 @@ INSERT INTO `safedocx_user_type` (`utype_id`, `utype_name`, `utype_page`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `safedocx_varify`
+-- Table structure for table `safedocx_verify`
 --
 
-CREATE TABLE `safedocx_varify` (
-  `varify_id` int(11) NOT NULL,
-  `varify_login_id` int(11) NOT NULL,
-  `varify_phone` tinyint(4) NOT NULL DEFAULT '0',
-  `varify_email` tinyint(4) NOT NULL DEFAULT '0'
+CREATE TABLE `safedocx_verify` (
+  `verify_id` int(11) NOT NULL,
+  `verify_login_id` int(11) NOT NULL,
+  `verify_phone` tinyint(4) NOT NULL DEFAULT '0',
+  `verify_email` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `safedocx_varify`
+-- Dumping data for table `safedocx_verify`
 --
 
-INSERT INTO `safedocx_varify` (`varify_id`, `varify_login_id`, `varify_phone`, `varify_email`) VALUES
+INSERT INTO `safedocx_verify` (`verify_id`, `verify_login_id`, `verify_phone`, `verify_email`) VALUES
 (2, 2, 1, 1),
 (4, 1, 0, 0),
 (5, 324, 1, 1),
@@ -621,10 +621,10 @@ ALTER TABLE `safedocx_user_type`
   ADD PRIMARY KEY (`utype_id`);
 
 --
--- Indexes for table `safedocx_varify`
+-- Indexes for table `safedocx_verify`
 --
-ALTER TABLE `safedocx_varify`
-  ADD PRIMARY KEY (`varify_id`);
+ALTER TABLE `safedocx_verify`
+  ADD PRIMARY KEY (`verify_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -715,10 +715,10 @@ ALTER TABLE `safedocx_user_type`
   MODIFY `utype_id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `safedocx_varify`
+-- AUTO_INCREMENT for table `safedocx_verify`
 --
-ALTER TABLE `safedocx_varify`
-  MODIFY `varify_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+ALTER TABLE `safedocx_verify`
+  MODIFY `verify_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

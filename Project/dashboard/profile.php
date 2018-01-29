@@ -61,11 +61,11 @@ include_once 'lobibox.php';
                           ?>
                           <center style="margin:18px !important;">  <div id="upload-demo-i" style="border-radius: 360px;width:202px;height:202px;box-shadow: 1px 1px 10px 3px #888888;"><img src="<?php echo('images/profile_pics/'.$profile_pic);?>" alt="No Image"></div></center>
                         </div>
-                        <div id="varification_div">
+                        <div id="verification_div">
                           <?php
-                          $query=mysqli_query($con,"SELECT * FROM safedocx_varify WHERE varify_login_id=$user_id");
+                          $query=mysqli_query($con,"SELECT * FROM safedocx_verify WHERE verify_login_id=$user_id");
                           while ($row=mysqli_fetch_array($query)) {
-                            if($row['varify_phone']==1){
+                            if($row['verify_phone']==1){
                               ?>
                               <div class="form-group">
                                 <label for="profile-phone">Phone Number</label></br>
@@ -79,16 +79,16 @@ include_once 'lobibox.php';
                               ?>
                               <div class="form-group">
                                 <label for="profile-phone">Phone Number</label></br>
-                                <button type="button" id="varify-phone-btn" class="btn btn-primary bg-red">
-                                  <i class="icon-check"></i> Varify
+                                <button type="button" id="verify-phone-btn" class="btn btn-primary bg-red">
+                                  <i class="icon-check"></i> verify
                                 </button>
-                                <input type="text" id="profile-phone" class="varify in_icon form-control square q3" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
+                                <input type="text" id="profile-phone" class="verify in_icon form-control square q3" placeholder="Phone Number" name="profile-phone" value="<?php echo $login['login_phone']; ?>">
                                 <span class="var-error cd-error-message" id="profile-phone-error" >Invalid Phone number!</span>
 
                               </div>
                               <?php
                             }
-                            if($row['varify_email']==1){
+                            if($row['verify_email']==1){
                               ?>
                               <div class="form-group">
                                 <label for="profile-email">Email ID</label></br>
@@ -101,10 +101,10 @@ include_once 'lobibox.php';
                               ?>
                               <div class="form-group">
                                 <label for="profile-email">Email ID</label></br>
-                                <button type="button" id="varify-email-btn"  class="btn btn-primary bg-red">
-                                  <i class="icon-check"></i> Varify
+                                <button type="button" id="verify-email-btn"  class="btn btn-primary bg-red">
+                                  <i class="icon-check"></i> verify
                                 </button>
-                                <input type="text" id="profile-email" class="varify in_icon form-control square q3" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
+                                <input type="text" id="profile-email" class="verify in_icon form-control square q3" placeholder="Email ID" name="profile-email" value="<?php echo $login['login_email']; ?>">
                                 <span class="var-error cd-error-message" id="profile-email-error" >Invalid Email id!</span>
                               </div>
                               <?php
@@ -186,7 +186,7 @@ include_once 'lobibox.php';
       </div>
     </form>
   </div>
-  <div class="cd-popup" id="varify-phone" role="alert">
+  <div class="cd-popup" id="verify-phone" role="alert">
     <div class="cd-popup-container">
       <p>We just sent you an SMS with a 6 digit OTP to <?php echo $phone;?>. Enter it to verify your phone.</p>
       <form method="post" id="var-phone_form" onsubmit="return false">
@@ -194,7 +194,7 @@ include_once 'lobibox.php';
           <input type="text" id="var-phone" class="form-control" placeholder="Enter OTP" name="var-phone">
           <span class="cd-error-message" id="var-phone-error" >Invalid OTP</span>
         </div>
-        <input type="submit" class="btn btn-success" style="width:49%;" value="Varify">
+        <input type="submit" class="btn btn-success" style="width:49%;" value="verify">
         <button type="button" id="var-phone-resend" class="btn btn-success bg-orange" style="width:49%;">Resend</button>
         <a href="#0" class="cd-popup-close img-replace">Close</a>
       </form>

@@ -38,11 +38,11 @@ $(document).ready(function(){
 			$('#password-change').removeClass('is-visible');
 		}
 	});
-	//open popup-phone varification
-	$('#varify-phone-btn').on('click', function(event){
+	//open popup-phone verification
+	$('#verify-phone-btn').on('click', function(event){
 		event.preventDefault();
-		$('#varify-phone').addClass('is-visible');
-		$fun="varify-phone-otpsend";
+		$('#verify-phone').addClass('is-visible');
+		$fun="verify-phone-otpsend";
 		$.ajax({
 			type:'post',
 			url:'./actions.php',
@@ -50,17 +50,17 @@ $(document).ready(function(){
 		});
 
 	});
-	//close popup-phone varification
-	$('#varify-phone').on('click', function(event){
-		if( $(event.target).is('.cd-popup-close') || $(event.target).is('#varify-phone') ) {
+	//close popup-phone verification
+	$('#verify-phone').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('#verify-phone') ) {
 			event.preventDefault();
 			$(this).removeClass('is-visible');
 		}
 	});
-	//close popup when clicking the esc keyboard button-phone varification
+	//close popup when clicking the esc keyboard button-phone verification
 	$(document).keyup(function(event){
 		if(event.which=='27'){
-			$('#varify-phone').removeClass('is-visible');
+			$('#verify-phone').removeClass('is-visible');
 		}
 	});
 

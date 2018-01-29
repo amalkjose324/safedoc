@@ -2,7 +2,7 @@
 include_once '../db_connect.php';
 include_once 'check_logout.php';
 include_once 'lobibox.php';
-$query1=mysqli_query($con,"SELECT * FROM safedocx_varify WHERE varify_email=1 AND varify_phone=1 AND varify_login_id=$user_id");
+$query1=mysqli_query($con,"SELECT * FROM safedocx_verify WHERE verify_email=1 AND verify_phone=1 AND verify_login_id=$user_id");
 $query2=mysqli_query($con,"SELECT * FROM safedocx_users WHERE user_aadhaar_no>0 AND user_id=$user_id");
 if(isset($_SESSION['login_password'])){
   ?>
@@ -25,9 +25,9 @@ if((mysqli_num_rows($query1)==0)||(mysqli_num_rows($query2)==0)){
     setTimeout(function() {
       Lobibox.notify('error', {
         delay:5000,
-        title: 'Varification Failed',
+        title: 'verification Failed',
         size: 'mini',
-        msg: 'Please complete both phone and email varification'
+        msg: 'Please complete both phone and email verification'
       });
     }, 1000);
     </script>

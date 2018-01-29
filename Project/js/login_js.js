@@ -3,7 +3,7 @@ jQuery(document).ready(function($){
 	$form_login = $form_modal.find('#cd-login'),
 	$form_signup = $form_modal.find('#cd-signup'),
 	$form_forgot_password = $form_modal.find('#cd-reset-password'),
-	$form_varify=$form_modal.find('#cd-varify'),
+	$form_verify=$form_modal.find('#cd-verify'),
 	$form_modal_tab = $('.cd-switcher'),
 	$tab_login = $form_modal_tab.children('li').eq(0).children('a'),
 	$tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
@@ -83,7 +83,7 @@ jQuery(document).ready(function($){
 	function login_selected(){
 		$form_login.addClass('is-selected');
 		$form_signup.removeClass('is-selected');
-		$form_varify.removeClass('is-selected');
+		$form_verify.removeClass('is-selected');
 		$form_forgot_password.removeClass('is-selected');
 		$tab_login.addClass('selected');
 		$tab_signup.removeClass('selected');
@@ -92,7 +92,7 @@ jQuery(document).ready(function($){
 	function signup_selected(){
 		$form_login.removeClass('is-selected');
 		$form_signup.addClass('is-selected');
-		$form_varify.removeClass('is-selected');
+		$form_verify.removeClass('is-selected');
 		$form_forgot_password.removeClass('is-selected');
 		$tab_login.removeClass('selected');
 		$tab_signup.addClass('selected');
@@ -101,7 +101,7 @@ jQuery(document).ready(function($){
 	function forgot_password_selected(){
 		$form_login.removeClass('is-selected');
 		$form_signup.removeClass('is-selected');
-		$form_varify.removeClass('is-selected');
+		$form_verify.removeClass('is-selected');
 		$form_forgot_password.addClass('is-selected');
 	}
 

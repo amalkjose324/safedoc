@@ -36,10 +36,10 @@ if(isset($_GET['otp'])){
   $query = mysqli_query($con,"SELECT * FROM safedocx_otp WHERE otp_login_id=$userid AND otp_type=1 AND otp_password='$dec_otp'");
   if(mysqli_num_rows($query)>0){
     mysqli_query($con, "DELETE FROM `safedocx_otp` WHERE `otp_login_id`=$userid AND otp_type=1");
-    mysqli_query($con, "UPDATE `safedocx_varify` SET `varify_email`=1 WHERE `varify_login_id`=$userid");
+    mysqli_query($con, "UPDATE `safedocx_verify` SET `verify_email`=1 WHERE `verify_login_id`=$userid");
     ?><script>
     Lobibox.alert('success', {
-      msg: "Your Email id has been varified...!"
+      msg: "Your Email id has been verified...!"
     });
     setTimeout(function() {
       window.location.replace("./profile.php");

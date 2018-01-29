@@ -140,8 +140,8 @@ include_once 'check_login.php';
           <div class="feature">
             <i class="fa fa-check"></i>
             <div class="feature-content">
-              <h4>Easy Varification</h4>
-              <p>Document varification is through online system using SafeDocx Varification Option(SVO). </p>
+              <h4>Easy verification</h4>
+              <p>Document verification is through online system using SafeDocx verification Option(SVO). </p>
             </div>
           </div>
         </div><!-- /.col-md-3 -->
@@ -278,7 +278,7 @@ include_once 'check_login.php';
           <div class="counter-item">
             <i class="fa fa-cloud-upload"></i>
             <div class="timer" id="item2" data-to="7394" data-speed="5000"></div>
-            <h5>Varified Documents</h5>
+            <h5>verified Documents</h5>
           </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3">

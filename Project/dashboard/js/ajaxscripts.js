@@ -434,7 +434,7 @@ $(document).ready(function(){
     }
   });
   /**
-  * Phone varification  form validation
+  * Phone verification  form validation
   * @return error message
   */
   $("#var-phone_form").on("submit", function(){
@@ -444,7 +444,7 @@ $(document).ready(function(){
       $("#var-phone").focusout();
     }
     else{
-      $fun="varify-phone-submit";
+      $fun="verify-phone-submit";
       $.ajax({
         type:'post',
         url:'./actions.php',
@@ -454,12 +454,12 @@ $(document).ready(function(){
           var obj = JSON.parse(response)[0]['val'];
           if(obj){
             $('#var-phone_form').trigger("reset");
-            $('#varify-phone').removeClass('is-visible');
-            $('#varification_div').load(document.URL +  ' #varification_div');
+            $('#verify-phone').removeClass('is-visible');
+            $('#verification_div').load(document.URL +  ' #verification_div');
             Lobibox.notify('success', {
               delay:5000,
-              title: 'Phone Varified',
-              msg: "Your phone number has been varified successfully...!"
+              title: 'Phone verified',
+              msg: "Your phone number has been verified successfully...!"
             });
           }
           else{
@@ -473,13 +473,13 @@ $(document).ready(function(){
       });
     }
   });
-  $('#varify-email-btn').on('click', function(event){
+  $('#verify-email-btn').on('click', function(event){
     event.preventDefault();
-    $fun="varify-email-otpsend";
+    $fun="verify-email-otpsend";
     Lobibox.notify('info', {
       delay:5000,
-      title: 'E-mail varification',
-      msg: "We are trying to send varification link for Varify your email."
+      title: 'E-mail verification',
+      msg: "We are trying to send verification link for verify your email."
     });
     $.ajax({
       type:'post',
@@ -492,8 +492,8 @@ $(document).ready(function(){
         if(obj){
           Lobibox.notify('success', {
             delay:5000,
-            title: 'Varification link Sent to Email',
-            msg: "We just sent you an email with varification link. Varify your email id using this varification link."
+            title: 'verification link Sent to Email',
+            msg: "We just sent you an email with verification link. verify your email id using this verification link."
           });
           $.fn.myFunction();
         }
@@ -501,7 +501,7 @@ $(document).ready(function(){
           Lobibox.notify('error', {
             delay:5000,
             title: 'Network error',
-            msg: "Due to network issues, we can't send varification link to your email id. Please try again later."
+            msg: "Due to network issues, we can't send verification link to your email id. Please try again later."
           });
         }
       }
@@ -510,8 +510,8 @@ $(document).ready(function(){
   //open popup-phone rsend
   $('#var-phone-resend').on('click', function(event){
     event.preventDefault();
-    $('#varify-phone').addClass('is-visible');
-    $fun="varify-phone-otpsend";
+    $('#verify-phone').addClass('is-visible');
+    $fun="verify-phone-otpsend";
     Lobibox.notify('info', {
       delay:5000,
       title: 'OTP Senting to Phone',
@@ -525,7 +525,7 @@ $(document).ready(function(){
         Lobibox.notify('success', {
           delay:5000,
           title: 'OTP Sent to Phone',
-          msg: "We just sent you an SMS with OTP. Varify your Mobile using this OTP."
+          msg: "We just sent you an SMS with OTP. verify your Mobile using this OTP."
         });
       }
     });
@@ -560,7 +560,7 @@ $(document).ready(function(){
   });
   $.fn.myFunction = function(){
     setInterval(function(){
-      $('#varification_div').load(document.URL +  ' #varification_div');
+      $('#verification_div').load(document.URL +  ' #verification_div');
     },1000);
   }
   /**
@@ -1741,7 +1741,7 @@ $(document).ready(function(){
   });
 
   /**
-  * Document  varify in datatables
+  * Document  verify in datatables
   * @return error message
   */
   $(".form_doc_reject").on("submit",function(){
@@ -1776,13 +1776,13 @@ $(document).ready(function(){
   });
 
   /**
-  * Document  varify in datatables
+  * Document  verify in datatables
   * @return error message
   */
-  $(".form_doc_varify").on("submit",function(){
+  $(".form_doc_verify").on("submit",function(){
     $doc_id=$(this).children("#doc_id").val();
     $doc_type=$(this).children("#doc_type").val();
-    $fun="doc_varify";
+    $fun="doc_verify";
     $.ajax({
       type:'post',
       url:'./actions.php',
@@ -1802,8 +1802,8 @@ $(document).ready(function(){
           $('#datatable_data').load('./datatable_documents.php?doc_type='+$doc_type);
           Lobibox.notify('error', {
             delay:5000,
-            title: 'Varification Failed',
-            msg: "You can't varify this document right now..!"
+            title: 'verification Failed',
+            msg: "You can't verify this document right now..!"
           });
         }
       }

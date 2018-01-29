@@ -61,7 +61,7 @@ else {
               }
               else if($doc_type==2){
                 ?>
-                <form class="form_doc_varify" method="post"  onsubmit="return false;" style="display:inline-block;margin: 0px;">
+                <form class="form_doc_verify" method="post"  onsubmit="return false;" style="display:inline-block;margin: 0px;">
                   <input type="hidden" id="doc_id" value="<?php echo $row['doc_id'];?>">
                   <input type="hidden" id="doc_type" value="<?php echo $doc_type ?>">
                   <button type="submit" class="btn btn-primary datatable_button" style="background:green;" name="state_node_disable"><i class='icon-check '></i></button>
@@ -75,7 +75,7 @@ else {
               }
               else if($doc_type==3){
                 ?>
-                <form class="form_doc_varify" method="post"  onsubmit="return false;" style="display:inline-block;margin: 0px;">
+                <form class="form_doc_verify" method="post"  onsubmit="return false;" style="display:inline-block;margin: 0px;">
                   <input type="hidden" id="doc_id" value="<?php echo $row['doc_id'];?>">
                   <input type="hidden" id="doc_type" value="<?php echo $doc_type ?>">
                   <button type="submit" class="btn btn-primary datatable_button" style="background:green;" name="state_node_disable"><i class='icon-check '></i></button>

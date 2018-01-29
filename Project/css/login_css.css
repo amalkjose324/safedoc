@@ -429,10 +429,10 @@ xsigin/signup popup
   }
 }
 
-#cd-login, #cd-signup, #cd-reset-password,#cd-varify {
+#cd-login, #cd-signup, #cd-reset-password,#cd-verify {
   display: none;
 }
 
-#cd-login.is-selected, #cd-signup.is-selected, #cd-reset-password.is-selected, #cd-varify.is-selected {
+#cd-login.is-selected, #cd-signup.is-selected, #cd-reset-password.is-selected, #cd-verify.is-selected {
   display: block;
 }

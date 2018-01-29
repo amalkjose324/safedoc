@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png" href="../asset/icons/android-icon-192x192.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-  <meta name="description" content="Secure, Varified and Faster Solution for Document Storage and Share">
+  <meta name="description" content="Secure, verified and Faster Solution for Document Storage and Share">
   <meta name="keywords" content="SafeDoc, SafeDocx, Share documents, documents, Share doc, Docx">
   <meta name="author" content="SafeDocx">
   <title>SafeDocx : Secure Document Storage &amp; Share</title>

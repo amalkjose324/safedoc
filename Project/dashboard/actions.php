@@ -185,12 +185,12 @@ if(isset($_POST['fun']) && $_POST['fun']=="profile-submit"){
   $query1 = mysqli_query($con, "UPDATE safedocx_login SET login_email='$email' WHERE login_id=$userid");
   if(mysqli_affected_rows($con)>0){
     $rows=1;
-    mysqli_query($con, "UPDATE safedocx_varify SET varify_email=0 WHERE varify_login_id=$userid");
+    mysqli_query($con, "UPDATE safedocx_verify SET verify_email=0 WHERE verify_login_id=$userid");
   }
   $query3 = mysqli_query($con, "UPDATE safedocx_login SET login_phone='$phone' WHERE login_id=$userid");
   if(mysqli_affected_rows($con)>0){
     $rows=1;
-    mysqli_query($con, "UPDATE safedocx_varify SET varify_phone=0 WHERE varify_login_id=$userid");
+    mysqli_query($con, "UPDATE safedocx_verify SET verify_phone=0 WHERE verify_login_id=$userid");
   }
   $query2 = mysqli_query($con, "UPDATE safedocx_users SET user_name='$name',user_dob='$dob',user_aadhaar_no='$aadhaar',user_district_id=$district WHERE user_id=$userid");
   if(mysqli_affected_rows($con)>0){
@@ -225,17 +225,17 @@ if(isset($_POST['fun']) && $_POST['fun']=="change-password-submit"){
   exit();
 }
 /**
-* Varification otp send to phone  process
+* verification otp send to phone  process
 * @var json
 */
-if(isset($_POST['fun']) && $_POST['fun']=="varify-phone-otpsend"){
+if(isset($_POST['fun']) && $_POST['fun']=="verify-phone-otpsend"){
   $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE login_id=$userid");
   while ($row=mysqli_fetch_array($query)) {
     $phone=$row['login_phone'];
     $chars = "012345678901234567890123456789";
     $otp = substr(str_shuffle( $chars ), 0, 6 );
     $otp_code=SHA1($otp);
-    $sms_msg   = "Varify your Mobile Number using otp: $otp -SafeDocx";
+    $sms_msg   = "verify your Mobile Number using otp: $otp -SafeDocx";
     mysqli_query($con, "DELETE FROM `safedocx_otp` WHERE `otp_login_id`=$userid AND otp_type=0");
     mysqli_query($con, "INSERT INTO `safedocx_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($userid,0,'$otp_code')");
     sendsms($phone,$sms_msg);
@@ -246,10 +246,10 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-phone-otpsend"){
   }
 }
 /**
-* Varification link send to email  process
+* verification link send to email  process
 * @var json
 */
-if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
+if(isset($_POST['fun']) && $_POST['fun']=="verify-email-otpsend"){
   $query = mysqli_query($con, "SELECT * FROM safedocx_login WHERE login_id=$userid");
   while ($row=mysqli_fetch_array($query)) {
     $email=$row['login_email'];
@@ -263,7 +263,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
       $position = $i*$step;
       $enc_otp = substr($enc_otp, 0, $position) . $enc_user[$i-1] . substr($enc_otp, $position);
     }
-    $email_msg = "Hi, Help us secure your SafeDocx account by verifying your email address ($email). This will let you receive notifications and password resets from SafeDocx. <br><br><center><a style='border:1px solid black;background:blue;color:white;text-decoration:none;padding:5px;padding-left:30px;padding-right:30px;font-size:18px;font-weight:bold' href='http://localhost/safedocx/Project/dashboard/varify_email.php?otp=$enc_otp'>Varify Email Id</a></center><br><hr>Button not working? Paste the following link into your browser: <br><center>http://localhost/safedocx/Project/dashboard/varify_email.php?otp=$enc_otp</center><hr>You’re receiving this email because you recently created a new GitHub account or added a new email address. If this wasn’t you, please ignore this email.";
+    $email_msg = "Hi, Help us secure your SafeDocx account by verifying your email address ($email). This will let you receive notifications and password resets from SafeDocx. <br><br><center><a style='border:1px solid black;background:blue;color:white;text-decoration:none;padding:5px;padding-left:30px;padding-right:30px;font-size:18px;font-weight:bold' href='http://localhost/safedocx/Project/dashboard/verify_email.php?otp=$enc_otp'>verify Email Id</a></center><br><hr>Button not working? Paste the following link into your browser: <br><center>http://localhost/safedocx/Project/dashboard/verify_email.php?otp=$enc_otp</center><hr>You’re receiving this email because you recently created a new GitHub account or added a new email address. If this wasn’t you, please ignore this email.";
       mysqli_query($con, "DELETE FROM `safedocx_otp` WHERE `otp_login_id`=$userid AND otp_type=1");
       mysqli_query($con, "INSERT INTO `safedocx_otp`(`otp_login_id`,`otp_type`,`otp_password`) VALUES($userid,1,'$otp_code')");
       $m=sendmail("pw.safedocx@gmail.com",$email,"SafeDocx Password",$email_msg);
@@ -280,16 +280,16 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
     }
   }
   /**
-  * Varification phoneno
+  * verification phoneno
   * @var json
   */
-  if(isset($_POST['fun']) && $_POST['fun']=="varify-phone-submit"){
+  if(isset($_POST['fun']) && $_POST['fun']=="verify-phone-submit"){
     $otp=SHA1($_POST['otp']);
     $arr = array();
     $query = mysqli_query($con, "SELECT * FROM safedocx_otp WHERE otp_login_id=$userid AND otp_type=0 AND otp_password='$otp'");
     if(mysqli_num_rows($query)>0){
       mysqli_query($con, "DELETE FROM `safedocx_otp` WHERE `otp_login_id`=$userid AND otp_type=0");
-      mysqli_query($con, "UPDATE `safedocx_varify` SET `varify_phone`=1 WHERE `varify_login_id`=$userid");
+      mysqli_query($con, "UPDATE `safedocx_verify` SET `verify_phone`=1 WHERE `verify_login_id`=$userid");
       array_push($arr, array("val" => true));
     }
     else {
@@ -450,7 +450,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
       while ($row=mysqli_fetch_array($query2)) {
         $uid=$row['login_id'];
         mysqli_query($con, "INSERT INTO `safedocx_profile_pic`(`profile_pic_user_id`) VALUES($uid)");
-        mysqli_query($con, "INSERT INTO `safedocx_varify`(`varify_login_id`) VALUES($uid)");
+        mysqli_query($con, "INSERT INTO `safedocx_verify`(`verify_login_id`) VALUES($uid)");
         mysqli_query($con, "INSERT INTO `safedocx_users`(`user_id`,`user_district_id`) VALUES($uid,$dist)");
       }
       array_push($arr, array("val" => true));
@@ -638,10 +638,10 @@ if(isset($_POST['fun']) && $_POST['fun']=="varify-email-otpsend"){
   }
 
   /**
-  * Doc varify -submit first
+  * Doc verify -submit first
   * @var json
   */
-  if(isset($_POST['fun']) && $_POST['fun']=="doc_varify"){
+  if(isset($_POST['fun']) && $_POST['fun']=="doc_verify"){
     $doc_id= $_POST['doc_id'];
     $arr = array();
     $query = mysqli_query($con, "UPDATE safedocx_docs SET doc_status=1 WHERE doc_id=$doc_id");

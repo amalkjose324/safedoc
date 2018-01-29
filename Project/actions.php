@@ -48,7 +48,7 @@ if(isset($_POST['fun']) && $_POST['fun']=="signup-first-submit"){
     while ($row=mysqli_fetch_array($query2)) {
       $uid=$row['login_id'];
       mysqli_query($con, "INSERT INTO `safedocx_profile_pic`(`profile_pic_user_id`) VALUES($uid)");
-      mysqli_query($con, "INSERT INTO `safedocx_varify`(`varify_login_id`) VALUES($uid)");
+      mysqli_query($con, "INSERT INTO `safedocx_verify`(`verify_login_id`) VALUES($uid)");
       mysqli_query($con, "INSERT INTO `safedocx_users`(`user_id`) VALUES($uid)");
     }
     array_push($arr, array("val" => true));

@@ -224,7 +224,7 @@ while ($row=mysqli_fetch_array($query)) {
                                           else if($user_type=="user"){
                                             ?>
                                             <hr style="width:80%; border:0.4px solid white;">
-                                            <li class=" nav-item"><a href="./varified_docs.php"><i class="icon-check-square-o"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Verified Documents</span></a></li>
+                                            <li class=" nav-item"><a href="./verified_docs.php"><i class="icon-check-square-o"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Verified Documents</span></a></li>
                                             <li class=" nav-item"><a href="./pending_docs.php"><i class="icon-clock-o"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Pending Documents</span></a></li>
                                             <li class=" nav-item"><a href="./rejected_docs.php"><i class="icon-times"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Rejected Documents</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">
@@ -254,7 +254,7 @@ while ($row=mysqli_fetch_array($query)) {
                                             ?>
                                             <hr style="width:80%; border:0.4px solid white;">
                                             <li class=" nav-item"><a href="./attestor_requests.php"><i class="icon-arrow-down"></i><span data-i18n="nav.page_layouts.main" class="menu-title">New Requests</span></a></li>
-                                            <li class=" nav-item"><a href="./attestor_varified.php"><i class="icon-check-square-o"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Varified Documents</span></a></li>
+                                            <li class=" nav-item"><a href="./attestor_verified.php"><i class="icon-check-square-o"></i><span data-i18n="nav.page_layouts.main" class="menu-title">verified Documents</span></a></li>
                                             <li class=" nav-item"><a href="./attestor_rejected.php"><i class="icon-times"></i><span data-i18n="nav.page_layouts.main" class="menu-title">Rejected Documents</span></a></li>
                                             <hr style="width:80%; border:0.4px solid white;">
                                             <?php
