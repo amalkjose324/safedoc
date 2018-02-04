@@ -57,10 +57,9 @@ if(isset($_GET['otp'])){
     }, 2000);
     </script>
     <?php
-    //header('location:./');
   }
 }
 else {
-  header('location:./');
+  echo "<script>window.location.href = './';</script>";
 }
 ?>

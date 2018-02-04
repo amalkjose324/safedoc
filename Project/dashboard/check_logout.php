@@ -1,6 +1,6 @@
 <?php
 if(!isset($_SESSION['user_page'])){
-  header("location: ../");
+  echo "<script>window.location.href = '../';</script>";;
 }
 else {
   $user_page=$_SESSION['user_page'];

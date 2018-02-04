@@ -6,7 +6,7 @@ include_once 'lobibox.php';
 $page=$_SESSION['user_page'];
 $doc_type=0;
 if($page<>'attestor.php' || !isset($_GET['doc_type'])){
-  header("location: $page");
+  echo "<script>window.location.href = '$page';</script>";
 }
 else {
   $doc_type=$_GET['doc_type'];

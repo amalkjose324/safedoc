@@ -7,7 +7,7 @@ $page=$_SESSION['user_page'];
 $state_query="";
 if($page<>'admin.php'){
   if($page<>'s_nodal.php'){
-    header("location: $page");
+    echo "<script>window.location.href = '$page';</script>";
   }
 }
 if(isset($_GET['state_id'])){

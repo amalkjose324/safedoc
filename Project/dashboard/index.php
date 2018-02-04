@@ -2,11 +2,11 @@
   include_once '../db_connect.php';
   include_once 'check_logout.php';
   if(!isset($_SESSION['user_page'])){
-    header("location: ../");
+    echo "<script>window.location.href = '../';</script>";;
   }
   else{
     $page=$_SESSION['user_page'];
-    header("location: $page");
+    echo "<script>window.location.href = '$page';</script>";
   }
 
  ?>

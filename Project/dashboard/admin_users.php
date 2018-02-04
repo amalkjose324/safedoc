@@ -5,7 +5,7 @@ include_once 'profile_check.php';
 include_once 'lobibox.php';
 $page=$_SESSION['user_page'];
 if($page<>'admin.php'){
-  header("location: $page");
+  echo "<script>window.location.href = '$page';</script>";
 }
 ?>
 

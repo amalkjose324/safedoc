@@ -7,7 +7,7 @@ $page=$_SESSION['user_page'];
 if($page<>'admin.php'){
   if($page<>'s_nodal.php'){
     if($page<>'d_nodal.php'){
-      header("location: $page");
+      echo "<script>window.location.href = '$page';</script>";
     }
   }
 }

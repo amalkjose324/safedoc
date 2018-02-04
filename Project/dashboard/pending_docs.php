@@ -20,7 +20,7 @@
   include_once 'sidemenu.php';
   $page=$_SESSION['user_page'];
   if($page<>'users.php'){
-    header("location: $page");
+    echo "<script>window.location.href = '$page';</script>";
   }
   ?>
   <?php

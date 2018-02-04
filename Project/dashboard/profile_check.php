@@ -64,6 +64,5 @@ if((mysqli_num_rows($query1)==0)||(mysqli_num_rows($query2)==0)){
   }, 12000);
   </script>
   <?php
-  //header('location:./profile.php');
 }
 ?>
